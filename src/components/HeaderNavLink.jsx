@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 const HeaderNavLink = ({ text, link, children }) => {
   return (
     <div>
-      <Link to={link}>{text}</Link>
+      <Link
+        to={link}
+        className="font-semibold hover:bg-gray-50 hover:text py-2 px-4 hover:text-gray-950 rounded-md transition-colors"
+      >
+        {text}
+      </Link>
       {children && <div>{children}</div>}
     </div>
   );

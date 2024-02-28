@@ -6,7 +6,12 @@ const HeaderProfile = ({ isLoggedIn = false, userId }) => {
       <span className="material-symbols-rounded">account_circle</span>
     </Link>
   ) : (
-    <Link to="login">Login</Link>
+    <Link
+      to="login"
+      className="font-semibold text-gray-950 bg-yellow-400 hover:bg-yellow-500 hover:text py-2 px-8 rounded-md transition-colors"
+    >
+      Login
+    </Link>
   );
 };
 HeaderProfile.propTypes = {
