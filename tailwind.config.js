@@ -6,9 +6,6 @@ export default {
       fontFamily: {
         Lato: ['Lato', 'sans-serif'],
       },
-      spacing: {
-        'auto-resize': '20vw',
-      },
     },
   },
   plugins: [],
