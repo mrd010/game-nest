@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import HeaderNavLink from './HeaderNavLink';
+import HeaderProfile from './HeaderProfile';
 import HeaderSearch from './HeaderSearch';
 
 const Header = () => {
@@ -6,7 +8,9 @@ const Header = () => {
     <header>
       <div>
         <h1>
-          Game<span>Nest</span>
+          <Link>
+            Game<span>Nest</span>
+          </Link>
         </h1>
       </div>
       <nav>
@@ -15,6 +19,9 @@ const Header = () => {
       </nav>
       <div>
         <HeaderSearch></HeaderSearch>
+      </div>
+      <div>
+        <HeaderProfile></HeaderProfile>
       </div>
     </header>
   );

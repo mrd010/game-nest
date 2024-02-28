@@ -3,7 +3,7 @@ import { Form } from 'react-router-dom';
 const HeaderSearch = () => {
   return (
     <Form action="">
-      <input type="search" />
+      <input type="search" placeholder="Search for games" />
       <button type="submit">
         <span className="material-symbols-rounded">search</span>
       </button>
