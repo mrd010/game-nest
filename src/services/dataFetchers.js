@@ -18,9 +18,12 @@ const getData = async (url) => {
 };
 
 // get recommended games with at least [minScore] meta score
-export const getRecommendedGames = (count, minScore) => {
-  const games = getData(`${dealsApi}?AAA=1&sortBy=Release&metacritic=${minScore}`);
+export const getRecommendedGames = async (count, minScore) => {
+  const games = await getData(`${dealsApi}?AAA=1&sortBy=Release&metacritic=${minScore}`);
 
-  const recommendedGames = new Map(games.map((game) => [game.internalName, game])).values();
+  const uniqueGamesArray = new Map(games.map((game) => [game.internalName, game]));
+  const recommendedGames = uniqueGamesArray
+    .values()
+    .slice(0, Math.min(count, uniqueGamesArray.length));
   console.log(recommendedGames);
 };
