@@ -7,6 +7,7 @@ import {
 import Layout from './Layout';
 import Home from './routes/Home';
 import Games from './routes/Games';
+import Deals from './routes/Deals';
 
 const Router = () => {
   const router = createBrowserRouter(
@@ -15,6 +16,7 @@ const Router = () => {
         <Route index element={<Home />}></Route>
         <Route path="home" element={<Home />}></Route>
         <Route path="games" element={<Games />}></Route>
+        <Route path="deals" element={<Deals />}></Route>
       </Route>
     )
   );
