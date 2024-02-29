@@ -9,7 +9,7 @@ const Carousel = ({ title, children }) => {
       <button>
         <span className="material-symbols-rounded">arrow_forward</span>
       </button>
-      <div>{children}</div>
+      {children && <div>{children}</div>}
     </div>
   );
 };
