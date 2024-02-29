@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <section className="my-5">
         {recommendedGames.length && (
-          <Carousel title="Recommended Games">
+          <Carousel title="Recommended Games" itemWidth={290}>
             {recommendedGames.map((game) => (
               <RecommendedCard key={game.steamAppID} {...game}></RecommendedCard>
             ))}

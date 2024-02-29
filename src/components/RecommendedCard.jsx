@@ -12,7 +12,7 @@ const RecommendedCard = ({
   releaseDate,
 }) => {
   return (
-    <Link className="gap-2 p-3 drop-shadow-sm shadow-md bg-gradient-to-b from-amber-300 from-25% to-25% to-gray-100 rounded-md">
+    <Link className="gap-2 p-3 drop-shadow-sm shadow-md bg-gradient-to-b from-amber-300 from-25% to-25% to-gray-100 rounded-md w-[290px]">
       <div className="flex flex-col flex-nowrap gap-2">
         <img src={steamHeaderImage(steamAppID)} alt={`${title} image`} className="rounded-md" />
         <h3 className="text-2xl font-bold ">{title}</h3>
