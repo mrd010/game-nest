@@ -1,4 +1,4 @@
-import { getRecommendedGames } from '../services/dataFetchers';
+import { getFeaturedCategories, getRecommendedGames, getTrailers } from '../services/dataFetchers';
 import getUserLanguage from '../services/userLocaleServices';
 
 // recommended games should be above this threshold
@@ -8,7 +8,11 @@ const userLanguage = getUserLanguage();
 
 export const homeLoader = () => {
   const recommendedGamesPromise = getRecommendedGames(recommendedGamesMinScore);
+  const featuredCategoriesPromise = getFeaturedCategories(userLanguage);
+  const trailersPromise = getTrailers(userLanguage);
 
-  Promise.all([recommendedGamesPromise]).then((data) => console.log(data));
+  Promise.all([recommendedGamesPromise, featuredCategoriesPromise, trailersPromise]).then((data) =>
+    console.log(data)
+  );
   return null;
 };
