@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { steamHeaderImage } from '../services/utilities';
+import { Link } from 'react-router-dom';
 
 const RecommendedCard = ({
   steamAppID,
@@ -11,10 +12,10 @@ const RecommendedCard = ({
   releaseDate,
 }) => {
   return (
-    <div>
-      <div>
-        <img src={steamHeaderImage(steamAppID)} alt={`${title} image`} />
-        <h3>{title}</h3>
+    <Link className="gap-2 p-3 drop-shadow-sm shadow-md bg-gradient-to-b from-amber-300 from-25% to-25% to-gray-100 rounded-md">
+      <div className="flex flex-col flex-nowrap gap-2">
+        <img src={steamHeaderImage(steamAppID)} alt={`${title} image`} className="rounded-md" />
+        <h3 className="text-2xl font-bold ">{title}</h3>
         <span>Released on {Date(releaseDate)}</span>
       </div>
       <div>
@@ -31,7 +32,7 @@ const RecommendedCard = ({
           </>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 
