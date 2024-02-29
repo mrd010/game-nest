@@ -4,10 +4,10 @@ const Carousel = ({ title, children }) => {
     <div>
       <h2>{title}</h2>
       <button>
-        <span className="material-symbols-outlined">west</span>
+        <span className="material-symbols-rounded">arrow_back</span>
       </button>
       <button>
-        <span className="material-symbols-outlined">east</span>
+        <span className="material-symbols-rounded">arrow_forward</span>
       </button>
       <div>{children}</div>
     </div>
