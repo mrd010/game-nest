@@ -21,6 +21,17 @@ const getData = async (url) => {
 export const getRecommendedGames = async (minScore) => {
   const games = await getData(`${dealsApi}?AAA=1&sortBy=Release&metacritic=${minScore}`);
 
+  //   extract unique (non repetitive) games
   const recommendedGames = [...new Map(games.map((game) => [game.internalName, game])).values()];
   return recommendedGames;
+};
+
+export const getFeaturedCategories = async (lang) => {
+  const featuredCategories = await getData(`${featuredCategoriesApi}/?l=${lang}`);
+  return featuredCategories;
+};
+
+export const getTrailers = async (lang) => {
+  const trailersData = await getData(`${trailersApi}/?l=${lang}`);
+  return trailersData.movies;
 };
