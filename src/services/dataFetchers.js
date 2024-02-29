@@ -25,7 +25,11 @@ export const getRecommendedGames = async (minScore) => {
   const games = await getData(`${dealsApi}?AAA=1&sortBy=Release&metacritic=${minScore}`);
 
   //   extract unique (non repetitive) games
-  const recommendedGames = [...new Map(games.map((game) => [game.internalName, game])).values()];
+  const recommendedGames = [
+    ...new Map(games.map((game) => [game.internalName, game]))
+      .values()
+      .filter((uGame) => uGame.steamAppID),
+  ];
   return recommendedGames;
 };
 
