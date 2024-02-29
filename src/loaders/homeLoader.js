@@ -6,13 +6,15 @@ const recommendedGamesMinScore = 80;
 // get user lang
 const userLanguage = getUserLanguage();
 
-export const homeLoader = () => {
-  const recommendedGamesPromise = getRecommendedGames(recommendedGamesMinScore);
-  const featuredCategoriesPromise = getFeaturedCategories(userLanguage);
-  const trailersPromise = getTrailers(userLanguage);
+export const homeLoader = async () => {
+  const dataPromises = [
+    getRecommendedGames(recommendedGamesMinScore),
+    getFeaturedCategories(userLanguage),
+    getTrailers(userLanguage),
+  ];
 
-  Promise.all([recommendedGamesPromise, featuredCategoriesPromise, trailersPromise]).then((data) =>
-    console.log(data)
-  );
-  return null;
+  const homeData = await Promise.all(dataPromises).then((data) => {
+    return { recommendedGames: data[0], featuredCategories: data[1], trailers: data[2] };
+  });
+  return homeData;
 };
