@@ -23,7 +23,7 @@ const Header = () => {
           <HeaderSearch></HeaderSearch>
         </div>
         <div>
-          <HeaderProfile></HeaderProfile>
+          <HeaderProfile isLoggedIn={false}></HeaderProfile>
         </div>
       </div>
     </header>

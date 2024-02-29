@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-const HeaderProfile = ({ isLoggedIn = false, userId }) => {
+const HeaderProfile = ({ isLoggedIn, userId }) => {
   return isLoggedIn ? (
     <Link to={`profile/${userId}`}>
       <span className="material-symbols-rounded">account_circle</span>
