@@ -5,7 +5,9 @@ const Layout = () => {
   return (
     <div className="font-Lato">
       <Header></Header>
-      <Outlet></Outlet>
+      <main className="w-[1280px] mx-auto">
+        <Outlet></Outlet>
+      </main>
     </div>
   );
 };
