@@ -18,9 +18,9 @@ const getData = async (url) => {
 };
 
 // get recommended games with at least [minScore] meta score
-export const getRecommendedGames = async (count, minScore) => {
+export const getRecommendedGames = async (minScore) => {
   const games = await getData(`${dealsApi}?AAA=1&sortBy=Release&metacritic=${minScore}`);
 
   const recommendedGames = [...new Map(games.map((game) => [game.internalName, game])).values()];
-  return recommendedGames.slice(0, count);
+  return recommendedGames;
 };
