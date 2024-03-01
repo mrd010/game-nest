@@ -5,7 +5,7 @@ import HeaderSearch from './HeaderSearch';
 
 const Header = () => {
   return (
-    <header className="bg-gray-950 text-gray-50">
+    <header className="bg-gray-950 text-gray-50 min-w-min">
       <div className="grid grid-cols-[auto_auto_1fr_auto] items-center p-3 mx-auto w-[1280px] justify-between gap-8">
         <div className="mr-10">
           <h1>
