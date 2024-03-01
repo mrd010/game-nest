@@ -3,7 +3,7 @@ import TabButton from './TabButton';
 import { useState } from 'react';
 import GamesListRow from './GamesListRow';
 import PageNavNumbers from './PageNavNumbers';
-const TabbedCategories = ({ categoriesData }) => {
+const TabbedCategories = ({ categoriesData, onSelectGame, selectedGameId }) => {
   // tabbed list with tabs for each key in categoriesData
 
   // currently active tab in featured categories
@@ -58,7 +58,12 @@ const TabbedCategories = ({ categoriesData }) => {
           categoriesData[selectedTab]
             .slice(pageNumber * 10, pageNumber * 10 + 10)
             .map((gameData) => (
-              <GamesListRow key={gameData.id} {...gameData}></GamesListRow>
+              <GamesListRow
+                key={gameData.id}
+                onSelect={onSelectGame}
+                isSelected={selectedGameId === gameData.id}
+                {...gameData}
+              ></GamesListRow>
             ))
         }
       </div>
@@ -79,5 +84,7 @@ const TabbedCategories = ({ categoriesData }) => {
 };
 TabbedCategories.propTypes = {
   categoriesData: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.object)),
+  onSelectGame: PropTypes.func.isRequired,
+  selectedGameId: PropTypes.oneOfType(PropTypes.number, null),
 };
 export default TabbedCategories;
