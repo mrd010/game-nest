@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 const OSIcon = ({ src }) => {
   return (
     <div>
-      <img src={src} alt="OS Icon" width={20} height={20} />
+      <img src={src} alt="OS Icon" width={18} height={18} />
     </div>
   );
 };
