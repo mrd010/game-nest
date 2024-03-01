@@ -9,10 +9,12 @@ const TabbedCategories = ({ categoriesData }) => {
 
   const tabIndex = selectedTab === 'new_releases' ? 0 : selectedTab === 'top_sellers' ? 1 : 2;
   console.log(categoriesData);
+  const numberOfPages = Math.ceil(categoriesData[selectedTab].length / 10);
 
   const handlePageChange = (number) => {
     setPageNumber(number);
   };
+
   return (
     <div className="grid grid-flow-row">
       <div
@@ -44,13 +46,15 @@ const TabbedCategories = ({ categoriesData }) => {
             <GamesListRow key={gameData.id} {...gameData}></GamesListRow>
           ))}
       </div>
-      <div className="justify-self-center">
-        <PageNavNumbers
-          currentPageNumber={pageNumber}
-          totalPageNumbers={Math.ceil(categoriesData[selectedTab].length / 10)}
-          onSelect={handlePageChange}
-        ></PageNavNumbers>
-      </div>
+      {numberOfPages > 1 && (
+        <div className="justify-self-center">
+          <PageNavNumbers
+            currentPageNumber={pageNumber}
+            totalPageNumbers={numberOfPages}
+            onSelect={handlePageChange}
+          ></PageNavNumbers>
+        </div>
+      )}
     </div>
   );
 };
