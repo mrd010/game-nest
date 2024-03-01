@@ -2,12 +2,17 @@ import PropTypes from 'prop-types';
 import TabButton from './TabButton';
 import { useState } from 'react';
 import GamesListRow from './GamesListRow';
+import PageNavNumbers from './PageNavNumbers';
 const TabbedCategories = ({ categoriesData }) => {
   const [selectedTab, setSelectedTab] = useState('new_releases');
   const [pageNumber, setPageNumber] = useState(0);
 
   const tabIndex = selectedTab === 'new_releases' ? 0 : selectedTab === 'top_sellers' ? 1 : 2;
   console.log(categoriesData);
+
+  const handlePageChange = (number) => {
+    setPageNumber(number);
+  };
   return (
     <div>
       <div
@@ -38,6 +43,13 @@ const TabbedCategories = ({ categoriesData }) => {
           .map((gameData) => (
             <GamesListRow key={gameData.id} {...gameData}></GamesListRow>
           ))}
+      </div>
+      <div>
+        <PageNavNumbers
+          currentPageNumber={pageNumber}
+          totalPageNumbers={Math.ceil(categoriesData[selectedTab].length / 10)}
+          onSelect={handlePageChange}
+        ></PageNavNumbers>
       </div>
     </div>
   );
