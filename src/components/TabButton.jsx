@@ -3,7 +3,7 @@ const TabButton = ({ onSelect, isSelected, children }) => {
   return (
     <button
       onClick={onSelect}
-      className={`px-1 py-3 w-32 opacity-40 transition-opacity ${isSelected ? 'opacity-100 font-bold' : ''}`}
+      className={`px-1 py-3 w-40 opacity-40 transition-opacity ${isSelected ? 'opacity-100 font-bold' : ''}`}
     >
       {children}
     </button>
