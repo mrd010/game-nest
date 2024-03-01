@@ -13,9 +13,9 @@ const GamesListRow = (props) => {
         {props.name}
       </span>
       <div className="grid grid-flow-col border-l-[1px] border-gray-950/10 gap-1 justify-start p-3">
-        <OSIcon src={AppleIcon}></OSIcon>
-        <OSIcon src={LinuxIcon}></OSIcon>
-        <OSIcon src={WindowsIcon}></OSIcon>
+        <OSIcon src={AppleIcon} isAvailable={props.mac_available}></OSIcon>
+        <OSIcon src={LinuxIcon} isAvailable={props.linux_available}></OSIcon>
+        <OSIcon src={WindowsIcon} isAvailable={props.windows_available}></OSIcon>
       </div>
     </button>
   );
