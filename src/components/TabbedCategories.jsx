@@ -14,7 +14,7 @@ const TabbedCategories = ({ categoriesData }) => {
     setPageNumber(number);
   };
   return (
-    <div>
+    <div className="grid grid-flow-row">
       <div
         className={`flex relative after:content-[' '] after:h-1 after:rounded-sm after:bg-yellow-500 after:w-32 after:absolute after:bottom-0 after:transition-transform ${tabIndex === 1 ? 'after:translate-x-32' : tabIndex === 2 ? 'after:translate-x-64' : ''}`}
       >
@@ -44,7 +44,7 @@ const TabbedCategories = ({ categoriesData }) => {
             <GamesListRow key={gameData.id} {...gameData}></GamesListRow>
           ))}
       </div>
-      <div>
+      <div className="justify-self-center">
         <PageNavNumbers
           currentPageNumber={pageNumber}
           totalPageNumbers={Math.ceil(categoriesData[selectedTab].length / 10)}
