@@ -2,7 +2,7 @@ import { useLoaderData } from 'react-router-dom';
 import Carousel from '../components/Carousel';
 import RecommendedCard from '../components/RecommendedCard';
 import TabbedCategories from '../components/TabbedCategories';
-import TabListPreviewPanel from '../components/TabListPreviewPanel';
+import TabListPreviewPanel from '../components/TabListGamePreview';
 import { getRefinedGamesArray } from '../services/manipulators';
 import { useState } from 'react';
 
@@ -21,7 +21,9 @@ const Home = () => {
 
   // control active game (selected by user) in featured categories (coming soon, new releases, top sellers)
   const [selectedGameInCats, setSelectedGameInCats] = useState(null);
-  const handleChangeActiveGameInCats = () => {};
+  const handleChangeActiveGameInCats = (steamId) => {
+    setSelectedGameInCats(steamId);
+  };
 
   return (
     <div>
@@ -36,8 +38,12 @@ const Home = () => {
         )}
       </section>
       <section className="grid grid-cols-2">
-        <TabbedCategories categoriesData={refinedCategoriesData}></TabbedCategories>
-        <TabListPreviewPanel></TabListPreviewPanel>
+        <TabbedCategories
+          categoriesData={refinedCategoriesData}
+          onSelectGame={handleChangeActiveGameInCats}
+          selectedGameId={selectedGameInCats}
+        ></TabbedCategories>
+        <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>
       </section>
     </div>
   );
