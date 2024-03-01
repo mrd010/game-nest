@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import AppleIcon from '../assets/icons/AppleIcon.svg';
 import LinuxIcon from '../assets/icons/LinuxIcon.svg';
 import WindowsIcon from '../assets/icons/WindowsIcon.svg';
@@ -7,19 +6,19 @@ import OSIcon from './OSIcon';
 const GamesListRow = (props) => {
   console.log(props);
   return (
-    <Link>
+    <button className="grid grid-cols-[auto_1fr] gap-4">
       <div>
-        <img src={props.small_capsule_image} alt={props.name} />
+        <img src={props.small_capsule_image} alt={props.name} className="rounded-md" />
       </div>
-      <div>
-        <span>{props.name}</span>
-        <div>
+      <div className="grid grid-rows-[1fr_auto] text-left h-full">
+        <span className="text-base self-start">{props.name}</span>
+        <div className="grid grid-flow-col self-end gap-1 justify-start items-end">
           <OSIcon src={AppleIcon}></OSIcon>
           <OSIcon src={LinuxIcon}></OSIcon>
           <OSIcon src={WindowsIcon}></OSIcon>
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
 GamesListRow.propTypes = {
