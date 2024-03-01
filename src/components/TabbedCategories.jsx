@@ -11,7 +11,7 @@ const TabbedCategories = ({ categoriesData }) => {
   return (
     <div>
       <div
-        className={`flex relative after:content-[' '] after:h-1 after:rounded-sm after:bg-yellow-500 after:w-32 after:absolute after:bottom-0 after:transition-transform ${tabIndex === 1 ? 'after:translate-x-32' : tabIndex === 2 ? 'after:translate-x-64' : ''}`}
+        className={`flex relative after:content-[' '] after:h-1 after:rounded-sm after:bg-yellow-500 after:w-36 after:absolute after:bottom-0 after:transition-transform ${tabIndex === 1 ? 'after:translate-x-36' : tabIndex === 2 ? 'after:translate-x-72' : ''}`}
       >
         <TabButton
           onSelect={() => setSelectedTab('new_releases')}
@@ -32,7 +32,7 @@ const TabbedCategories = ({ categoriesData }) => {
           Coming Soon
         </TabButton>
       </div>
-      <div>
+      <div className="w-96 flex">
         {categoriesData[selectedTab]
           .slice(pageNumber * 10, pageNumber * 10 + 10)
           .map((gameData) => (
