@@ -5,12 +5,14 @@ import WindowsIcon from '../assets/icons/WindowsIcon.svg';
 import OSIcon from './OSIcon';
 const GamesListRow = (props) => {
   return (
-    <button className="grid h-14 grid-cols-[auto_1fr_auto] content-center items-center gap-4 bg-gray-200 shadow-sm drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden">
+    <button className="grid group h-14 grid-cols-[auto_1fr_auto] content-center items-center gap-4 bg-gray-200 drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden">
       <div className="">
         <img src={props.small_capsule_image} alt={props.name} className="" />
       </div>
-      <span className="text-[15px] line-clamp-1 text-left">{props.name}</span>
-      <div className="grid grid-flow-col gap-1 justify-start p-3">
+      <span className="text-[15px] group-hover:translate-x-4 p-1 line-clamp-1 text-left  transition-transform ">
+        {props.name}
+      </span>
+      <div className="grid grid-flow-col border-l-[1px] border-gray-950/10 gap-1 justify-start p-3">
         <OSIcon src={AppleIcon}></OSIcon>
         <OSIcon src={LinuxIcon}></OSIcon>
         <OSIcon src={WindowsIcon}></OSIcon>
