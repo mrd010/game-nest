@@ -6,12 +6,12 @@ import OSIcon from './OSIcon';
 const GamesListRow = (props) => {
   console.log(props);
   return (
-    <button className="grid grid-cols-[auto_1fr] gap-4">
+    <button className="grid grid-cols-[auto_1fr] gap-4 bg-gray-200 shadow-sm drop-shadow-sm p-2 rounded-md hover:ring-2 ring-yellow-500">
       <div>
         <img src={props.small_capsule_image} alt={props.name} className="rounded-md" />
       </div>
       <div className="grid grid-rows-[1fr_auto] text-left h-full">
-        <span className="text-base self-start">{props.name}</span>
+        <span className="text-[15px] self-start line-clamp-2 pr-1">{props.name}</span>
         <div className="grid grid-flow-col self-end gap-1 justify-start items-end">
           <OSIcon src={AppleIcon}></OSIcon>
           <OSIcon src={LinuxIcon}></OSIcon>

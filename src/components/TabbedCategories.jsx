@@ -32,7 +32,7 @@ const TabbedCategories = ({ categoriesData }) => {
           Coming Soon
         </TabButton>
       </div>
-      <div className="w-[calc(160px_*_3)] flex flex-col gap-2">
+      <div className="w-[calc(160px_*_3)] flex flex-col gap-2 my-2">
         {categoriesData[selectedTab]
           .slice(pageNumber * 10, pageNumber * 10 + 10)
           .map((gameData) => (
