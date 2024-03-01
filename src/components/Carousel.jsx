@@ -12,10 +12,12 @@ const Carousel = ({ title, itemWidth, children }) => {
   console.log(currentPosition);
 
   useEffect(() => {
-    carousel.current.scrollLeft = currentPosition * (itemWidth + 16);
+    carousel.current.scrollLeft = currentPosition * (itemWidth + 8);
   }, [itemWidth, currentPosition]);
   return (
-    <div className="grid grid-cols-[1fr_auto] grid-row-2 gap-5">
+    <div
+      className={`grid grid-cols-[1fr_auto] grid-row-2 relative gap-5 ${currentPosition > 0 ? 'before:content-[" "] before:absolute before:bottom-2 before:left-0 before:z-50 before:h-[calc(100%_-_60px)] before:w-10 before:bg-gradient-to-l before:from-transparent before:to-gray-50 before:to-80%' : ''}${currentPosition < children.length - 3 ? 'after:content-[" "] after:w-8 after:right-0 after:bottom-2 after:h-[calc(100%_-_60px)] after:bg-gradient-to-r after:to-80% after:from-transparent after:to-gray-50 after:absolute after:z-50' : ''}`}
+    >
       <h2 className="text-2xl font-bold border-b-[1px] pb-2 border-gray-900/50">{title}</h2>
       <div className="flex flex-row gap-2 justify-self-end self-end">
         <ActionButton isDisabled={currentPosition <= 0} onClick={() => handleScrollChange(-3)}>
@@ -30,7 +32,7 @@ const Carousel = ({ title, itemWidth, children }) => {
       </div>
       {children && (
         <div
-          className="grid grid-flow-col auto-cols-max gap-4 scroll-smooth col-span-2 overflow-x-auto pb-2  carousel"
+          className="grid grid-flow-col auto-cols-max gap-4 scroll-smooth col-span-2 overflow-hidden pb-2  carousel"
           ref={carousel}
         >
           {children}
