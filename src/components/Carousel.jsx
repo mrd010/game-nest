@@ -3,15 +3,20 @@ import ActionButton from './ActionButton';
 import { useEffect, useRef, useState } from 'react';
 
 const Carousel = ({ title, itemWidth, children }) => {
+  // carousel component which scrolls horizontally through its children with left and right buttons
+
+  // item currently is showing in left of carousel
   const [currentPosition, setCurrentPosition] = useState(0);
   const carousel = useRef(null);
+
   const handleScrollChange = (direction) => {
+    // when pressed arrow buttons change position between 0 and max items - 3
+    // note: 3 is number of items scrolling with each scroll
     setCurrentPosition((p) => Math.min(Math.max(0, p + direction), children.length - 3));
   };
 
-  console.log(currentPosition);
-
   useEffect(() => {
+    // after set of position scroll container to that position
     carousel.current.scrollLeft = currentPosition * (itemWidth + 8);
   }, [itemWidth, currentPosition]);
   return (
@@ -25,7 +30,7 @@ const Carousel = ({ title, itemWidth, children }) => {
         </ActionButton>
         <ActionButton
           isDisabled={currentPosition >= children.length - 3}
-          onClick={() => handleScrollChange(3)}
+          onClick={() => handleScrollChange(+3)}
         >
           <span className="material-symbols-rounded">arrow_forward</span>
         </ActionButton>

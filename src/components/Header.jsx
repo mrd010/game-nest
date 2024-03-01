@@ -4,6 +4,7 @@ import HeaderProfile from './HeaderProfile';
 import HeaderSearch from './HeaderSearch';
 
 const Header = () => {
+  // top header of app
   return (
     <header className="bg-gray-950 text-gray-50 min-w-min">
       <div className="grid grid-cols-[auto_auto_1fr_auto] items-center p-3 mx-auto w-[1280px] justify-between gap-8">

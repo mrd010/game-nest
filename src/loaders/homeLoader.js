@@ -7,6 +7,7 @@ const recommendedGamesMinScore = 80;
 const userLanguage = getUserLanguage();
 
 export const homeLoader = async () => {
+  // array of fetching data. page loads when all fetched
   const dataPromises = [
     getRecommendedGames(recommendedGamesMinScore),
     getFeaturedCategories(userLanguage),
@@ -14,7 +15,11 @@ export const homeLoader = async () => {
   ];
 
   const homeData = await Promise.all(dataPromises).then((data) => {
-    return { recommendedGames: data[0], featuredCategories: data[1], trailers: data[2] };
+    return {
+      recommendedGames: data[0],
+      featuredCategories: data[1],
+      trailers: data[2],
+    };
   });
   return homeData;
 };

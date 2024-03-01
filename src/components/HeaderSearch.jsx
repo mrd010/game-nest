@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { Form } from 'react-router-dom';
 const HeaderSearch = () => {
+  // search nar in header of app. searches whole steam database for games and navigates to that game page in app
+  // TODO
   return (
     <Form action="" className="relative text-gray-950">
       <input

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const HeaderNavLink = ({ text, link, children }) => {
+  // links in header of page which navigates to different main pages of app
   return (
     <div>
       <Link

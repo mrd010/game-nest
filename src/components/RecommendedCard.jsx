@@ -11,6 +11,9 @@ const RecommendedCard = ({
   steamRatingText,
   releaseDate,
 }) => {
+  // game card for each game in recommended games section . links to game page
+
+  // TODO
   return (
     <Link className="gap-2 p-3 drop-shadow-sm shadow-md bg-gradient-to-b from-amber-300 from-25% to-25% to-gray-100 rounded-md w-[290px]">
       <div className="flex flex-col flex-nowrap gap-2">

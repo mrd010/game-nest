@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 const OSIcon = ({ src, isAvailable }) => {
+  // icon which represents an os and has opacity according to game availability for that os
   return (
     <div>
       <img

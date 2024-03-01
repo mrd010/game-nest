@@ -4,11 +4,17 @@ import { useState } from 'react';
 import GamesListRow from './GamesListRow';
 import PageNavNumbers from './PageNavNumbers';
 const TabbedCategories = ({ categoriesData }) => {
+  // tabbed list with tabs for each key in categoriesData
+
+  // currently active tab in featured categories
   const [selectedTab, setSelectedTab] = useState('new_releases');
+  // pagination for each category with number of items greater than 10
   const [pageNumber, setPageNumber] = useState(0);
 
+  // number version of selected tab (1==new_releases,2===top_sellers,3==coming_soon)
   const tabIndex = selectedTab === 'new_releases' ? 0 : selectedTab === 'top_sellers' ? 1 : 2;
-  console.log(categoriesData);
+
+  // max number of pages for active category
   const numberOfPages = Math.ceil(categoriesData[selectedTab].length / 10);
 
   const handlePageChange = (number) => {
@@ -40,21 +46,27 @@ const TabbedCategories = ({ categoriesData }) => {
         </TabButton>
       </div>
       <div className="grid grid-flow-row gap-1 my-2">
-        {categoriesData[selectedTab]
-          .slice(pageNumber * 10, pageNumber * 10 + 10)
-          .map((gameData) => (
-            <GamesListRow key={gameData.id} {...gameData}></GamesListRow>
-          ))}
+        {
+          // divide items in pages and show active page items
+          categoriesData[selectedTab]
+            .slice(pageNumber * 10, pageNumber * 10 + 10)
+            .map((gameData) => (
+              <GamesListRow key={gameData.id} {...gameData}></GamesListRow>
+            ))
+        }
       </div>
-      {numberOfPages > 1 && (
-        <div className="justify-self-center">
-          <PageNavNumbers
-            currentPageNumber={pageNumber}
-            totalPageNumbers={numberOfPages}
-            onSelect={handlePageChange}
-          ></PageNavNumbers>
-        </div>
-      )}
+      {
+        // show page navigator only when more than one page exists
+        numberOfPages > 1 && (
+          <div className="justify-self-center">
+            <PageNavNumbers
+              currentPageNumber={pageNumber}
+              totalPageNumbers={numberOfPages}
+              onSelect={handlePageChange}
+            ></PageNavNumbers>
+          </div>
+        )
+      }
     </div>
   );
 };

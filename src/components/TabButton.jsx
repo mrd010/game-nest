@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 const TabButton = ({ onSelect, isSelected, children }) => {
+  // featured categories top tab menu buttons
   return (
     <button
       onClick={onSelect}

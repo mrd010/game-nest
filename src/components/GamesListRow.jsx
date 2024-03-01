@@ -4,6 +4,7 @@ import LinuxIcon from '../assets/icons/LinuxIcon.svg';
 import WindowsIcon from '../assets/icons/WindowsIcon.svg';
 import OSIcon from './OSIcon';
 const GamesListRow = (props) => {
+  // game row button in featured categories section of home page. displays game info in preview section
   return (
     <button className="grid group h-14 grid-cols-[auto_1fr_auto] content-center items-center gap-4 bg-gray-200 drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden">
       <div className="">

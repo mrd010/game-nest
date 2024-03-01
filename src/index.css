@@ -75,6 +75,7 @@
 }
 
 @layer components {
+  /* change color of os icons to bg-gray-800 */
   .os-icon {
     filter: brightness(0) saturate(100%) invert(14%) sepia(22%) saturate(841%) hue-rotate(175deg)
       brightness(92%) contrast(94%);
