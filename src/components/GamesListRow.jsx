@@ -1,11 +1,23 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AppleIcon from '../assets/icons/AppleIcon.svg';
+import LinuxIcon from '../assets/icons/LinuxIcon.svg';
+import WindowsIcon from '../assets/icons/WindowsIcon.svg';
+import OSIcon from './OSIcon';
 const GamesListRow = (props) => {
   console.log(props);
   return (
     <Link>
       <div>
         <img src={props.small_capsule_image} alt={props.name} />
+      </div>
+      <div>
+        <span>{props.name}</span>
+        <div>
+          <OSIcon src={AppleIcon}></OSIcon>
+          <OSIcon src={LinuxIcon}></OSIcon>
+          <OSIcon src={WindowsIcon}></OSIcon>
+        </div>
       </div>
     </Link>
   );
