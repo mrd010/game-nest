@@ -1,4 +1,5 @@
 import scoreColors from '../data/scoreColors.json';
+import { htmlToSysReqArray } from './parsers';
 
 // functions to get an image title from steam according to game steam id
 
@@ -29,4 +30,35 @@ export const getMetascoreColor = (score) => {
         : score >= 40
           ? scoreColors.bad
           : scoreColors.trash;
+};
+
+export const extractGameSysReq = (gameData) => {
+  let systemRequirements = {};
+  if (gameData) {
+    if (gameData.pc_requirements && gameData.pc_requirements.minimum) {
+      const sysReqArray = htmlToSysReqArray(gameData.pc_requirements.minimum);
+      if (sysReqArray.length) {
+        systemRequirements.pcMinimum = sysReqArray;
+      }
+    }
+    if (gameData.pc_requirements && gameData.pc_requirements.recommended) {
+      const sysReqArray = htmlToSysReqArray(gameData.pc_requirements.recommended);
+      if (sysReqArray.length) {
+        systemRequirements.pcRecommended = sysReqArray;
+      }
+    }
+    if (gameData.mac_requirements && gameData.mac_requirements.minimum) {
+      const sysReqArray = htmlToSysReqArray(gameData.mac_requirements.minimum);
+      if (sysReqArray.length) {
+        systemRequirements.macMinimum = sysReqArray;
+      }
+    }
+    if (gameData.linux_requirements && gameData.linux_requirements.minimum) {
+      const sysReqArray = htmlToSysReqArray(gameData.linux_requirements.minimum);
+      if (sysReqArray.length) {
+        systemRequirements.linuxMinimum = sysReqArray;
+      }
+    }
+  }
+  return systemRequirements;
 };
