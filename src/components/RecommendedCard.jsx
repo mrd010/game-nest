@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { format } from 'date-fns';
+import GameScore from './GameScore';
 
 const RecommendedCard = ({
   steamAppID,
@@ -37,19 +38,10 @@ const RecommendedCard = ({
           </span>
         </div>
       </div>
-      <div className="border-b-[1px] mb-2 pb-2 grid items-center grid-cols-[minmax(0,1fr)_40px]">
-        <span className="uppercase text-2xl text-gray-500/80">Metascore</span>
-        {metacriticScore ? (
-          <span
-            style={{ backgroundColor: getMetascoreColor(Number(metacriticScore)) }}
-            className="rounded-md p-1 text-2xl size-10 text-center"
-          >
-            {metacriticScore}
-          </span>
-        ) : (
-          <span>?</span>
-        )}
-      </div>
+      <GameScore>
+        <GameScore.GameScoreTitle>Metascore</GameScore.GameScoreTitle>
+        <GameScore.GameScoreRateMeta score={Number(metacriticScore)}></GameScore.GameScoreRateMeta>
+      </GameScore>
       <div>
         <span>Steam Score</span>
         {steamRatingPercent ? <span>{steamRatingPercent}%</span> : <span>?</span>}
