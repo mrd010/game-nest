@@ -27,7 +27,9 @@ export const useData = (url) => {
       }
     };
 
-    getData();
+    if (typeof url === 'string') {
+      getData();
+    }
 
     // if effect fires second time ignore first one
     return () => (ignore = true);
