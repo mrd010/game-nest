@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useData } from '../hooks/useData';
+import { steamHeaderImage } from '../services/utilities';
 const TabListGamePreview = ({ id }) => {
-  const [gameData, setGameData] = useState(null);
+  const { data } = useData(id ? `/api/appdetails?appids=${id}` : null);
+  const gameData = data && data[id] && data[id].success ? data[id].data : null;
+  console.log(data);
+
   return (
     <>
       {gameData ? (
         <div>
-          <img src={gameData.header_image} alt={gameData.name} />
+          <img width={460} height={215} src={steamHeaderImage(id)} alt={gameData.name} />
           <h3>{gameData.name}</h3>
           <p>{gameData.short_description}</p>
         </div>
