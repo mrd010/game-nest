@@ -18,7 +18,7 @@ const GameScoreRateMeta = ({ score }) => {
       style={{ backgroundColor: getMetascoreColor(score) }}
       className="rounded-md p-1 text-2xl size-10 text-center grid place-items-center"
     >
-      {typeof score === number ? score : '?'}
+      {typeof score === 'number' ? score : '?'}
     </span>
   );
 };
