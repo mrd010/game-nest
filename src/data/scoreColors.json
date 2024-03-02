@@ -1,8 +1,8 @@
-[
-  { "excellent": "#10b981" },
-  { "good": "#22c55e" },
-  { "ok": "#eab308" },
-  { "bad": "#ea580c" },
-  { "trash": "#b91c1c" },
-  { "na": "#a3a3a3" }
-]
+{
+  "excellent": "#10b981",
+  "good": "#22c55e",
+  "ok": "#eab308",
+  "bad": "#ea580c",
+  "trash": "#b91c1c",
+  "na": "#a3a3a3"
+}
