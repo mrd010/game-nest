@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { getMetascoreColor, steamHeaderImage } from '../services/utilities';
+import { steamHeaderImage } from '../services/utilities';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -11,7 +11,7 @@ const RecommendedCard = ({
   title,
   metacriticScore,
   steamRatingPercent,
-  steamRatingCount,
+
   steamRatingText,
   releaseDate,
 }) => {
@@ -58,7 +58,6 @@ RecommendedCard.propTypes = {
   title: PropTypes.string.isRequired,
   metacriticScore: PropTypes.string,
   steamRatingPercent: PropTypes.string,
-  steamRatingCount: PropTypes.string,
   steamRatingText: PropTypes.string,
   releaseDate: PropTypes.number,
 };
