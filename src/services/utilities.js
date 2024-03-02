@@ -1,4 +1,3 @@
-import { number } from 'prop-types';
 import scoreColors from '../data/scoreColors.json';
 
 // functions to get an image title from steam according to game steam id
