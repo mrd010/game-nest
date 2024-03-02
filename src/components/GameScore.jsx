@@ -2,7 +2,7 @@ import PropTypes, { number } from 'prop-types';
 import { getMetascoreColor } from '../services/utilities';
 const GameScore = ({ children }) => {
   return (
-    <div className="border-b-[1px] mb-2 pb-2 grid items-center grid-cols-[minmax(0,1fr)_auto]">
+    <div className="py-2 border-t-[1px] grid items-center grid-cols-[minmax(0,1fr)_auto] relative">
       {children}
     </div>
   );
@@ -23,8 +23,23 @@ const GameScoreRateMeta = ({ score }) => {
   );
 };
 
+const GameScoreRateSteam = ({ score }) => {
+  return (
+    <div>
+      {score ? (
+        <span className="rounded-md p-1 text-2xl size-10 text-center grid place-items-center text-gray-50 bg-gradient-to-r from-[#15202c] to-[#0e141c]">
+          {score}
+        </span>
+      ) : (
+        <span>?</span>
+      )}
+    </div>
+  );
+};
+
 GameScore.GameScoreTitle = GameScoreTitle;
 GameScore.GameScoreRateMeta = GameScoreRateMeta;
+GameScore.GameScoreRateSteam = GameScoreRateSteam;
 
 GameScore.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
@@ -34,6 +49,9 @@ GameScoreTitle.propTypes = {
   children: PropTypes.node.isRequired,
 };
 GameScoreRateMeta.propTypes = {
+  score: PropTypes.number.isRequired,
+};
+GameScoreRateSteam.propTypes = {
   score: PropTypes.number.isRequired,
 };
 

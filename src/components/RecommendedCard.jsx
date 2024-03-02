@@ -20,7 +20,7 @@ const RecommendedCard = ({
   // TODO
   return (
     <Link className="grid grid-rows-[1fr_auto_auto] p-3 drop-shadow-sm shadow-md bg-gradient-to-b from-amber-300 from-25% to-25% to-gray-100 rounded-md w-[290px]">
-      <div className="grid grid-rows-[124px_1fr_auto] gap-3 border-b-[1px] mb-2 pb-2">
+      <div className="grid grid-rows-[124px_1fr_auto] gap-3 pb-2">
         <div className="size-full relative rounded-md bg-gray-100">
           {!imageLoaded && <div className="image-loader rounded-md absolute top-0 left-0"></div>}
           <LazyLoadImage
@@ -42,16 +42,13 @@ const RecommendedCard = ({
         <GameScore.GameScoreTitle>Metascore</GameScore.GameScoreTitle>
         <GameScore.GameScoreRateMeta score={Number(metacriticScore)}></GameScore.GameScoreRateMeta>
       </GameScore>
-      <div>
-        <span>Steam Score</span>
-        {steamRatingPercent ? <span>{steamRatingPercent}%</span> : <span>?</span>}
-        {steamRatingPercent && (
-          <>
-            <span>{steamRatingText}</span>
-            <span>Based on {steamRatingCount} Ratings</span>
-          </>
-        )}
-      </div>
+      <GameScore>
+        <GameScore.GameScoreTitle>Steam Score</GameScore.GameScoreTitle>
+        <GameScore.GameScoreRateSteam
+          score={Number(steamRatingPercent)}
+        ></GameScore.GameScoreRateSteam>
+      </GameScore>
+      <span className="text-sm text-right text-gray-400 font-bold">{steamRatingText}</span>
     </Link>
   );
 };
