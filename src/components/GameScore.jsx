@@ -1,4 +1,4 @@
-import PropTypes, { number } from 'prop-types';
+import PropTypes from 'prop-types';
 import { getMetascoreColor } from '../services/utilities';
 const GameScore = ({ children }) => {
   return (
