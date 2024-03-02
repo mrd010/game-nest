@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-const SysReq = ({ platform, systemReqData }) => {
-  return <div></div>;
+const SysReq = ({ platform, title, systemReqData }) => {
+  return <div>{platform}</div>;
 };
 SysReq.propTypes = {
   platform: PropTypes.oneOf(['windows', 'mac', 'linux']),
+  title: PropTypes.oneOf(['minimum', 'recommended']),
   systemReqData: PropTypes.shape({
     pcMinimum: PropTypes.arrayOf(PropTypes.array),
     pcRecommended: PropTypes.arrayOf(PropTypes.array),
