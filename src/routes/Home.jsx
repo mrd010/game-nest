@@ -37,7 +37,7 @@ const Home = () => {
           </Carousel>
         )}
       </section>
-      <section className="grid grid-cols-2">
+      <section className="grid grid-cols-2 gap-4">
         <TabbedCategories
           categoriesData={refinedCategoriesData}
           onSelectGame={handleChangeActiveGameInCats}
