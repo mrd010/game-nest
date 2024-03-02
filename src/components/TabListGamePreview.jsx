@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useData } from '../hooks/useData';
 import { extractGameSysReq, steamHeaderImage } from '../services/utilities';
+import SysReq from './SysReq';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
@@ -18,6 +19,34 @@ const TabListGamePreview = ({ id }) => {
           <img src={steamHeaderImage(id)} alt={gameData.name} />
           <h3>{gameData.name}</h3>
           <p>{gameData.short_description}</p>
+          {allOSSysRequirements.pcMinimum && (
+            <SysReq
+              platform="windows"
+              title="minimum"
+              systemReqData={allOSSysRequirements.pcMinimum}
+            ></SysReq>
+          )}
+          {allOSSysRequirements.pcRecommended && (
+            <SysReq
+              platform="windows"
+              title="recommended"
+              systemReqData={allOSSysRequirements.pcRecommended}
+            ></SysReq>
+          )}
+          {allOSSysRequirements.macMinimum && (
+            <SysReq
+              platform="mac"
+              title="minimum"
+              systemReqData={allOSSysRequirements.macMinimum}
+            ></SysReq>
+          )}
+          {allOSSysRequirements.linuxMinimum && (
+            <SysReq
+              platform="linux"
+              title="minimum"
+              systemReqData={allOSSysRequirements.linuxMinimum}
+            ></SysReq>
+          )}
         </div>
       ) : (
         // if no data loaded yet show notifier empty
