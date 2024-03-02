@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { steamHeaderImage } from '../services/utilities';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const RecommendedCard = ({
   steamAppID,
@@ -20,12 +21,12 @@ const RecommendedCard = ({
       <div className="grid grid-rows-[124px_auto] gap-3 ">
         <div className="size-full relative rounded-md bg-gray-100">
           {!imageLoaded && <div className="image-loader rounded-md absolute top-0 left-0"></div>}
-          <img
+          <LazyLoadImage
             src={steamHeaderImage(steamAppID)}
             alt={`${title} image`}
             className="h-[124px] w-full rounded-md"
             onLoad={() => setImageLoaded(true)}
-          />
+          ></LazyLoadImage>
         </div>
         <h3 className="text-2xl font-bold ">{title}</h3>
         <span>Released on {Date(releaseDate)}</span>

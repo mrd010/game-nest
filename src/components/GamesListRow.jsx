@@ -3,6 +3,7 @@ import AppleIcon from '../assets/icons/AppleIcon.svg';
 import LinuxIcon from '../assets/icons/LinuxIcon.svg';
 import WindowsIcon from '../assets/icons/WindowsIcon.svg';
 import OSIcon from './OSIcon';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const GamesListRow = (props) => {
   // game row button in featured categories section of home page. displays game info in preview section
   return (
@@ -11,7 +12,7 @@ const GamesListRow = (props) => {
       className={`grid group h-14 grid-cols-[auto_1fr_auto] content-center items-center gap-4 bg-gray-200 drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden ${props.isSelected ? 'bg-yellow-300' : ''}`}
     >
       <div className="">
-        <img src={props.small_capsule_image} alt={props.name} className="" />
+        <LazyLoadImage src={props.small_capsule_image} alt={props.name}></LazyLoadImage>
       </div>
       <span
         className={`text-[15px] group-hover:translate-x-4 p-1 line-clamp-1 text-left  transition-transform ${props.isSelected ? 'translate-x-4 font-bold' : ''}`}
