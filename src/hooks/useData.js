@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { checkResponse } from '../services/dataFetchers';
 
 // custom hook for fetching data in json type from any url
 export const useData = (url) => {
@@ -13,9 +14,8 @@ export const useData = (url) => {
           headers: { 'content-type': 'application/json' },
         });
 
-        if (!response.ok || response.status >= 400) {
-          throw new Error('Ooof');
-        }
+        // check if response has errors
+        checkResponse(response);
 
         const resJSON = await response.json();
         if (!ignore) {
