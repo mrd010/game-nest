@@ -60,11 +60,11 @@ export const extractPriorityMinReq = (gameData) => {
 
   switch (platformName) {
     case 'windows':
-      return extractGameSysReq(gameData).pcMinimum;
+      return { platform: platformName, minSysReq: extractGameSysReq(gameData).pcMinimum };
     case 'mac':
-      return extractGameSysReq(gameData).macMinimum;
+      return { platform: platformName, minSysReq: extractGameSysReq(gameData).macMinimum };
     case 'linux':
-      return extractGameSysReq(gameData).linuxMinimum;
+      return { platform: platformName, minSysReq: extractGameSysReq(gameData).linuxMinimum };
 
     default:
       return null;
