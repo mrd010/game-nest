@@ -2,58 +2,30 @@ import PropTypes from 'prop-types';
 import { useData } from '../hooks/useData';
 import SysReq from './SysReq';
 import { decode } from 'html-entities';
-import { extractGameSysReq, extractPriorityPlatform } from '../services/extractors';
+import {
+  extractGameData,
+  extractGameSysReq,
+  extractPriorityMinReq,
+  extractPriorityPlatform,
+} from '../services/extractors';
 import { steamHeaderImage } from '../services/utilities';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
   // if data fetched and data is for this id and it fetched with succuss set game data
-  const gameData = data && Object.values(data)[0].success && Object.values(data)[0].data;
+  const gameData = extractGameData(data);
+  // extract game base sys req from game data
+  const minSysReq = extractPriorityMinReq(gameData);
 
-  // extract game sys req from received html code
-  const allOSSysRequirements = gameData ? extractGameSysReq(gameData) : null;
-
-  // get most common platform
-  const priorityPlatform =
-    gameData && gameData.platforms ? extractPriorityPlatform(gameData.platforms) : null;
-
-  console.log(allOSSysRequirements, priorityPlatform);
+  console.log(gameData);
   return (
     <>
       {gameData ? (
         // if data loaded
         <div>
-          <img src={steamHeaderImage(id)} alt={gameData.name} />
+          <img src={steamHeaderImage(gameData.steam_appid)} alt={gameData.name} />
           <h3>{gameData.name}</h3>
           <p>{decode(gameData.short_description)}</p>
-          {allOSSysRequirements.pcMinimum && (
-            <SysReq
-              platform="windows"
-              title="minimum"
-              systemReqData={allOSSysRequirements.pcMinimum}
-            ></SysReq>
-          )}
-          {allOSSysRequirements.pcRecommended && (
-            <SysReq
-              platform="windows"
-              title="recommended"
-              systemReqData={allOSSysRequirements.pcRecommended}
-            ></SysReq>
-          )}
-          {allOSSysRequirements.macMinimum && (
-            <SysReq
-              platform="mac"
-              title="minimum"
-              systemReqData={allOSSysRequirements.macMinimum}
-            ></SysReq>
-          )}
-          {allOSSysRequirements.linuxMinimum && (
-            <SysReq
-              platform="linux"
-              title="minimum"
-              systemReqData={allOSSysRequirements.linuxMinimum}
-            ></SysReq>
-          )}
         </div>
       ) : (
         // if no data loaded yet show notifier empty
