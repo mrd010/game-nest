@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { capitalizeWord } from '../services/utilities';
 const SysReq = ({ platform, title, systemReqData }) => {
   return (
-    <div className="grid justify-items-start gap-1 bg-gray-200 rounded-md p-2 justify-self-start">
-      <h4 className="text-base font-bold bg-gray-900 rounded-md text-gray-50 px-1">
+    <div className="grid gap-2 bg-gray-200 rounded-md p-2">
+      <h4 className="text-base font-bold justify-self-start bg-gray-900 rounded-md text-gray-50 px-1">
         {platform === 'windows' ? capitalizeWord(title) : capitalizeWord(platform)}
       </h4>
       <ul className="grid grid-cols-3 gap-1">
