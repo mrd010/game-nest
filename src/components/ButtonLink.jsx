@@ -5,7 +5,7 @@ const ButtonLink = ({ text, link }) => {
 
   return (
     <Link
-      className="font-semibold text-gray-950 bg-yellow-400 hover:bg-yellow-500 hover:text py-2 px-8 rounded-md transition-colors"
+      className="font-semibold text-gray-950 bg-yellow-400 focus:bg-yellow-300 hover:bg-yellow-300 shadow-sm py-2 px-8 rounded-md transition-colors"
       to={link}
     >
       {text}
