@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ButtonLink from './ButtonLink';
 const HeaderProfile = ({ isLoggedIn, userId }) => {
   // user profile notifier. shows login button if no one is logged in
   // TODO
@@ -8,12 +9,7 @@ const HeaderProfile = ({ isLoggedIn, userId }) => {
       <span className="material-symbols-rounded">account_circle</span>
     </Link>
   ) : (
-    <Link
-      to="login"
-      className="font-semibold text-gray-950 bg-yellow-400 hover:bg-yellow-500 hover:text py-2 px-8 rounded-md transition-colors"
-    >
-      Login
-    </Link>
+    <ButtonLink text="Login" link="/login"></ButtonLink>
   );
 };
 HeaderProfile.propTypes = {
