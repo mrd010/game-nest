@@ -3,7 +3,8 @@ import TabButton from './TabButton';
 import { useState } from 'react';
 import GamesListRow from './GamesListRow';
 import PageNavNumbers from './PageNavNumbers';
-const TabbedCategories = ({ categoriesData, onSelectGame, selectedGameId }) => {
+import TabListPreviewPanel from '../components/TabListGamePreview';
+const TabbedCategories = ({ categoriesData }) => {
   // tabbed list with tabs for each key in categoriesData
 
   // currently active tab in featured categories
@@ -28,8 +29,14 @@ const TabbedCategories = ({ categoriesData, onSelectGame, selectedGameId }) => {
     setPageNumber(number);
   };
 
+  // control active game (selected by user) in featured categories (coming soon, new releases, top sellers)
+  const [selectedGameInCats, setSelectedGameInCats] = useState(null);
+  const handleChangeActiveGameInCats = (steamId) => {
+    setSelectedGameInCats(steamId);
+  };
+
   return (
-    <div className="grid grid-flow-row">
+    <div className="grid grid-flow-row gap-2">
       <div
         className={`flex relative after:content-[' '] after:h-1 after:rounded-sm after:bg-yellow-500 after:w-32 after:absolute after:bottom-0 after:transition-transform ${tabIndex === 1 ? 'after:translate-x-32' : tabIndex === 2 ? 'after:translate-x-64' : ''}`}
       >
@@ -52,25 +59,28 @@ const TabbedCategories = ({ categoriesData, onSelectGame, selectedGameId }) => {
           Coming Soon
         </TabButton>
       </div>
-      <div className="grid grid-flow-row gap-1 my-2">
-        {
-          // divide items in pages and show active page items
-          categoriesData[selectedTab]
-            .slice(pageNumber * 10, pageNumber * 10 + 10)
-            .map((gameData) => (
-              <GamesListRow
-                key={gameData.id}
-                onSelect={onSelectGame}
-                isSelected={selectedGameId === gameData.id}
-                {...gameData}
-              ></GamesListRow>
-            ))
-        }
+      <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-8">
+        <div className="grid grid-flow-row gap-1">
+          {
+            // divide items in pages and show active page items
+            categoriesData[selectedTab]
+              .slice(pageNumber * 10, pageNumber * 10 + 10)
+              .map((gameData) => (
+                <GamesListRow
+                  key={gameData.id}
+                  onSelect={handleChangeActiveGameInCats}
+                  isSelected={selectedGameInCats === gameData.id}
+                  {...gameData}
+                ></GamesListRow>
+              ))
+          }
+        </div>
+        <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>
       </div>
       {
         // show page navigator only when more than one page exists
         numberOfPages > 1 && (
-          <div className="justify-self-center">
+          <div className="my-2">
             <PageNavNumbers
               currentPageNumber={pageNumber}
               totalPageNumbers={numberOfPages}
@@ -84,7 +94,5 @@ const TabbedCategories = ({ categoriesData, onSelectGame, selectedGameId }) => {
 };
 TabbedCategories.propTypes = {
   categoriesData: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.object)),
-  onSelectGame: PropTypes.func.isRequired,
-  selectedGameId: PropTypes.oneOfType(PropTypes.number, null),
 };
 export default TabbedCategories;
