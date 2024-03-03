@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { useData } from '../hooks/useData';
-import { extractGameSysReq, steamHeaderImage } from '../services/utilities';
 import SysReq from './SysReq';
+import { decode } from 'html-entities';
+import { extractGameSysReq, getPriorityPlatform } from '../services/extractors';
+import { steamHeaderImage } from '../services/utilities';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
@@ -9,8 +11,13 @@ const TabListGamePreview = ({ id }) => {
   const gameData = data && Object.values(data)[0].success && Object.values(data)[0].data;
 
   // extract game sys req from received html code
-  const allOSSysRequirements = extractGameSysReq(gameData);
+  const allOSSysRequirements = gameData ? extractGameSysReq(gameData) : null;
 
+  // get most common platform
+  const priorityPlatform =
+    gameData && gameData.platforms ? getPriorityPlatform(gameData.platforms) : null;
+
+  console.log(allOSSysRequirements, priorityPlatform);
   return (
     <>
       {gameData ? (
@@ -18,7 +25,7 @@ const TabListGamePreview = ({ id }) => {
         <div>
           <img src={steamHeaderImage(id)} alt={gameData.name} />
           <h3>{gameData.name}</h3>
-          <p>{gameData.short_description}</p>
+          <p>{decode(gameData.short_description)}</p>
           {allOSSysRequirements.pcMinimum && (
             <SysReq
               platform="windows"
