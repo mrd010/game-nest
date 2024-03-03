@@ -9,12 +9,3 @@ export const htmlToSysReqArray = (sysReqHtml) => {
   const sysReqArray = sysReqParts.map((part) => part.split(':').map((p) => p.trim()));
   return sysReqArray;
 };
-
-// checks if string has english words
-export const isStringInEnglish = (str) => {
-  const englishPhraseRegex = new RegExp(/[a-zA-Z]+/);
-  if (englishPhraseRegex.test(str)) {
-    return true;
-  }
-  return false;
-};
