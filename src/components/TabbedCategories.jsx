@@ -12,6 +12,9 @@ const TabbedCategories = ({ categoriesData }) => {
   // pagination for each category with number of items greater than 10
   const [pageNumber, setPageNumber] = useState(0);
 
+  // control active game (selected by user) in featured categories (coming soon, new releases, top sellers)
+  const [selectedGameInCats, setSelectedGameInCats] = useState(null);
+
   // number version of selected tab (1==new_releases,2===top_sellers,3==coming_soon)
   const tabIndex = selectedTab === 'new_releases' ? 0 : selectedTab === 'top_sellers' ? 1 : 2;
 
@@ -29,8 +32,6 @@ const TabbedCategories = ({ categoriesData }) => {
     setPageNumber(number);
   };
 
-  // control active game (selected by user) in featured categories (coming soon, new releases, top sellers)
-  const [selectedGameInCats, setSelectedGameInCats] = useState(null);
   const handleChangeActiveGameInCats = (steamId) => {
     setSelectedGameInCats(steamId);
   };
@@ -60,7 +61,7 @@ const TabbedCategories = ({ categoriesData }) => {
         </TabButton>
       </div>
       <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-8">
-        <div className="grid grid-flow-row gap-1">
+        <div className="grid grid-flow-row gap-1 h-[600px] content-start">
           {
             // divide items in pages and show active page items
             categoriesData[selectedTab]
@@ -75,7 +76,7 @@ const TabbedCategories = ({ categoriesData }) => {
               ))
           }
         </div>
-        <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>
+        {selectedGameInCats && <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>}
       </div>
       {
         // show page navigator only when more than one page exists
