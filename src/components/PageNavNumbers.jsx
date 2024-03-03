@@ -10,7 +10,7 @@ const PageNavNumbers = ({ currentPageNumber, totalPageNumbers, onSelect }) => {
           <button
             key={index}
             onClick={() => onSelect(index)}
-            className={`border-[1px] h-8 w-16 font-bold rounded-[4px] hover:text-gray-900 transition-colors border-gray-700/80 ${index === currentPageNumber ? 'bg-yellow-400 text-gray-900' : 'text-gray-900/60'}`}
+            className={`border-[1px] h-8 w-16 font-bold rounded-[4px] hover:text-gray-900 border-gray-500/40 ${index === currentPageNumber ? 'bg-yellow-400  text-gray-900' : 'text-gray-900/60'} ${index !== currentPageNumber ? 'hover:bg-yellow-100' : ''}`}
           >
             {index + 1}
           </button>
