@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { capitalizeWord } from '../services/utilities';
 const SysReq = ({ platform, title, systemReqData }) => {
   return (
-    <div className="grid gap-2 bg-gray-200 rounded-md p-2">
+    <div className="grid grid-rows-[auto_1fr] gap-2 bg-gray-200 rounded-md p-2">
       <h4 className="text-base font-bold justify-self-start bg-gray-900 rounded-md text-gray-50 px-1">
         {platform === 'windows' ? capitalizeWord(title) : capitalizeWord(platform)}
       </h4>
@@ -13,7 +13,7 @@ const SysReq = ({ platform, title, systemReqData }) => {
             className={`flex flex-col border-[1px] border-gray-900/10 px-1 rounded-sm ${index === 0 && !reqData[0].toLowerCase().includes('os') ? 'col-span-3' : ''}`}
           >
             <span className="font-bold text-sm">{reqData[0]}</span>
-            <span className="text-xs text-gray-500/90">{reqData[1]}</span>
+            <span className="text-xs text-gray-500/90 break-words">{reqData[1]}</span>
           </li>
         ))}
       </ul>
