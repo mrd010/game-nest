@@ -6,7 +6,6 @@ import { extractGameData, extractPriorityMinReq } from '../services/extractors';
 import { steamHeaderImage } from '../services/utilities';
 import { useEffect, useState } from 'react';
 import MiniCategoriesList from './MiniCategoriesList';
-import ButtonLink from './ButtonLink';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
@@ -20,57 +19,59 @@ const TabListGamePreview = ({ id }) => {
 
   console.log(gameData);
 
+  const newId = gameData && gameData.steam_appid;
   useEffect(() => {
-    if (id) {
+    if (id !== newId) {
       setIsImageLoaded(false);
     }
-  }, [id]);
+  }, [id, newId]);
 
   return (
     <>
-      {gameData && (
+      {gameData && gameData.type === 'game' && (
         // if data loaded
-        <div>
-          <div className="relative">
+        <div className="grid grid-rows-[230px_150px_60px_50px_260px] drop-shadow-sm items-start">
+          <div className="relative rounded-md overflow-hidden">
             <img
               width={460}
               height={215}
               src={steamHeaderImage(gameData.steam_appid)}
               alt={gameData.name}
               onLoad={() => setIsImageLoaded(true)}
+              className="rounded-sm w-full"
             />
-            {!isImageLoaded && <div className="image-loader rounded-md"></div>}
+            {!isImageLoaded && <div className="image-loader rounded-sm"></div>}
           </div>
-          <h3>{gameData.name}</h3>
-          <p>{decode(gameData.short_description)}</p>
-          <div>
-            <h4>System Requirements</h4>
+          <div className="pb-2 grid grid-flow-row h-full ">
+            <h3 className="text-2xl font-extrabold my-2">{gameData.name}</h3>
+            <p className="text-justify text-sm text-gray-500/90   overflow-y-auto">
+              {decode(gameData.short_description)}
+            </p>
+          </div>
+          <div className="border-y-[1px] py-2 grid grid-cols-2">
+            {gameData.developers && gameData.developers.length && (
+              <div className="flex flex-col">
+                <span className="font-bold">Developer</span>
+                <span className="text-sm text-gray-500/90">{gameData.developers[0]}</span>
+              </div>
+            )}
+            {gameData.publishers && gameData.publishers.length && (
+              <div className="flex flex-col">
+                <span className="font-bold">Publisher</span>
+                <span className="text-sm text-gray-500/90">{gameData.publishers[0]}</span>
+              </div>
+            )}
+          </div>
+          <div className="flex items-start justify-end flex-wrap gap-1 justify-self-end py-2">
+            <MiniCategoriesList categoryList={gameData.categories}></MiniCategoriesList>
+          </div>
+          <div className="grid grid-rows-[auto_minmax(0,1fr)] self-stretch">
+            <h4 className="text-lg p-2 font-bold">System Requirements</h4>
             <SysReq
               platform={minSysReq.platform}
               title="minimum"
               systemReqData={minSysReq.specs}
             ></SysReq>
-          </div>
-          <div>
-            <MiniCategoriesList categoryList={gameData.categories}></MiniCategoriesList>
-          </div>
-          <div></div>
-          <div>
-            <ButtonLink text="More Info" link={`/games/${gameData.steam_appid}`}></ButtonLink>
-          </div>
-          <div>
-            {gameData.developers && gameData.developers.length && (
-              <p>
-                <span>Developer:</span>
-                <span>{gameData.developers[0]}</span>
-              </p>
-            )}
-            {gameData.publishers && gameData.publishers.length && (
-              <p>
-                <span>Publisher:</span>
-                <span>{gameData.publishers[0]}</span>
-              </p>
-            )}
           </div>
         </div>
       )}
