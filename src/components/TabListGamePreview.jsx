@@ -4,36 +4,74 @@ import SysReq from './SysReq';
 import { decode } from 'html-entities';
 import { extractGameData, extractPriorityMinReq } from '../services/extractors';
 import { steamHeaderImage } from '../services/utilities';
+import { useEffect, useState } from 'react';
+import MiniCategoriesList from './MiniCategoriesList';
+import ButtonLink from './ButtonLink';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // if data fetched and data is for this id and it fetched with succuss set game data
   const gameData = extractGameData(data);
 
   // extract min game sys req for base platform
   const minSysReq = extractPriorityMinReq(gameData);
-  console.log(minSysReq);
+
+  console.log(gameData);
+
+  useEffect(() => {
+    if (id) {
+      setIsImageLoaded(false);
+    }
+  }, [id]);
+
   return (
     <>
-      {gameData ? (
+      {gameData && (
         // if data loaded
         <div>
-          <img src={steamHeaderImage(gameData.steam_appid)} alt={gameData.name} />
+          <div className="relative">
+            <img
+              width={460}
+              height={215}
+              src={steamHeaderImage(gameData.steam_appid)}
+              alt={gameData.name}
+              onLoad={() => setIsImageLoaded(true)}
+            />
+            {!isImageLoaded && <div className="image-loader rounded-md"></div>}
+          </div>
           <h3>{gameData.name}</h3>
           <p>{decode(gameData.short_description)}</p>
-          <SysReq platform={minSysReq.platform} systemReqData={minSysReq.specs}></SysReq>
-        </div>
-      ) : (
-        // if no data loaded yet show notifier empty
-        <div className="bg-gray-200 rounded-md grid place-content-center">
-          <h3 className="text-center text-2xl italic font-bold p-2">No Preview!</h3>
-          <p className="text-center p-2 grid grid-flow-col items-center">
-            <span className="material-symbols-rounded  m-3 translate-y-[0.7px]">
-              keyboard_backspace
-            </span>
-            select a game from list to preview
-          </p>
+          <div>
+            <h4>System Requirements</h4>
+            <SysReq
+              platform={minSysReq.platform}
+              title="minimum"
+              systemReqData={minSysReq.specs}
+            ></SysReq>
+          </div>
+          <div>
+            <MiniCategoriesList categoryList={gameData.categories}></MiniCategoriesList>
+          </div>
+          <div></div>
+          <div>
+            <ButtonLink text="More Info" link={`/games/${gameData.steam_appid}`}></ButtonLink>
+          </div>
+          <div>
+            {gameData.developers && gameData.developers.length && (
+              <p>
+                <span>Developer:</span>
+                <span>{gameData.developers[0]}</span>
+              </p>
+            )}
+            {gameData.publishers && gameData.publishers.length && (
+              <p>
+                <span>Publisher:</span>
+                <span>{gameData.publishers[0]}</span>
+              </p>
+            )}
+          </div>
         </div>
       )}
     </>
