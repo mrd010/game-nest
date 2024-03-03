@@ -22,7 +22,7 @@ const RecommendedCard = ({
     <Link className="grid grid-rows-[1fr_auto_auto] p-3 drop-shadow-sm shadow-md bg-gradient-to-b from-amber-300 from-25% to-25% to-gray-100 rounded-md w-[290px]">
       <div className="grid grid-rows-[124px_1fr_auto] gap-3 pb-2">
         <div className="size-full relative rounded-md bg-gray-100">
-          {!imageLoaded && <div className="image-loader rounded-md absolute top-0 left-0"></div>}
+          {!imageLoaded && <div className="image-loader rounded-md"></div>}
           <LazyLoadImage
             src={steamHeaderImage(steamAppID)}
             alt={`${title} image`}
