@@ -4,7 +4,7 @@ const MiniCategoriesList = ({ categoryList }) => {
   return (
     <>
       {categoryList.map((cat) => (
-        <Link key={cat.id} to={`categories/${cat.id}`}>
+        <Link key={cat.id} to={`/categories/${cat.id}`}>
           {cat.description}
         </Link>
       ))}
