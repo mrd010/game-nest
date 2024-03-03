@@ -9,13 +9,13 @@ const GamesListRow = (props) => {
   return (
     <button
       onClick={() => props.onSelect(props.id)}
-      className={`grid group h-14 grid-cols-[auto_1fr_auto] content-center items-center gap-4 bg-gray-200 drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden ${props.isSelected ? 'bg-yellow-300' : ''}`}
+      className={`grid grid-cols-[auto_1fr_auto] content-center items-center gap-4 bg-gray-200 drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden ${props.isSelected ? 'bg-yellow-300' : ''}`}
     >
       <div className="">
         <LazyLoadImage src={props.small_capsule_image} alt={props.name}></LazyLoadImage>
       </div>
       <span
-        className={`text-[15px] group-hover:translate-x-4 p-1 line-clamp-1 text-left  transition-transform ${props.isSelected ? 'translate-x-4 font-bold' : ''}`}
+        className={`text-[15px] p-1 line-clamp-1 text-left  transition-transform ${props.isSelected ? 'translate-x-4 font-bold' : ''}`}
       >
         {props.name}
       </span>
