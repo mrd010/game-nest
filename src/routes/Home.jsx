@@ -2,9 +2,7 @@ import { useLoaderData } from 'react-router-dom';
 import Carousel from '../components/Carousel';
 import RecommendedCard from '../components/RecommendedCard';
 import TabbedCategories from '../components/TabbedCategories';
-
-import { getRefinedGamesArray } from '../services/manipulators';
-import { useState } from 'react';
+import { getRefinedGamesArray } from '../services/extractors';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
