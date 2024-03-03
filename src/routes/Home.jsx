@@ -18,7 +18,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col flex-nowrap gap-10">
       <section className="my-5">
         {recommendedGames.length && (
           <Carousel title="Recommended Games" itemWidth={290}>
@@ -29,7 +29,7 @@ const Home = () => {
           </Carousel>
         )}
       </section>
-      <section>
+      <section className="border-t-[1px] border-gray-900/50 py-1">
         <TabbedCategories categoriesData={refinedCategoriesData}></TabbedCategories>
       </section>
     </div>
