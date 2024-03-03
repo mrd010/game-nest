@@ -15,25 +15,25 @@ export const extractGameSysReq = (gameData) => {
     if (gameData.pc_requirements && gameData.pc_requirements.minimum) {
       const sysReqArray = htmlToSysReqArray(gameData.pc_requirements.minimum);
       if (sysReqArray.length && sysReqArray[0].length) {
-        systemRequirements.pcMinimum = sysReqArray;
+        systemRequirements.minimum = sysReqArray;
       }
     }
     if (gameData.pc_requirements && gameData.pc_requirements.recommended) {
       const sysReqArray = htmlToSysReqArray(gameData.pc_requirements.recommended);
       if (sysReqArray.length && sysReqArray[0].length) {
-        systemRequirements.pcRecommended = sysReqArray;
+        systemRequirements.recommended = sysReqArray;
       }
     }
     if (gameData.mac_requirements && gameData.mac_requirements.minimum) {
       const sysReqArray = htmlToSysReqArray(gameData.mac_requirements.minimum);
       if (sysReqArray.length && sysReqArray[0].length) {
-        systemRequirements.macMinimum = sysReqArray;
+        systemRequirements.mac = sysReqArray;
       }
     }
     if (gameData.linux_requirements && gameData.linux_requirements.minimum) {
       const sysReqArray = htmlToSysReqArray(gameData.linux_requirements.minimum);
       if (sysReqArray.length && sysReqArray[0].length) {
-        systemRequirements.linuxMinimum = sysReqArray;
+        systemRequirements.linux = sysReqArray;
       }
     }
   }
@@ -60,13 +60,13 @@ export const extractPriorityMinReq = (gameData) => {
 
   switch (platformName) {
     case 'windows':
-      return { platform: platformName, specs: extractGameSysReq(gameData).pcMinimum };
+      return { platform: platformName, specs: extractGameSysReq(gameData).minimum };
     case 'mac':
-      return { platform: platformName, specs: extractGameSysReq(gameData).macMinimum };
+      return { platform: platformName, specs: extractGameSysReq(gameData).mac };
     case 'linux':
       return {
         platform: platformName,
-        specs: extractGameSysReq(gameData).linuxMinimum,
+        specs: extractGameSysReq(gameData).linux,
       };
 
     default:
