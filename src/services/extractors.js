@@ -1,7 +1,7 @@
 import { htmlToSysReqArray } from './parsers';
 
 // removes duplicate games with same steam id in data arrays received from steam api
-export const getRefinedGamesArray = (gameArray) => {
+export const extractRefinedGamesArray = (gameArray) => {
   return [...new Map(gameArray.map((item) => [item.id, item])).values()];
 };
 
@@ -37,6 +37,10 @@ export const extractGameSysReq = (gameData) => {
   return systemRequirements;
 };
 
-export const getPriorityPlatform = (platforms) => {
+export const extractPriorityPlatform = (platforms) => {
   return Object.entries(platforms).find((platform) => platform[1] === true)[0];
+};
+
+export const extractGameData = (data) => {
+  return data && Object.values(data)[0].success && Object.values(data)[0].data;
 };

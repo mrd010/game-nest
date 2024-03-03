@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useData } from '../hooks/useData';
 import SysReq from './SysReq';
 import { decode } from 'html-entities';
-import { extractGameSysReq, getPriorityPlatform } from '../services/extractors';
+import { extractGameSysReq, extractPriorityPlatform } from '../services/extractors';
 import { steamHeaderImage } from '../services/utilities';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
@@ -15,7 +15,7 @@ const TabListGamePreview = ({ id }) => {
 
   // get most common platform
   const priorityPlatform =
-    gameData && gameData.platforms ? getPriorityPlatform(gameData.platforms) : null;
+    gameData && gameData.platforms ? extractPriorityPlatform(gameData.platforms) : null;
 
   console.log(allOSSysRequirements, priorityPlatform);
   return (

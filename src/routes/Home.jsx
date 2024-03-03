@@ -2,7 +2,7 @@ import { useLoaderData } from 'react-router-dom';
 import Carousel from '../components/Carousel';
 import RecommendedCard from '../components/RecommendedCard';
 import TabbedCategories from '../components/TabbedCategories';
-import { getRefinedGamesArray } from '../services/extractors';
+import { extractRefinedGamesArray } from '../services/extractors';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
@@ -10,11 +10,11 @@ const Home = () => {
   // remove duplicate games from data
   const refinedCategoriesData = {
     // game which release soon
-    coming_soon: getRefinedGamesArray(featuredCategories.coming_soon.items),
+    coming_soon: extractRefinedGamesArray(featuredCategories.coming_soon.items),
     // games released recently
-    new_releases: getRefinedGamesArray(featuredCategories.new_releases.items),
+    new_releases: extractRefinedGamesArray(featuredCategories.new_releases.items),
     // games with most selling worldwide
-    top_sellers: getRefinedGamesArray(featuredCategories.top_sellers.items),
+    top_sellers: extractRefinedGamesArray(featuredCategories.top_sellers.items),
   };
 
   return (
