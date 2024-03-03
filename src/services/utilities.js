@@ -34,3 +34,14 @@ export const getMetascoreColor = (score) => {
 export const toKebabCase = (str) => {
   return str.toLowerCase().split(' ').join('-');
 };
+
+export const capitalizeWord = (str) => {
+  return str.charAt(0).toUpperCase().concat(str.slice(1));
+};
+
+export const capitalizeMultiWords = (str) => {
+  return str
+    .split(' ')
+    .map((word) => capitalizeWord(word))
+    .join(' ');
+};
