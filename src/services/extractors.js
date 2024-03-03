@@ -41,13 +41,32 @@ export const extractGameSysReq = (gameData) => {
   return systemRequirements;
 };
 
-export const extractPriorityPlatform = (gameData) => {
-  if (gameData) {
-    return Object.entries(gameData.platforms).find((platform) => platform[1] === true)[0];
-  }
-  return null;
-};
-
 export const extractGameData = (data) => {
   return data && Object.values(data)[0].success && Object.values(data)[0].data;
+};
+
+export const extractPriorityMinReq = (gameData) => {
+  if (!gameData) {
+    return null;
+  }
+
+  const platformName = gameData.platforms.windows
+    ? 'windows'
+    : gameData.platforms.mac
+      ? 'mac'
+      : gameData.platforms.linux
+        ? 'linux'
+        : null;
+
+  switch (platformName) {
+    case 'windows':
+      return extractGameSysReq(gameData).pcMinimum;
+    case 'mac':
+      return extractGameSysReq(gameData).macMinimum;
+    case 'linux':
+      return extractGameSysReq(gameData).linuxMinimum;
+
+    default:
+      return null;
+  }
 };
