@@ -30,3 +30,7 @@ export const getMetascoreColor = (score) => {
           ? scoreColors.bad
           : scoreColors.trash;
 };
+
+export const toKebabCase = (str) => {
+  return str.toLowerCase().split(' ').join('-');
+};
