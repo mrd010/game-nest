@@ -61,35 +61,37 @@ const TabbedCategories = ({ categoriesData }) => {
         </TabButton>
       </div>
       <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-8">
-        <div className="grid grid-flow-row gap-1 h-[600px] content-start">
+        <div className="relative">
+          <div className="grid gap-1 grid-rows-10 h-[750px] content-start">
+            {
+              // divide items in pages and show active page items
+              categoriesData[selectedTab]
+                .slice(pageNumber * 10, pageNumber * 10 + 10)
+                .map((gameData) => (
+                  <GamesListRow
+                    key={gameData.id}
+                    onSelect={handleChangeActiveGameInCats}
+                    isSelected={selectedGameInCats === gameData.id}
+                    {...gameData}
+                  ></GamesListRow>
+                ))
+            }
+          </div>
           {
-            // divide items in pages and show active page items
-            categoriesData[selectedTab]
-              .slice(pageNumber * 10, pageNumber * 10 + 10)
-              .map((gameData) => (
-                <GamesListRow
-                  key={gameData.id}
-                  onSelect={handleChangeActiveGameInCats}
-                  isSelected={selectedGameInCats === gameData.id}
-                  {...gameData}
-                ></GamesListRow>
-              ))
+            // show page navigator only when more than one page exists
+            numberOfPages > 1 && (
+              <div className="my-4 absolute bottom-full right-0 opacity-35 hover:opacity-100 transition-opacity">
+                <PageNavNumbers
+                  currentPageNumber={pageNumber}
+                  totalPageNumbers={numberOfPages}
+                  onSelect={handlePageChange}
+                ></PageNavNumbers>
+              </div>
+            )
           }
         </div>
         {selectedGameInCats && <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>}
       </div>
-      {
-        // show page navigator only when more than one page exists
-        numberOfPages > 1 && (
-          <div className="my-2">
-            <PageNavNumbers
-              currentPageNumber={pageNumber}
-              totalPageNumbers={numberOfPages}
-              onSelect={handlePageChange}
-            ></PageNavNumbers>
-          </div>
-        )
-      }
     </div>
   );
 };
