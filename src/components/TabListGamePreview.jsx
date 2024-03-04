@@ -31,7 +31,7 @@ const TabListGamePreview = ({ id }) => {
     <>
       {status === 'has_data' && (
         // if data loaded and exists
-        <div className="grid grid-rows-[230px_150px_60px_50px_260px] drop-shadow-sm items-start">
+        <div className="grid grid-rows-[230px_150px_60px_60px_260px] drop-shadow-sm items-start">
           {hasError && <div>Error</div>}
           <div className="relative rounded-sm">
             <img
@@ -99,7 +99,7 @@ const TabListGamePreview = ({ id }) => {
               </div>
             )}
           </div>
-          <div className="flex items-start justify-end flex-wrap gap-1 justify-self-end py-2">
+          <div className="flex items-start h-full overflow-hidden justify-end flex-wrap gap-1 justify-self-end py-2">
             {isLoading || hasError ? (
               <>
                 <ContentLoader size="16px" length={5}></ContentLoader>
