@@ -8,6 +8,9 @@ import { useEffect, useState } from 'react';
 import MiniCategoriesList from './MiniCategoriesList';
 import FreeGameLabel from './FreeGameLabel';
 import ContentLoader from './ContentLoader';
+import noDataImg from '../assets/img/no_data.png';
+import { Link } from 'react-router-dom';
+
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
@@ -18,7 +21,6 @@ const TabListGamePreview = ({ id }) => {
 
   // extract min game sys req for base platform
   const minSysReq = extractPriorityMinReq(gameData);
-  console.log(gameData);
 
   const newId = gameData && gameData.steam_appid;
   useEffect(() => {
@@ -26,6 +28,8 @@ const TabListGamePreview = ({ id }) => {
       setIsImageLoaded(false);
     }
   }, [id, newId]);
+
+  // console.log(gameData);
 
   return (
     <>
@@ -55,7 +59,11 @@ const TabListGamePreview = ({ id }) => {
               {isLoading || hasError ? (
                 <ContentLoader size="32px"></ContentLoader>
               ) : (
-                <h3 className="text-2xl font-extrabold line-clamp-1">{gameData.name}</h3>
+                <Link to={`games/${gameData.steam_appid}`}>
+                  <h3 className="text-2xl font-extrabold line-clamp-1 hover:text-yellow-500">
+                    {gameData.name}
+                  </h3>
+                </Link>
               )}
             </div>
             <div className="relative">
@@ -126,8 +134,18 @@ const TabListGamePreview = ({ id }) => {
           </div>
         </div>
       )}
-      {status === 'not_fetched' && isLoading && <div>Loading...</div>}
-      {status === 'no_data' && <div>No Data</div>}
+      {status === 'not_fetched' && isLoading && (
+        <div className="relative">
+          <div className="absolute top-0 left-0 w-full h-full grid place-items-center z-30">
+            <div className="page-loader"></div>
+          </div>
+        </div>
+      )}
+      {status === 'no_data' && (
+        <div className="grid place-items-center">
+          <img src={noDataImg} className="select-none" />
+        </div>
+      )}
     </>
   );
 };
