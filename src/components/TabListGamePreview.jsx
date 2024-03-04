@@ -48,9 +48,9 @@ const TabListGamePreview = ({ id }) => {
             <img
               width={460}
               height={215}
-              src={steamHeaderImage(id)}
+              src={steamHeaderImage(gameData.steam_appid)}
               onLoad={() => setIsImageLoaded(true)}
-              className="rounded-md w-full"
+              className="rounded-md w-full shadow-md"
             />
             {(!isImageLoaded || isLoading || hasError) && (
               <div className="content-loader rounded-sm"></div>
@@ -61,15 +61,18 @@ const TabListGamePreview = ({ id }) => {
               </div>
             )}
           </div>
-          <div className="pb-2 grid justify-items-start grid-rows-[auto_minmax(0,1fr)]">
-            <div className="relative my-2">
+          <div className="pb-2 grid grid-rows-[auto_minmax(0,1fr)]">
+            <div className="relative my-2 grid">
               {isLoading || hasError ? (
-                <ContentLoader size="32px"></ContentLoader>
+                <div>
+                  <ContentLoader size="32px"></ContentLoader>
+                </div>
               ) : (
-                <Link to={`games/${gameData.steam_appid}`}>
-                  <h3 className="text-2xl font-extrabold line-clamp-1 hover:text-yellow-500">
-                    {gameData.name}
-                  </h3>
+                <Link
+                  className=" hover:text-yellow-500 justify-self-start"
+                  to={`games/${gameData.steam_appid}`}
+                >
+                  <h3 className="text-2xl font-extrabold line-clamp-1">{gameData.name}</h3>
                 </Link>
               )}
             </div>
