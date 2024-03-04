@@ -45,7 +45,8 @@ export const extractGameData = (data) => {
   console.log(data);
   return !data
     ? { status: 'not_fetched', gameData: null }
-    : !Object.values(data)[0].success
+    : !Object.values(data)[0].success ||
+        !['game', 'demo'].includes(Object.values(data)[0].data.type)
       ? { status: 'no_data', gameData: null }
       : { status: 'has_data', gameData: Object.values(data)[0].data };
 };
