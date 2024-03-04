@@ -7,6 +7,7 @@ import { steamHeaderImage } from '../services/utilities';
 import { useEffect, useState } from 'react';
 import MiniCategoriesList from './MiniCategoriesList';
 import FreeGameLabel from './FreeGameLabel';
+import ContentLoader from './ContentLoader';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
@@ -30,9 +31,9 @@ const TabListGamePreview = ({ id }) => {
   return (
     <>
       {gameData && ['game', 'demo'].includes(gameData.type) && (
-        // if data loaded
+        // if data loaded and exists
         <div className="grid grid-rows-[230px_150px_60px_50px_260px] drop-shadow-sm items-start">
-          <div className="relative rounded-sm overflow-hidden">
+          <div className="relative rounded-sm">
             <img
               width={460}
               height={215}
@@ -41,43 +42,86 @@ const TabListGamePreview = ({ id }) => {
               onLoad={() => setIsImageLoaded(true)}
               className="rounded-md w-full"
             />
-            {!isImageLoaded && <div className="content-loader rounded-sm"></div>}
+            {(!isImageLoaded || isLoading) && <div className="content-loader rounded-sm"></div>}
             {isImageLoaded && gameData.is_free && (
               <div className="absolute top-0 right-0 z-10 -translate-y-4">
                 <FreeGameLabel></FreeGameLabel>
               </div>
             )}
           </div>
-          <div className="pb-2 grid grid-flow-row h-full">
-            <h3 className="text-2xl font-extrabold my-2">{gameData.name}</h3>
-            <p className="text-justify text-sm text-gray-500/90 overflow-y-auto">
-              {decode(gameData.short_description)}
-            </p>
+          <div className="pb-2 grid grid-rows-[auto_minmax(0,1fr)]">
+            <div className="relative my-2">
+              {isLoading ? (
+                <ContentLoader size="32px"></ContentLoader>
+              ) : (
+                <h3 className="text-2xl font-extrabold line-clamp-1">{gameData.name}</h3>
+              )}
+            </div>
+            <div className="relative">
+              {isLoading ? (
+                <div className="grid grid-flow-row gap-1">
+                  <ContentLoader size="20px"></ContentLoader>
+                  <ContentLoader size="20px"></ContentLoader>
+                  <ContentLoader size="20px"></ContentLoader>
+                  <ContentLoader size="20px" length={35}></ContentLoader>
+                </div>
+              ) : (
+                <p className="text-justify text-sm text-gray-500/90 overflow-y-auto line-clamp-4">
+                  {decode(gameData.short_description)}
+                </p>
+              )}
+            </div>
           </div>
           <div className="border-y-[1px] py-2 grid grid-cols-2">
             {gameData.developers && gameData.developers.length && (
               <div className="flex flex-col">
                 <span className="font-bold">Developer</span>
-                <span className="text-sm text-gray-500/90">{gameData.developers[0]}</span>
+                <div>
+                  {isLoading ? (
+                    <ContentLoader size="20px" length={15}></ContentLoader>
+                  ) : (
+                    <span className="text-sm text-gray-500/90">{gameData.developers[0]}</span>
+                  )}
+                </div>
               </div>
             )}
             {gameData.publishers && gameData.publishers.length && (
               <div className="flex flex-col">
                 <span className="font-bold">Publisher</span>
-                <span className="text-sm text-gray-500/90">{gameData.publishers[0]}</span>
+                <div>
+                  {isLoading ? (
+                    <ContentLoader size="20px" length={15}></ContentLoader>
+                  ) : (
+                    <span className="text-sm text-gray-500/90">{gameData.publishers[0]}</span>
+                  )}
+                </div>
               </div>
             )}
           </div>
           <div className="flex items-start justify-end flex-wrap gap-1 justify-self-end py-2">
-            <MiniCategoriesList categoryList={gameData.categories}></MiniCategoriesList>
+            {isLoading ? (
+              <>
+                <ContentLoader size="16px" length={5}></ContentLoader>
+                <ContentLoader size="16px" length={6}></ContentLoader>
+                <ContentLoader size="16px" length={4}></ContentLoader>
+                <ContentLoader size="16px" length={8}></ContentLoader>
+                <ContentLoader size="16px" length={3}></ContentLoader>
+              </>
+            ) : (
+              <MiniCategoriesList categoryList={gameData.categories}></MiniCategoriesList>
+            )}
           </div>
           <div className="grid grid-rows-[auto_minmax(0,1fr)] items-start">
             <h4 className="text-lg p-2 font-bold">System Requirements</h4>
-            <SysReq
-              platform={minSysReq.platform}
-              title="minimum"
-              systemReqData={minSysReq.specs}
-            ></SysReq>
+            {isLoading ? (
+              <ContentLoader size="150px"></ContentLoader>
+            ) : (
+              <SysReq
+                platform={minSysReq.platform}
+                title="minimum"
+                systemReqData={minSysReq.specs}
+              ></SysReq>
+            )}
           </div>
         </div>
       )}
