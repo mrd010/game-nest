@@ -6,6 +6,7 @@ import { extractGameData, extractPriorityMinReq } from '../services/extractors';
 import { steamHeaderImage } from '../services/utilities';
 import { useEffect, useState } from 'react';
 import MiniCategoriesList from './MiniCategoriesList';
+import FreeGameLabel from './FreeGameLabel';
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
   const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
@@ -28,7 +29,7 @@ const TabListGamePreview = ({ id }) => {
 
   return (
     <>
-      {gameData && gameData.type === 'game' && (
+      {gameData && ['game', 'demo'].includes(gameData.type) && (
         // if data loaded
         <div className="grid grid-rows-[230px_150px_60px_50px_260px] drop-shadow-sm items-start">
           <div className="relative rounded-md overflow-hidden">
@@ -41,10 +42,15 @@ const TabListGamePreview = ({ id }) => {
               className="rounded-sm w-full"
             />
             {!isImageLoaded && <div className="image-loader rounded-sm"></div>}
+            {isImageLoaded && gameData.is_free && (
+              <div className="absolute top-0 right-0 z-10 -translate-y-4">
+                <FreeGameLabel></FreeGameLabel>
+              </div>
+            )}
           </div>
-          <div className="pb-2 grid grid-flow-row h-full ">
+          <div className="pb-2 grid grid-flow-row h-full">
             <h3 className="text-2xl font-extrabold my-2">{gameData.name}</h3>
-            <p className="text-justify text-sm text-gray-500/90   overflow-y-auto">
+            <p className="text-justify text-sm text-gray-500/90 overflow-y-auto">
               {decode(gameData.short_description)}
             </p>
           </div>
@@ -65,7 +71,7 @@ const TabListGamePreview = ({ id }) => {
           <div className="flex items-start justify-end flex-wrap gap-1 justify-self-end py-2">
             <MiniCategoriesList categoryList={gameData.categories}></MiniCategoriesList>
           </div>
-          <div className="grid grid-rows-[auto_minmax(0,1fr)] self-stretch">
+          <div className="grid grid-rows-[auto_minmax(0,1fr)] items-start">
             <h4 className="text-lg p-2 font-bold">System Requirements</h4>
             <SysReq
               platform={minSysReq.platform}
