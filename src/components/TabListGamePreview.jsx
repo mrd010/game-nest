@@ -32,13 +32,13 @@ const TabListGamePreview = ({ id }) => {
     }
   }, [id, newId]);
 
-  // console.log(gameData);
+  console.log(gameData);
 
   return (
     <>
       {status === 'has_data' && (
         // if data loaded and exists
-        <div className="grid grid-rows-[230px_150px_60px_60px_260px] drop-shadow-sm items-start">
+        <div className="grid grid-rows-[230px_150px_60px_60px_300px] drop-shadow-sm items-start">
           {hasError && (
             <div className="absolute bottom-0 left-0 w-full z-50">
               <ErrorOverlay onDismiss={resetError} onRefresh={retry}></ErrorOverlay>
@@ -61,7 +61,7 @@ const TabListGamePreview = ({ id }) => {
               </div>
             )}
           </div>
-          <div className="pb-2 grid grid-rows-[auto_minmax(0,1fr)]">
+          <div className="pb-2 grid justify-items-start grid-rows-[auto_minmax(0,1fr)]">
             <div className="relative my-2">
               {isLoading || hasError ? (
                 <ContentLoader size="32px"></ContentLoader>
@@ -124,7 +124,9 @@ const TabListGamePreview = ({ id }) => {
                 <ContentLoader size="16px" length={3}></ContentLoader>
               </>
             ) : (
-              <MiniCategoriesList categoryList={gameData.categories}></MiniCategoriesList>
+              gameData.genres && (
+                <MiniCategoriesList categoryList={gameData.genres}></MiniCategoriesList>
+              )
             )}
           </div>
           <div className="grid grid-rows-[auto_minmax(0,1fr)] items-start">
