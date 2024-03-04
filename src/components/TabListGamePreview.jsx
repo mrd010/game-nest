@@ -14,11 +14,10 @@ const TabListGamePreview = ({ id }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // if data fetched and data is for this id and it fetched with succuss set game data
-  const gameData = extractGameData(data);
+  const { status, gameData } = extractGameData(data);
 
   // extract min game sys req for base platform
   const minSysReq = extractPriorityMinReq(gameData);
-
   console.log(gameData);
 
   const newId = gameData && gameData.steam_appid;
@@ -30,19 +29,21 @@ const TabListGamePreview = ({ id }) => {
 
   return (
     <>
-      {gameData && ['game', 'demo'].includes(gameData.type) && (
+      {status === 'has_data' && (
         // if data loaded and exists
         <div className="grid grid-rows-[230px_150px_60px_50px_260px] drop-shadow-sm items-start">
+          {hasError && <div>Error</div>}
           <div className="relative rounded-sm">
             <img
               width={460}
               height={215}
-              src={steamHeaderImage(gameData.steam_appid)}
-              alt={gameData.name}
+              src={steamHeaderImage(id)}
               onLoad={() => setIsImageLoaded(true)}
               className="rounded-md w-full"
             />
-            {(!isImageLoaded || isLoading) && <div className="content-loader rounded-sm"></div>}
+            {(!isImageLoaded || isLoading || hasError) && (
+              <div className="content-loader rounded-sm"></div>
+            )}
             {isImageLoaded && gameData.is_free && (
               <div className="absolute top-0 right-0 z-10 -translate-y-4">
                 <FreeGameLabel></FreeGameLabel>
@@ -51,14 +52,14 @@ const TabListGamePreview = ({ id }) => {
           </div>
           <div className="pb-2 grid grid-rows-[auto_minmax(0,1fr)]">
             <div className="relative my-2">
-              {isLoading ? (
+              {isLoading || hasError ? (
                 <ContentLoader size="32px"></ContentLoader>
               ) : (
                 <h3 className="text-2xl font-extrabold line-clamp-1">{gameData.name}</h3>
               )}
             </div>
             <div className="relative">
-              {isLoading ? (
+              {isLoading || hasError ? (
                 <div className="grid grid-flow-row gap-1">
                   <ContentLoader size="20px"></ContentLoader>
                   <ContentLoader size="20px"></ContentLoader>
@@ -77,7 +78,7 @@ const TabListGamePreview = ({ id }) => {
               <div className="flex flex-col">
                 <span className="font-bold">Developer</span>
                 <div>
-                  {isLoading ? (
+                  {isLoading || hasError ? (
                     <ContentLoader size="20px" length={15}></ContentLoader>
                   ) : (
                     <span className="text-sm text-gray-500/90">{gameData.developers[0]}</span>
@@ -89,7 +90,7 @@ const TabListGamePreview = ({ id }) => {
               <div className="flex flex-col">
                 <span className="font-bold">Publisher</span>
                 <div>
-                  {isLoading ? (
+                  {isLoading || hasError ? (
                     <ContentLoader size="20px" length={15}></ContentLoader>
                   ) : (
                     <span className="text-sm text-gray-500/90">{gameData.publishers[0]}</span>
@@ -99,7 +100,7 @@ const TabListGamePreview = ({ id }) => {
             )}
           </div>
           <div className="flex items-start justify-end flex-wrap gap-1 justify-self-end py-2">
-            {isLoading ? (
+            {isLoading || hasError ? (
               <>
                 <ContentLoader size="16px" length={5}></ContentLoader>
                 <ContentLoader size="16px" length={6}></ContentLoader>
@@ -113,7 +114,7 @@ const TabListGamePreview = ({ id }) => {
           </div>
           <div className="grid grid-rows-[auto_minmax(0,1fr)] items-start">
             <h4 className="text-lg p-2 font-bold">System Requirements</h4>
-            {isLoading ? (
+            {isLoading || hasError ? (
               <ContentLoader size="150px"></ContentLoader>
             ) : (
               <SysReq
@@ -125,6 +126,8 @@ const TabListGamePreview = ({ id }) => {
           </div>
         </div>
       )}
+      {status === 'not_fetched' && isLoading && <div>Loading...</div>}
+      {status === 'no_data' && <div>No Data</div>}
     </>
   );
 };

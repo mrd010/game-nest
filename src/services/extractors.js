@@ -42,7 +42,12 @@ export const extractGameSysReq = (gameData) => {
 };
 
 export const extractGameData = (data) => {
-  return data && Object.values(data)[0].success && Object.values(data)[0].data;
+  console.log(data);
+  return !data
+    ? { status: 'not_fetched', gameData: null }
+    : !Object.values(data)[0].success
+      ? { status: 'no_data', gameData: null }
+      : { status: 'has_data', gameData: Object.values(data)[0].data };
 };
 
 export const extractPriorityMinReq = (gameData) => {
