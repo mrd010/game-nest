@@ -6,6 +6,15 @@ export const useData = (url) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [tries, setTries] = useState(0);
+
+  const retry = () => {
+    setTries((t) => t + 1);
+  };
+
+  const resetError = () => {
+    setHasError(false);
+  };
 
   useEffect(() => {
     let ignore = false;
@@ -39,7 +48,7 @@ export const useData = (url) => {
 
     // if effect fires second time ignore first one
     return () => (ignore = true);
-  }, [url]);
+  }, [url, tries]);
 
-  return { data, isLoading, hasError };
+  return { data, isLoading, hasError, retry, resetError };
 };

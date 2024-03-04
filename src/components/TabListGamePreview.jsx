@@ -10,10 +10,13 @@ import FreeGameLabel from './FreeGameLabel';
 import ContentLoader from './ContentLoader';
 import noDataImg from '../assets/img/no_data.png';
 import { Link } from 'react-router-dom';
+import ErrorOverlay from './ErrorOverlay';
 
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
-  const { data, isLoading, hasError } = useData(id ? `/api/appdetails?appids=${id}` : null);
+  const { data, isLoading, hasError, retry, resetError } = useData(
+    id ? `/api/appdetails?appids=${id}` : null
+  );
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // if data fetched and data is for this id and it fetched with succuss set game data
@@ -36,7 +39,11 @@ const TabListGamePreview = ({ id }) => {
       {status === 'has_data' && (
         // if data loaded and exists
         <div className="grid grid-rows-[230px_150px_60px_60px_260px] drop-shadow-sm items-start">
-          {hasError && <div>Error</div>}
+          {hasError && (
+            <div className="absolute bottom-0 left-0 w-full z-50">
+              <ErrorOverlay onDismiss={resetError} onRefresh={retry}></ErrorOverlay>
+            </div>
+          )}
           <div className="relative rounded-sm">
             <img
               width={460}
