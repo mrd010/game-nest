@@ -7,7 +7,7 @@ const FreeGameLabel = () => {
         alt="free label"
         className="col-end-1 row-end-1 translate-x-1 translate-y-1"
       />
-      <span className="uppercase z-20 font-extrabold text-sm col-end-1 row-end-1 text-gray-900">
+      <span className="uppercase select-none z-20 font-extrabold text-sm col-end-1 row-end-1 text-gray-900">
         Free
       </span>
     </div>
