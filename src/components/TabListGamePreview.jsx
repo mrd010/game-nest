@@ -32,14 +32,14 @@ const TabListGamePreview = ({ id }) => {
       {gameData && ['game', 'demo'].includes(gameData.type) && (
         // if data loaded
         <div className="grid grid-rows-[230px_150px_60px_50px_260px] drop-shadow-sm items-start">
-          <div className="relative rounded-md overflow-hidden">
+          <div className="relative rounded-sm overflow-hidden">
             <img
               width={460}
               height={215}
               src={steamHeaderImage(gameData.steam_appid)}
               alt={gameData.name}
               onLoad={() => setIsImageLoaded(true)}
-              className="rounded-sm w-full"
+              className="rounded-md w-full"
             />
             {!isImageLoaded && <div className="content-loader rounded-sm"></div>}
             {isImageLoaded && gameData.is_free && (
