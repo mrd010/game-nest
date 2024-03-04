@@ -41,7 +41,7 @@ const TabListGamePreview = ({ id }) => {
               onLoad={() => setIsImageLoaded(true)}
               className="rounded-sm w-full"
             />
-            {!isImageLoaded && <div className="image-loader rounded-sm"></div>}
+            {!isImageLoaded && <div className="content-loader rounded-sm"></div>}
             {isImageLoaded && gameData.is_free && (
               <div className="absolute top-0 right-0 z-10 -translate-y-4">
                 <FreeGameLabel></FreeGameLabel>
