@@ -6,15 +6,17 @@ const SysReq = ({ platform, title, systemReqData }) => {
       <h4 className="text-base font-bold justify-self-start bg-gray-900 rounded-md text-gray-50 px-1">
         {platform === 'windows' ? capitalizeWord(title) : capitalizeWord(platform)}
       </h4>
-      <ul className="grid grid-cols-4 grid-flow-dense gap-1 h-full">
+      <ul className="flex flex-wrap h-full gap-1">
         {systemReqData.map((reqData, index) =>
-          reqData.length === 2 ? (
+          reqData.length > 0 ? (
             <li
               key={index}
-              className={`flex flex-col border-[1px] border-gray-900/10 px-1 rounded-sm ${index === 0 && !reqData[0].toLowerCase().includes('os') ? 'col-span-4 border-none' : ''} ${reqData[1].length > 80 ? 'col-span-4' : reqData[1].length > 50 ? 'col-span-3' : reqData[1].length > 25 ? 'col-span-2' : ''}`}
+              className={`flex flex-col border-gray-900/10 px-1 rounded-sm justify-center bg-gray-50`}
             >
               <span className="font-bold text-sm">{reqData[0]}</span>
-              <span className={`text-xs text-gray-500/90 break-words `}>{reqData[1]}</span>
+              {reqData.length > 1 && (
+                <span className={`text-xs text-gray-500/90 break-words `}>{reqData[1]}</span>
+              )}
             </li>
           ) : null
         )}
@@ -22,8 +24,6 @@ const SysReq = ({ platform, title, systemReqData }) => {
     </div>
   );
 };
-
-// const Title = ({children}) => { third }
 
 SysReq.propTypes = {
   platform: PropTypes.oneOf(['windows', 'mac', 'linux']),
