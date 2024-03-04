@@ -62,7 +62,7 @@ const TabbedCategories = ({ categoriesData }) => {
       </div>
       <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-8">
         <div className="relative">
-          <div className="grid gap-1 grid-rows-10 h-[750px] content-start">
+          <div className="grid gap-2 grid-rows-10 h-[750px] content-start">
             {
               // divide items in pages and show active page items
               categoriesData[selectedTab]
@@ -80,7 +80,7 @@ const TabbedCategories = ({ categoriesData }) => {
           {
             // show page navigator only when more than one page exists
             numberOfPages > 1 && (
-              <div className="my-4 absolute bottom-full right-0 opacity-35 hover:opacity-100 transition-opacity">
+              <div className="my-4 absolute bottom-full right-0 opacity-80 hover:opacity-100 transition-opacity">
                 <PageNavNumbers
                   currentPageNumber={pageNumber}
                   totalPageNumbers={numberOfPages}
