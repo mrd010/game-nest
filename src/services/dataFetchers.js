@@ -33,11 +33,13 @@ export const getRecommendedGames = async (minScore) => {
   return recommendedGames;
 };
 
+// get games listed in special categories like:new releases, top sellers. coming soon
 export const getFeaturedCategories = async (lang) => {
   const featuredCategories = await getData(`${featuredCategoriesApi}/?l=${lang}`);
   return featuredCategories;
 };
 
+// get the most recent trailers and video games released
 export const getTrailers = async (lang) => {
   const trailersData = await getData(`${trailersApi}/?l=${lang}`);
   return trailersData.movies;

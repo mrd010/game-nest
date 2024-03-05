@@ -42,7 +42,9 @@ export const extractGameSysReq = (gameData) => {
 };
 
 export const extractGameData = (data) => {
-  console.log(data);
+  // if data not provided yet status='not fetched'
+  // if data provided but data is not correct or doesn't belong to a an actual game status = 'no data'
+  // if everything is ok status = 'has data' and then return data
   return !data
     ? { status: 'not_fetched', gameData: null }
     : !Object.values(data)[0].success ||
@@ -51,11 +53,14 @@ export const extractGameData = (data) => {
       : { status: 'has_data', gameData: Object.values(data)[0].data };
 };
 
+// extract min requirements for a game for its most common platform. usually windows
 export const extractPriorityMinReq = (gameData) => {
+  // if no data provided
   if (!gameData) {
     return null;
   }
 
+  // get the most important platform game is played on
   const platformName = gameData.platforms.windows
     ? 'windows'
     : gameData.platforms.mac
@@ -64,6 +69,7 @@ export const extractPriorityMinReq = (gameData) => {
         ? 'linux'
         : null;
 
+  // get system requirements according to most commom platform
   switch (platformName) {
     case 'windows':
       return { platform: platformName, specs: extractGameSysReq(gameData).minimum };

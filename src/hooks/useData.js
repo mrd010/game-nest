@@ -8,10 +8,12 @@ export const useData = (url) => {
   const [hasError, setHasError] = useState(false);
   const [tries, setTries] = useState(0);
 
+  // when retry has been called hook tries to fetch data again
   const retry = () => {
     setTries((t) => t + 1);
   };
 
+  // usually used before fetching to reset error state to normal
   const resetError = () => {
     setHasError(false);
   };
@@ -48,6 +50,7 @@ export const useData = (url) => {
 
     // if effect fires second time ignore first one
     return () => (ignore = true);
+    // trigger if new url received or a try command sent
   }, [url, tries]);
 
   return { data, isLoading, hasError, retry, resetError };

@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 @layer base {
+  /* BASE STYLES ##################################################### */
   html {
     scroll-behavior: smooth;
   }
   body {
     @apply bg-gray-50;
   }
+
+  /* Remove x button from search inputs ##################################################### */
   /* clears the ‘X’ from Internet Explorer */
   input[type='search']::-ms-clear {
     display: none;
@@ -28,12 +31,7 @@
     display: none;
   }
 
-  /* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
-  /** {
-  scrollbar-width: thin;
-  scrollbar-color: #EAB308 #E5E7EB;
-}*/
-
+  /* Custom style for scrollbar for whole app and some components #####################################################*/
   /* Chrome, Edge and Safari */
   *::-webkit-scrollbar {
     height: 10px;
@@ -75,12 +73,13 @@
 }
 
 @layer components {
-  /* change color of os icons to bg-gray-800 */
+  /* change color of os icons to bg-gray-800 ##################################################### */
   .os-icon {
     filter: brightness(0) saturate(100%) invert(14%) sepia(22%) saturate(841%) hue-rotate(175deg)
       brightness(92%) contrast(94%);
   }
 
+  /* A yellow loader placeholder for images while loading */
   /* HTML: <div class="loader"></div> */
   .image-loader {
     width: 100%;
@@ -103,6 +102,7 @@
     }
   }
 
+  /* A loader placeholder for contents like text when still fetching data ##################################################### */
   /* HTML: <div class="loader"></div> */
   .content-loader {
     width: 100%;
@@ -120,6 +120,7 @@
     }
   }
 
+  /* A loader for loading contents of page and navigating between pages ##################################################### */
   /* HTML: <div class="loader"></div> */
   .page-loader {
     width: 65px;

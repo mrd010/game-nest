@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 const MiniCategoriesList = ({ categoryList }) => {
+  // gets category list and generate a list of items
   return (
     <>
       {categoryList.map((cat) => (

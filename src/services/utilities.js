@@ -31,14 +31,17 @@ export const getMetascoreColor = (score) => {
           : scoreColors.trash;
 };
 
+// converts any space separated string to kebab-case format
 export const toKebabCase = (str) => {
   return str.toLowerCase().split(' ').join('-');
 };
 
+// converts any word to capitalized format
 export const capitalizeWord = (str) => {
   return str.charAt(0).toUpperCase().concat(str.slice(1));
 };
 
+// converts any space separated string to capitalized format
 export const capitalizeMultiWords = (str) => {
   return str
     .split(' ')

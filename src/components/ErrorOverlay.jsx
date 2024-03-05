@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 const ErrorOverlay = ({ onDismiss, onRefresh }) => {
+  // and overlay notification shows errors when fetch fails
+  // dismiss closes notification
+  // refresh retries for fetching data
   return (
     <div className="bg-yellow-400 p-2 rounded-md grid grid-cols-2 relative">
       <span className="material-symbols-rounded absolute top-3 left-3">error</span>

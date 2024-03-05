@@ -50,9 +50,12 @@ const TabListGamePreview = ({ id }) => {
               onLoad={() => setIsImageLoaded(true)}
               className="rounded-md w-full shadow-md"
             />
-            {(!isImageLoaded || isLoading || hasError) && (
-              <div className="content-loader rounded-sm"></div>
-            )}
+            {
+              // if is fetching data or fetched data and image url not loaded yet show loader
+              (!isImageLoaded || isLoading || hasError) && (
+                <div className="content-loader rounded-sm"></div>
+              )
+            }
             {isImageLoaded && gameData.is_free && (
               <div className="absolute top-0 right-0 z-10 -translate-y-4">
                 <FreeGameLabel></FreeGameLabel>
@@ -90,30 +93,36 @@ const TabListGamePreview = ({ id }) => {
             </div>
           </div>
           <div className="border-y-[1px] py-2 grid grid-cols-2">
-            {gameData.developers && gameData.developers.length && (
-              <div className="flex flex-col">
-                <span className="font-bold">Developer</span>
-                <div>
-                  {isLoading || hasError ? (
-                    <ContentLoader size="20px" length={15}></ContentLoader>
-                  ) : (
-                    <span className="text-sm text-gray-500/90">{gameData.developers[0]}</span>
-                  )}
+            {
+              // if data exists and game data has developers
+              gameData.developers && gameData.developers.length && (
+                <div className="flex flex-col">
+                  <span className="font-bold">Developer</span>
+                  <div>
+                    {isLoading || hasError ? (
+                      <ContentLoader size="20px" length={15}></ContentLoader>
+                    ) : (
+                      <span className="text-sm text-gray-500/90">{gameData.developers[0]}</span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
-            {gameData.publishers && gameData.publishers.length && (
-              <div className="flex flex-col">
-                <span className="font-bold">Publisher</span>
-                <div>
-                  {isLoading || hasError ? (
-                    <ContentLoader size="20px" length={15}></ContentLoader>
-                  ) : (
-                    <span className="text-sm text-gray-500/90">{gameData.publishers[0]}</span>
-                  )}
+              )
+            }
+            {
+              // if data exists and game data has publishers
+              gameData.publishers && gameData.publishers.length && (
+                <div className="flex flex-col">
+                  <span className="font-bold">Publisher</span>
+                  <div>
+                    {isLoading || hasError ? (
+                      <ContentLoader size="20px" length={15}></ContentLoader>
+                    ) : (
+                      <span className="text-sm text-gray-500/90">{gameData.publishers[0]}</span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )
+            }
           </div>
           <div className="flex items-start h-full overflow-hidden justify-end flex-wrap gap-1 justify-self-end py-2">
             {isLoading || hasError ? (
@@ -144,18 +153,24 @@ const TabListGamePreview = ({ id }) => {
           </div>
         </div>
       )}
-      {status === 'not_fetched' && isLoading && (
-        <div className="relative">
-          <div className="absolute top-0 left-0 w-full h-full grid place-items-center z-30">
-            <div className="page-loader"></div>
+      {
+        // if first time a game selected and is loading its data shows page loader
+        status === 'not_fetched' && isLoading && (
+          <div className="relative">
+            <div className="absolute top-0 left-0 w-full h-full grid place-items-center z-30">
+              <div className="page-loader"></div>
+            </div>
           </div>
-        </div>
-      )}
-      {status === 'no_data' && (
-        <div className="grid place-items-center">
-          <img src={noDataImg} className="select-none" />
-        </div>
-      )}
+        )
+      }
+      {
+        // if data provided is bad or no data exists for current id
+        status === 'no_data' && (
+          <div className="grid place-items-center">
+            <img src={noDataImg} className="select-none" />
+          </div>
+        )
+      }
     </>
   );
 };
