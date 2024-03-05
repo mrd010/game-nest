@@ -70,7 +70,7 @@ const TabListGamePreview = ({ id }) => {
                 </div>
               ) : (
                 <Link
-                  className=" hover:text-yellow-500 justify-self-start"
+                  className=" hover:text-yellow-600 justify-self-start"
                   to={`games/${gameData.steam_appid}`}
                 >
                   <h3 className="text-2xl font-extrabold line-clamp-1">{gameData.name}</h3>

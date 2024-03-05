@@ -4,18 +4,23 @@ import LinuxIcon from '../assets/icons/LinuxIcon.svg';
 import WindowsIcon from '../assets/icons/WindowsIcon.svg';
 import OSIcon from './OSIcon';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { steamThumbnail } from '../services/utilities';
 const GamesListRow = (props) => {
   // game row button in featured categories section of home page. displays game info in preview section
   return (
     <button
       onClick={() => props.onSelect(props.id)}
-      className={`grid grid-cols-[auto_1fr_auto] content-center items-center gap-4 bg-gray-200 drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden ${props.isSelected ? 'bg-yellow-300' : ''}`}
+      className={`grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 bg-gray-200 drop-shadow-sm rounded-md hover:ring-2 ring-yellow-500 overflow-hidden ${props.isSelected ? 'bg-gradient-to-tr from-yellow-400 to-yellow-200' : ''}`}
     >
-      <div className="">
-        <LazyLoadImage src={props.small_capsule_image} alt={props.name}></LazyLoadImage>
+      <div className="h-full">
+        <LazyLoadImage
+          src={steamThumbnail(props.id)}
+          alt={props.name}
+          className="h-full"
+        ></LazyLoadImage>
       </div>
       <span
-        className={`text-[15px] p-1 line-clamp-1 text-left  transition-transform ${props.isSelected ? 'translate-x-4 font-bold' : ''}`}
+        className={`p-1 line-clamp-1 text-left  transition-transform ${props.isSelected ? 'translate-x-4 font-bold' : ''}`}
       >
         {props.name}
       </span>
