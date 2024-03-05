@@ -1,5 +1,4 @@
 import { getFeaturedCategories, getRecommendedGames, getTrailers } from '../services/dataFetchers';
-import { extractImportantGameIds } from '../services/extractors';
 import getUserLanguage from '../services/userLocaleServices';
 
 // recommended games should be above this threshold
