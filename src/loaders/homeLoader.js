@@ -1,4 +1,5 @@
 import { getFeaturedCategories, getRecommendedGames, getTrailers } from '../services/dataFetchers';
+import { extractImportantGameIds } from '../services/extractors';
 import getUserLanguage from '../services/userLocaleServices';
 
 // recommended games should be above this threshold
@@ -19,6 +20,7 @@ export const homeLoader = async () => {
       recommendedGames: data[0],
       featuredCategories: data[1],
       trailers: data[2],
+      importantGamesIds: extractImportantGameIds(data[0], data[1].top_sellers.items),
     };
   });
   return homeData;

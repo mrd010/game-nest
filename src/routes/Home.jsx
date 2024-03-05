@@ -5,7 +5,7 @@ import TabbedCategories from '../components/TabbedCategories';
 import { extractRefinedGamesArray } from '../services/extractors';
 
 const Home = () => {
-  const { recommendedGames, featuredCategories, trailers } = useLoaderData();
+  const { recommendedGames, featuredCategories, trailers, importantGamesIds } = useLoaderData();
 
   // remove duplicate games from data
   const refinedCategoriesData = {
@@ -16,6 +16,8 @@ const Home = () => {
     // games with most selling worldwide
     top_sellers: extractRefinedGamesArray(featuredCategories.top_sellers.items),
   };
+
+  console.log(importantGamesIds);
 
   return (
     <div className="flex flex-col flex-nowrap gap-10">

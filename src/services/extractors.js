@@ -85,3 +85,10 @@ export const extractPriorityMinReq = (gameData) => {
       return null;
   }
 };
+
+// get recommended games and top sellers and return a randomized array of their ids
+export const extractImportantGameIds = (recommendedGames, topSellers) => {
+  const recommendedIds = new Set(recommendedGames.map((game) => Number(game.steamAppID)));
+  const topSellersIds = new Set(topSellers.map((game) => game.id));
+  return [...recommendedIds.union(topSellersIds)];
+};
