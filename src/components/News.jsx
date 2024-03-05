@@ -5,21 +5,29 @@ import ContentLoader from './ContentLoader';
 
 const News = ({ appId, title, url }) => {
   return (
-    <a href={url} target="_blank" className="w-[230px] group relative grid grid-rows-[120px_1fr]">
-      <div className="py-1">
+    <a
+      href={url}
+      target="_blank"
+      className="w-[230px] group relative grid grid-rows-[107.5px_1fr] gap-2"
+    >
+      <div className="">
         {appId ? (
           <LazyLoadImage className="rounded-md" src={steamHeaderImage(appId)}></LazyLoadImage>
         ) : (
           <ContentLoader size="100%"></ContentLoader>
         )}
       </div>
-      <div>
+      <div className="grid gap-1">
         {title && url ? (
           <h3 className="font-bold line-clamp-3 hover:text-yellow-600 drop-shadow-sm shadow-gray-900">
             {title}
           </h3>
         ) : (
-          <ContentLoader size="22px"></ContentLoader>
+          <>
+            <ContentLoader size="22px"></ContentLoader>
+            <ContentLoader size="22px"></ContentLoader>
+            <ContentLoader size="22px" length={10}></ContentLoader>
+          </>
         )}
       </div>
       <div className="absolute  scale-125 top-3 opacity-0 group-hover:opacity-100 right-2 text-gray-100/90">
