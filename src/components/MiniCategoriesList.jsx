@@ -19,7 +19,7 @@ const MiniCategoriesList = ({ categoryList }) => {
 MiniCategoriesList.propTypes = {
   categoryList: PropTypes.arrayOf(
     PropTypes.exact({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       description: PropTypes.string.isRequired,
     })
   ),
