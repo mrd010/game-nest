@@ -52,10 +52,13 @@ export const getNews = async (stringifiedGameIds) => {
     getData(`/ISteamNews/GetNewsForApp/v0002/?appid=${gameId}&count=1&format=json`)
   );
 
-  // fetch all and only return ok responses and valid data
-  return await Promise.allSettled(allNewsPromises).then((results) =>
-    results
+  // fetch all and only return ok responses and valid and unique data
+  return await Promise.allSettled(allNewsPromises).then((results) => {
+    const fulfilled = results
       .filter((result) => result.status === 'fulfilled')
-      .map((fulfilledResult) => fulfilledResult.value.appnews)
-  );
+      .map((fulfilledResult) => fulfilledResult.value.appnews);
+
+    // return fulfilled result filtered buy appid in newsitems[0]
+    return [...new Map(fulfilled.map((ff) => [ff.newsitems[0].appid, ff.newsitems[0]])).values()];
+  });
 };

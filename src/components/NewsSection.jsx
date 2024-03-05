@@ -10,12 +10,11 @@ const NewsSection = ({ importantGameIds }) => {
   // stringify array for not triggering deps
   const stringifiedIds = JSON.stringify(importantGameIds);
 
-  console.log(stringifiedIds);
-
   useEffect(() => {
     const fetchNewsData = async () => {
       const fetchedData = await getNews(stringifiedIds);
-      fetchedData.sort((a, b) => b.newsitems[0].date - a.newsitems[0].date);
+
+      fetchedData.sort((a, b) => b.date - a.date);
       setNewsData(fetchedData);
     };
 
@@ -23,19 +22,14 @@ const NewsSection = ({ importantGameIds }) => {
   }, [stringifiedIds]);
 
   console.log(newsData);
+
   return (
     <>
       <Carousel itemWidth={230} steps={4} title="News">
         {newsData
           ? newsData.map((news) => {
-              const newsItem = news.newsitems[0];
               return (
-                <News
-                  key={news.appid}
-                  appId={newsItem.appid}
-                  title={newsItem.title}
-                  url={newsItem.url}
-                ></News>
+                <News key={news.appid} appId={news.appid} title={news.title} url={news.url}></News>
               );
             })
           : [...Array(6)].map((v, index) => <News key={index}></News>)}
