@@ -20,7 +20,6 @@ export const homeLoader = async () => {
       recommendedGames: data[0],
       featuredCategories: data[1],
       trailers: data[2],
-      importantGamesIds: extractImportantGameIds(data[0], data[1].top_sellers.items),
     };
   });
   return homeData;
