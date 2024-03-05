@@ -27,11 +27,17 @@ const NewsSection = ({ importantGameIds }) => {
     <>
       <Carousel itemWidth={230} steps={4} title="News">
         {newsData
-          ? newsData.map((news) => {
-              return (
-                <News key={news.appid} appId={news.appid} title={news.title} url={news.url}></News>
-              );
-            })
+          ? newsData.map(
+              (news) =>
+                news.title.length > 20 && (
+                  <News
+                    key={news.appid}
+                    appId={news.appid}
+                    title={news.title}
+                    url={news.url}
+                  ></News>
+                )
+            )
           : [...Array(6)].map((v, index) => <News key={index}></News>)}
       </Carousel>
     </>
