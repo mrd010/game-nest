@@ -44,3 +44,18 @@ export const getTrailers = async (lang) => {
   const trailersData = await getData(`${trailersApi}/?l=${lang}`);
   return trailersData.movies;
 };
+
+// gets an stringified array of ids and fetches news related to them
+export const getNews = async (stringifiedGameIds) => {
+  const gameIds = JSON.parse(stringifiedGameIds);
+  const allNewsPromises = gameIds.map((gameId) =>
+    getData(`/ISteamNews/GetNewsForApp/v0002/?appid=${gameId}&count=1&format=json`)
+  );
+
+  // fetch all and only return ok responses and valid data
+  return await Promise.allSettled(allNewsPromises).then((results) =>
+    results
+      .filter((result) => result.status === 'fulfilled')
+      .map((fulfilledResult) => fulfilledResult.value.appnews)
+  );
+};
