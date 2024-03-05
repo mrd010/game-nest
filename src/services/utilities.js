@@ -48,3 +48,10 @@ export const capitalizeMultiWords = (str) => {
     .map((word) => capitalizeWord(word))
     .join(' ');
 };
+
+// shuffles an array of numbers
+export const shuffled = (array) => {
+  const shuffledArray = [...array];
+  shuffledArray.sort(() => Math.random() - 0.5);
+  return shuffledArray;
+};
