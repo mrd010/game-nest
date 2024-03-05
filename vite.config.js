@@ -9,6 +9,10 @@ export default defineConfig({
         target: 'https://store.steampowered.com',
         changeOrigin: true,
       },
+      '/ISteamNews': {
+        target: 'https://api.steampowered.com',
+        changeOrigin: true,
+      },
     },
   },
   plugins: [react()],
