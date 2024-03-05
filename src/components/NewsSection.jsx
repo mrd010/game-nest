@@ -21,8 +21,6 @@ const NewsSection = ({ importantGameIds }) => {
     fetchNewsData();
   }, [stringifiedIds]);
 
-  console.log(newsData);
-
   return (
     <>
       <Carousel itemWidth={230} steps={4} title="News">
