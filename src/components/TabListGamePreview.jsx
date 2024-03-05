@@ -25,14 +25,12 @@ const TabListGamePreview = ({ id }) => {
   // extract min game sys req for base platform
   const minSysReq = extractPriorityMinReq(gameData);
 
-  const newId = gameData && gameData.steam_appid;
+  // if a new game data is loading
   useEffect(() => {
-    if (id !== newId) {
+    if (isLoading) {
       setIsImageLoaded(false);
     }
-  }, [id, newId]);
-
-  console.log(gameData);
+  }, [isLoading]);
 
   return (
     <>
