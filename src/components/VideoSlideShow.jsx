@@ -1,11 +1,32 @@
 import PropTypes from 'prop-types';
 import { getCleanUrl } from '../services/utilities';
 import VideoListItem from './VideoListItem';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 const VideoSlideShow = ({ videoList }) => {
+  const firstVideo = videoList[0].target.id;
+  // component displaying video list and video player
+  const [selectedId, setSelectedId] = useState(firstVideo);
   console.log(videoList);
+
+  const currentVideo = videoList.find((video) => video.target.id === selectedId);
+
   return (
-    <div>
-      <div></div>
+    <div className="grid grid-cols-[minmax(0,1fr)_auto]">
+      {/* playing video */}
+      <div>
+        {/* player */}
+        <div></div>
+        {/* video details */}
+        <div>
+          <h3 className="font-bold text-3xl hover:text-yellow-600">
+            <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
+          </h3>
+          <p>{currentVideo.name}</p>
+        </div>
+      </div>
+      {/* video list */}
       <div className="w-[450px] grid grid-rows-5 gap-4">
         {videoList.map((video) => (
           <VideoListItem
@@ -13,7 +34,7 @@ const VideoSlideShow = ({ videoList }) => {
             gameName={video.target.name}
             name={video.name}
             thumbnail={getCleanUrl(video.thumbnail)}
-            width={200}
+            onSelect={() => setSelectedId(video.target.id)}
           ></VideoListItem>
         ))}
       </div>
