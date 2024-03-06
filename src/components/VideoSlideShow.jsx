@@ -26,7 +26,10 @@ const VideoSlideShow = ({ videoList }) => {
             <h3 className="font-bold text-3xl hover:text-yellow-600">
               <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
             </h3>
-            {currentVideo.name.length >= 10 && <p>{currentVideo.name}</p>}
+            {currentVideo.name.length >= 10 &&
+              currentVideo.name.toLowerCase() !== currentVideo.name.toLowerCase() && (
+                <p>{currentVideo.name}</p>
+              )}
           </div>
           <div className="self-center">
             <AvailableOSs
