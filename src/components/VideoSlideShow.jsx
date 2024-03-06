@@ -4,6 +4,7 @@ import VideoListItem from './VideoListItem';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonLink from './ButtonLink';
+import AvailableOSs from './AvailableOSs';
 
 const VideoSlideShow = ({ videoList }) => {
   const firstVideo = videoList[0].target.id;
@@ -14,31 +15,43 @@ const VideoSlideShow = ({ videoList }) => {
   const currentVideo = videoList.find((video) => video.target.id === selectedId);
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto]">
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10">
       {/* playing video */}
-      <div className="grid grid-rows-[]">
+      <div className="grid grid-rows-[1fr_auto]">
         {/* player */}
         <div className="bg-gray-900 size-full"></div>
         {/* video details */}
-        <div>
-          <h3 className="font-bold text-3xl hover:text-yellow-600">
-            <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
-          </h3>
-          <p>{currentVideo.name}</p>
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] h-28">
+          <div className="flex flex-col flex-nowrap gap-2 m-4">
+            <h3 className="font-bold text-3xl hover:text-yellow-600">
+              <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
+            </h3>
+            {currentVideo.name.length >= 10 && <p>{currentVideo.name}</p>}
+          </div>
+          <div className="self-center">
+            <AvailableOSs
+              mac={currentVideo.target.mac_available}
+              linux={currentVideo.target.linux_available}
+              win={currentVideo.target.windows_available}
+              iconSize={25}
+            ></AvailableOSs>
+          </div>
         </div>
       </div>
       {/* video list */}
-      <div className="grid grid-rows-6 gap-4">
-        {videoList.map((video) => (
-          <VideoListItem
-            key={video.target.id}
-            gameName={video.target.name}
-            name={video.name}
-            thumbnail={getCleanUrl(video.thumbnail)}
-            onSelect={() => setSelectedId(video.target.id)}
-          ></VideoListItem>
-        ))}
-        <div className="w-full">
+      <div className="grid gap-4">
+        <div className="grid grid-rows-4 gap-4">
+          {videoList.map((video) => (
+            <VideoListItem
+              key={video.target.id}
+              gameName={video.target.name}
+              name={video.name}
+              thumbnail={getCleanUrl(video.thumbnail)}
+              onSelect={() => setSelectedId(video.target.id)}
+            ></VideoListItem>
+          ))}
+        </div>
+        <div className="w-full self-center">
           <ButtonLink
             text="More Videos"
             link="videos"
