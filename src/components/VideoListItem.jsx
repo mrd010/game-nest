@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-const VideoListItem = ({ thumbnail, gameName, name }) => {
+const VideoListItem = ({ thumbnail, gameName, name, onSelect }) => {
   return (
-    <button className="grid grid-cols-[200px_200px] group gap-4">
+    <button className="grid grid-cols-[200px_200px] group gap-4" onClick={onSelect}>
       <div className="relative h-full">
         <LazyLoadImage
           src={thumbnail}
@@ -26,5 +26,6 @@ VideoListItem.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   gameName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 export default VideoListItem;
