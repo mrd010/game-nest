@@ -60,9 +60,9 @@ const TabbedCategories = ({ categoriesData }) => {
           Coming Soon
         </TabButton>
       </div>
-      <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] gap-8">
-        <div className="relative">
-          <div className="grid gap-2 grid-rows-10 h-[800px] content-start">
+      <div className="flex flex-nowrap gap-12 w-full h-[780px]">
+        <div className="relative grow">
+          <div className={`flex flex-col group flex-nowrap divide-y-2 border-gray-950/50`}>
             {
               // divide items in pages and show active page items
               categoriesData[selectedTab]
@@ -90,7 +90,9 @@ const TabbedCategories = ({ categoriesData }) => {
             )
           }
         </div>
-        {selectedGameInCats && <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>}
+        <div className={`transition-all duration-500 ${selectedGameInCats ? 'w-[500px]' : 'w-0'}`}>
+          <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>
+        </div>
       </div>
     </div>
   );

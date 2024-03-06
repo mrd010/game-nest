@@ -36,7 +36,7 @@ const TabListGamePreview = ({ id }) => {
     <>
       {status === 'has_data' && (
         // if data loaded and exists
-        <div className="grid grid-rows-[230px_150px_60px_60px_300px] drop-shadow-sm items-start">
+        <div className="grid grid-rows-[240px_150px_60px_65px_265px] drop-shadow-sm items-start">
           {hasError && (
             <div className="absolute bottom-0 left-0 w-full z-50">
               <ErrorOverlay onDismiss={resetError} onRefresh={retry}></ErrorOverlay>
@@ -80,10 +80,10 @@ const TabListGamePreview = ({ id }) => {
             <div className="relative">
               {isLoading || hasError ? (
                 <div className="grid grid-flow-row gap-1">
-                  <ContentLoader size="20px"></ContentLoader>
-                  <ContentLoader size="20px"></ContentLoader>
-                  <ContentLoader size="20px"></ContentLoader>
-                  <ContentLoader size="20px" length={35}></ContentLoader>
+                  <ContentLoader size="16px"></ContentLoader>
+                  <ContentLoader size="16px"></ContentLoader>
+                  <ContentLoader size="16px"></ContentLoader>
+                  <ContentLoader size="16px" length={35}></ContentLoader>
                 </div>
               ) : (
                 <p className="text-justify text-sm text-gray-500/90 overflow-y-auto line-clamp-4">
@@ -124,7 +124,7 @@ const TabListGamePreview = ({ id }) => {
               )
             }
           </div>
-          <div className="flex items-start h-full overflow-hidden justify-end flex-wrap gap-1 justify-self-end py-2">
+          <div className="flex items-start h-full overflow-hidden justify-end flex-wrap gap-1 justify-self-end py-3">
             {isLoading || hasError ? (
               <>
                 <ContentLoader size="16px" length={5}></ContentLoader>
@@ -156,7 +156,7 @@ const TabListGamePreview = ({ id }) => {
       {
         // if first time a game selected and is loading its data shows page loader
         status === 'not_fetched' && isLoading && (
-          <div className="relative">
+          <div className="relative h-full">
             <div className="absolute top-0 left-0 w-full h-full grid place-items-center z-30">
               <div className="page-loader"></div>
             </div>
@@ -164,9 +164,13 @@ const TabListGamePreview = ({ id }) => {
         )
       }
       {
+        // if not selected a game yet
+        status === 'not fetched' && !isLoading && <div className="h-full w-full"></div>
+      }
+      {
         // if data provided is bad or no data exists for current id
         status === 'no_data' && (
-          <div className="grid place-items-center">
+          <div className="grid place-items-center h-full">
             <img src={noDataImg} className="select-none" />
           </div>
         )
