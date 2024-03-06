@@ -56,7 +56,7 @@ const Home = () => {
       {refinedTrailersData && (
         <section className="flex flex-col gap-5">
           <HomeSectionTitle>Latest Videos</HomeSectionTitle>
-          <VideoSlideShow videoList={refinedTrailersData.slice(0, 5)}></VideoSlideShow>
+          <VideoSlideShow videoList={refinedTrailersData.slice(0, 4)}></VideoSlideShow>
         </section>
       )}
     </div>
