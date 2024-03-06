@@ -22,7 +22,7 @@ const VideoSlideShow = ({ videoList }) => {
         <div className="bg-gray-900 size-full"></div>
         {/* video details */}
         <div className="grid grid-cols-[minmax(0,1fr)_auto] h-28">
-          <div className="flex flex-col flex-nowrap gap-2 m-4">
+          <div className="flex flex-col flex-nowrap gap-1 m-4">
             <h3 className="font-bold text-3xl hover:text-yellow-600">
               <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
             </h3>
@@ -33,7 +33,7 @@ const VideoSlideShow = ({ videoList }) => {
               mac={currentVideo.target.mac_available}
               linux={currentVideo.target.linux_available}
               win={currentVideo.target.windows_available}
-              iconSize={25}
+              iconSize={32}
             ></AvailableOSs>
           </div>
         </div>
