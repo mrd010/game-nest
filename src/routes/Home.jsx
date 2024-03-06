@@ -4,6 +4,7 @@ import RecommendedCard from '../components/RecommendedCard';
 import TabbedCategories from '../components/TabbedCategories';
 import { extractImportantGameIds, extractRefinedGamesArray } from '../services/extractors';
 import NewsSection from '../components/NewsSection';
+import VideoSlideShow from '../components/VideoSlideShow';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
@@ -25,6 +26,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col flex-nowrap gap-10">
+      {/* recommended games */}
       <section className="my-5">
         {recommendedGames.length && (
           <Carousel title="Recommended Games" itemWidth={290} steps={3}>
@@ -35,12 +37,20 @@ const Home = () => {
           </Carousel>
         )}
       </section>
+      {/* game news */}
       <section className="h-[280px]">
         <NewsSection importantGameIds={importantGamesIds}></NewsSection>
       </section>
+      {/* featured categories */}
       <section className="border-t-[1px] border-gray-900/50 py-1">
         <TabbedCategories categoriesData={refinedCategoriesData}></TabbedCategories>
       </section>
+      {/* videos if available*/}
+      {trailers.status === 1 && (
+        <section>
+          <VideoSlideShow videoList={trailers.movies}></VideoSlideShow>
+        </section>
+      )}
     </div>
   );
 };
