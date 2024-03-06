@@ -69,7 +69,7 @@ export const extractPriorityMinReq = (gameData) => {
         ? 'linux'
         : null;
 
-  // get system requirements according to most commom platform
+  // get system requirements according to most common platform
   switch (platformName) {
     case 'windows':
       return { platform: platformName, specs: extractGameSysReq(gameData).minimum };
@@ -91,4 +91,9 @@ export const extractImportantGameIds = (recommendedGames, topSellers) => {
   const recommendedIds = new Set(recommendedGames.map((game) => Number(game.steamAppID)));
   const topSellersIds = new Set(topSellers.map((game) => game.id));
   return [...recommendedIds.union(topSellersIds)];
+};
+
+// get trailers filtered by id. every just 1 video for each game not more.
+export const getRefinedTrailers = (trailersData) => {
+  return [...new Map(trailersData.map((trailer) => [trailer.target.id, trailer])).values()];
 };
