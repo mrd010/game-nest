@@ -42,7 +42,7 @@ export const getFeaturedCategories = async (lang) => {
 // get the most recent trailers and video games released
 export const getTrailers = async (lang) => {
   const trailersData = await getData(`${trailersApi}/?l=${lang}`);
-  return trailersData.movies;
+  return trailersData;
 };
 
 // gets an stringified array of ids and fetches news related to them
