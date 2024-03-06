@@ -4,7 +4,11 @@ const VideoListItem = ({ thumbnail, gameName, name }) => {
   return (
     <button className="grid grid-cols-2 group gap-1">
       <div className="relative">
-        <LazyLoadImage src={thumbnail} alt={name} className="rounded-md"></LazyLoadImage>
+        <LazyLoadImage
+          src={thumbnail}
+          alt={name}
+          className="rounded-md group-hover:opacity-85"
+        ></LazyLoadImage>
         <div
           className={`text-gray-50 absolute bottom-2 left-4 scale-[180%] opacity-75 group-hover:opacity-100`}
         >
