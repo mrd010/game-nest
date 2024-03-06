@@ -9,6 +9,7 @@ import {
 } from '../services/extractors';
 import NewsSection from '../components/NewsSection';
 import VideoSlideShow from '../components/VideoSlideShow';
+import HomeSectionTitle from '../components/HomeSectionTitle';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
@@ -24,7 +25,6 @@ const Home = () => {
   };
 
   const refinedTrailersData = trailers.status === 1 ? getRefinedTrailers(trailers.movies) : null;
-  console.log(refinedTrailersData);
 
   const importantGamesIds = extractImportantGameIds(
     recommendedGames,
@@ -55,6 +55,7 @@ const Home = () => {
       {/* videos if available*/}
       {refinedTrailersData && (
         <section>
+          <HomeSectionTitle>Latest Videos</HomeSectionTitle>
           <VideoSlideShow videoList={refinedTrailersData.slice(0, 5)}></VideoSlideShow>
         </section>
       )}
