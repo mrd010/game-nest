@@ -1,7 +1,24 @@
 import PropTypes from 'prop-types';
+import { getCleanUrl } from '../services/utilities';
+import VideoListItem from './VideoListItem';
 const VideoSlideShow = ({ videoList }) => {
   console.log(videoList);
-  return <div></div>;
+  return (
+    <div>
+      <div></div>
+      <div className="w-[450px] flex flex-col gap-2">
+        {videoList.map((video) => (
+          <VideoListItem
+            key={video.target.id}
+            gameName={video.target.name}
+            name={video.name}
+            thumbnail={getCleanUrl(video.thumbnail)}
+            width={200}
+          ></VideoListItem>
+        ))}
+      </div>
+    </div>
+  );
 };
 VideoSlideShow.propTypes = {
   videoList: PropTypes.arrayOf(
