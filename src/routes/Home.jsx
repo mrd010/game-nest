@@ -48,7 +48,7 @@ const Home = () => {
       {/* videos if available*/}
       {trailers.status === 1 && (
         <section>
-          <VideoSlideShow videoList={trailers.movies}></VideoSlideShow>
+          <VideoSlideShow videoList={trailers.movies.slice(0, 5)}></VideoSlideShow>
         </section>
       )}
     </div>
