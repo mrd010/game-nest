@@ -23,9 +23,9 @@ const GamesListRow = (props) => {
         {props.name}
       </span>
       <AvailableOSs
-        win={props.mac_available}
+        mac={props.mac_available}
         linux={props.linux_available}
-        mac={props.windows_available}
+        win={props.windows_available}
       ></AvailableOSs>
     </button>
   );
