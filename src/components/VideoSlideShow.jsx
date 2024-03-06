@@ -3,6 +3,7 @@ import { getCleanUrl } from '../services/utilities';
 import VideoListItem from './VideoListItem';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ButtonLink from './ButtonLink';
 
 const VideoSlideShow = ({ videoList }) => {
   const firstVideo = videoList[0].target.id;
@@ -15,9 +16,9 @@ const VideoSlideShow = ({ videoList }) => {
   return (
     <div className="grid grid-cols-[minmax(0,1fr)_auto]">
       {/* playing video */}
-      <div>
+      <div className="grid grid-rows-[]">
         {/* player */}
-        <div></div>
+        <div className="bg-gray-900 size-full"></div>
         {/* video details */}
         <div>
           <h3 className="font-bold text-3xl hover:text-yellow-600">
@@ -27,7 +28,7 @@ const VideoSlideShow = ({ videoList }) => {
         </div>
       </div>
       {/* video list */}
-      <div className="w-[450px] grid grid-rows-5 gap-4">
+      <div className="grid grid-rows-6 gap-4">
         {videoList.map((video) => (
           <VideoListItem
             key={video.target.id}
@@ -37,6 +38,13 @@ const VideoSlideShow = ({ videoList }) => {
             onSelect={() => setSelectedId(video.target.id)}
           ></VideoListItem>
         ))}
+        <div className="w-full">
+          <ButtonLink
+            text="More Videos"
+            link="videos"
+            className="w-full block text-center text-lg py-3"
+          ></ButtonLink>
+        </div>
       </div>
     </div>
   );
