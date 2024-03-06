@@ -1,17 +1,14 @@
 import PropTypes from 'prop-types';
-import AppleIcon from '../assets/icons/AppleIcon.svg';
-import LinuxIcon from '../assets/icons/LinuxIcon.svg';
-import WindowsIcon from '../assets/icons/WindowsIcon.svg';
-import OSIcon from './OSIcon';
 import thumbPlaceholder from '../assets/img/placeholder_sm.jpg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { steamThumbnail } from '../services/utilities';
+import AvailableOSs from './AvailableOSs';
 const GamesListRow = (props) => {
   // game row button in featured categories section of home page. displays game info in preview section
   return (
     <button
       onClick={() => props.onSelect(props.id)}
-      className={`grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4  drop-shadow-sm border-gray-950/50 hover:bg-amber-50 overflow-hidden ${props.isSelected ? 'bg-gradient-to-tr from-yellow-400 to-yellow-200' : ''}`}
+      className={`grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 drop-shadow-sm border-gray-950/50 hover:bg-amber-50 overflow-hidden ${props.isSelected ? 'bg-gradient-to-tr from-yellow-400 to-yellow-200' : ''}`}
     >
       <LazyLoadImage
         src={steamThumbnail(props.id)}
@@ -25,11 +22,11 @@ const GamesListRow = (props) => {
       >
         {props.name}
       </span>
-      <div className="grid grid-flow-col gap-1 justify-start p-3">
-        <OSIcon src={AppleIcon} isAvailable={props.mac_available}></OSIcon>
-        <OSIcon src={LinuxIcon} isAvailable={props.linux_available}></OSIcon>
-        <OSIcon src={WindowsIcon} isAvailable={props.windows_available}></OSIcon>
-      </div>
+      <AvailableOSs
+        win={props.mac_available}
+        linux={props.linux_available}
+        mac={props.windows_available}
+      ></AvailableOSs>
     </button>
   );
 };
