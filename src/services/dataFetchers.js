@@ -47,18 +47,26 @@ export const getTrailers = async (lang) => {
 
 // gets an stringified array of ids and fetches news related to them
 export const getNews = async (stringifiedGameIds) => {
-  const gameIds = JSON.parse(stringifiedGameIds);
-  const allNewsPromises = gameIds.map((gameId) =>
-    getData(`/ISteamNews/GetNewsForApp/v0002/?appid=${gameId}&count=1&format=json`)
-  );
+  try {
+    const gameIds = JSON.parse(stringifiedGameIds);
+    const allNewsPromises = gameIds.map((gameId) =>
+      getData(`/ISteamNews/GetNewsForApp/v0002/?appid=${gameId}&count=1&format=json`)
+    );
 
-  // fetch all and only return ok responses and valid and unique data
-  return await Promise.allSettled(allNewsPromises).then((results) => {
-    const fulfilled = results
-      .filter((result) => result.status === 'fulfilled')
-      .map((fulfilledResult) => fulfilledResult.value.appnews);
+    // fetch all and only return ok responses and valid and unique data
+    return await Promise.allSettled(allNewsPromises)
+      .then((results) => {
+        const fulfilled = results
+          .filter((result) => result.status === 'fulfilled')
+          .map((fulfilledResult) => fulfilledResult.value.appnews);
 
-    // return fulfilled result filtered buy appid in newsitems[0]
-    return [...new Map(fulfilled.map((ff) => [ff.newsitems[0].appid, ff.newsitems[0]])).values()];
-  });
+        // return fulfilled result filtered buy appid in newsitems[0]
+        return [
+          ...new Map(fulfilled.map((ff) => [ff.newsitems[0].appid, ff.newsitems[0]])).values(),
+        ];
+      })
+      .catch((error) => console.log(error.message));
+  } catch (error) {
+    console.log(error.message);
+  }
 };
