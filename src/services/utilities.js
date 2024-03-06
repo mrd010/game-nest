@@ -55,3 +55,7 @@ export const shuffled = (array) => {
   shuffledArray.sort(() => Math.random() - 0.5);
   return shuffledArray;
 };
+
+export const getCleanUrl = (url) => {
+  return url.split('?')[0];
+};
