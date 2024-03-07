@@ -3,11 +3,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const VideoListItem = ({ thumbnail, gameName, name, onSelect }) => {
   return (
     <button className="grid grid-cols-[200px_200px] group gap-4" onClick={onSelect}>
-      <div className="relative h-full">
+      <div className="relative aspect-video">
         <LazyLoadImage
           src={thumbnail}
           alt={name}
-          className="rounded-md group-hover:opacity-85 h-full object-cover"
+          className="rounded-md group-hover:opacity-85 h-full w-full"
         ></LazyLoadImage>
         <div
           className={`text-gray-50 absolute bottom-2 left-4 scale-[180%] opacity-75 group-hover:opacity-100`}

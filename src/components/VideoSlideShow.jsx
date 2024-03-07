@@ -5,29 +5,36 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonLink from './ButtonLink';
 import AvailableOSs from './AvailableOSs';
+import VideoPlayer from './VideoPlayer';
 
 const VideoSlideShow = ({ videoList }) => {
   const firstVideo = videoList[0].target.id;
   // component displaying video list and video player
   const [selectedId, setSelectedId] = useState(firstVideo);
-  console.log(videoList);
 
   const currentVideo = videoList.find((video) => video.target.id === selectedId);
 
+  console.log(currentVideo);
   return (
     <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10">
       {/* playing video */}
-      <div className="grid grid-rows-[1fr_auto]">
+      <div className="grid grid-rows-[minmax(0,1fr)_auto]">
         {/* player */}
-        <div className="bg-gray-900 size-full"></div>
+        <VideoPlayer
+          lqUrl={getCleanUrl(currentVideo.webm['480'])}
+          hqUrl={getCleanUrl(currentVideo.webm['max'])}
+          previewImage={getCleanUrl(currentVideo.target.large_capsule_image)}
+          key={selectedId}
+        ></VideoPlayer>
+
         {/* video details */}
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] h-28">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] h-28 border-[1px] rounded-md border-gray-900">
           <div className="flex flex-col flex-nowrap gap-1 m-4">
             <h3 className="font-bold text-3xl hover:text-yellow-600">
               <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
             </h3>
             {currentVideo.name.length >= 10 &&
-              currentVideo.name.toLowerCase() !== currentVideo.name.toLowerCase() && (
+              currentVideo.target.name.toLowerCase() !== currentVideo.name.toLowerCase() && (
                 <p>{currentVideo.name}</p>
               )}
           </div>
