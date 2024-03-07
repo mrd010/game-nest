@@ -1,3 +1,4 @@
+import { secondsToMinutes } from 'date-fns';
 import scoreColors from '../data/scoreColors.json';
 
 // functions to get an image title from steam according to game steam id
@@ -58,4 +59,10 @@ export const shuffled = (array) => {
 
 export const getCleanUrl = (url) => {
   return url.split('?')[0];
+};
+
+export const secondsToMinutesPlus = (seconds) => {
+  const minutes = secondsToMinutes(Math.floor(seconds));
+  const remainedSeconds = Math.floor(seconds) % 60;
+  return `${minutes < 10 ? '0' : ''}${minutes}:${remainedSeconds < 10 ? '0' : ''}${remainedSeconds}`;
 };
