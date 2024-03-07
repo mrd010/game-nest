@@ -14,7 +14,6 @@ const VideoSlideShow = ({ videoList }) => {
 
   const currentVideo = videoList.find((video) => video.target.id === selectedId);
 
-  console.log(currentVideo);
   return (
     <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10">
       {/* playing video */}
