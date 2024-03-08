@@ -70,15 +70,20 @@ export const extractPriorityMinReq = (gameData) => {
         : null;
 
   // get system requirements according to most common platform
+
+  const specs = extractGameSysReq(gameData);
+  if (!specs) {
+    return { platform: platformName, specs: null };
+  }
   switch (platformName) {
     case 'windows':
-      return { platform: platformName, specs: extractGameSysReq(gameData).minimum };
+      return { platform: platformName, specs: specs.minimum ? specs.minimum : null };
     case 'mac':
-      return { platform: platformName, specs: extractGameSysReq(gameData).mac };
+      return { platform: platformName, specs: specs.mac ? specs.mac : null };
     case 'linux':
       return {
         platform: platformName,
-        specs: extractGameSysReq(gameData).linux,
+        specs: specs.linux ? specs.linux : null,
       };
 
     default:

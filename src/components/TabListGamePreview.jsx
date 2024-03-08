@@ -140,15 +140,19 @@ const TabListGamePreview = ({ id }) => {
             )}
           </div>
           <div className="grid grid-rows-[auto_minmax(0,1fr)] items-start">
-            <h4 className="text-lg p-2 font-bold">System Requirements</h4>
+            {minSysReq.specs && <h4 className="text-lg p-2 font-bold">System Requirements</h4>}
             {isLoading || hasError ? (
               <ContentLoader size="150px"></ContentLoader>
             ) : (
-              <SysReq
-                platform={minSysReq.platform}
-                title="minimum"
-                systemReqData={minSysReq.specs}
-              ></SysReq>
+              <>
+                {minSysReq.specs && (
+                  <SysReq
+                    platform={minSysReq.platform}
+                    title="minimum"
+                    systemReqData={minSysReq.specs}
+                  ></SysReq>
+                )}
+              </>
             )}
           </div>
         </div>
