@@ -54,6 +54,6 @@ Carousel.propTypes = {
   title: PropTypes.string,
   itemWidth: PropTypes.number.isRequired,
   steps: PropTypes.number.isRequired,
-  children: PropTypes.oneOfType(PropTypes.node, PropTypes.arrayOf(PropTypes.node)),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
 };
 export default Carousel;
