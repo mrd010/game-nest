@@ -11,6 +11,8 @@ import playIcon from '../assets/icons/player-icons/play.svg';
 import playBigIcon from '../assets/icons/player-icons/play_circle.svg';
 import muteIcon from '../assets/icons/player-icons/volume_off.svg';
 import volumeIcon from '../assets/icons/player-icons/volume_up.svg';
+import fsIcon from '../assets/icons/player-icons/fullscreen.svg';
+import screenfull from 'screenfull';
 import { secondsToMinutesPlus } from '../services/utilities';
 
 const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
@@ -36,6 +38,10 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
     setIsPlaying(status);
   };
 
+  const handleFullscreen = () => {
+    screenfull.request(document.querySelector('.react-player'));
+  };
+
   return (
     <div className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden">
       <div
@@ -48,6 +54,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
       >
         <ReactPlayer
           ref={player}
+          className="react-player"
           url={highQuality ? hqUrl : lqUrl}
           light={previewImage ? previewImage : true}
           muted={isMuted}
@@ -159,6 +166,9 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
                 <img src={hqIcon} className="icon-white size-8" />
               </button>
             </div>
+            <button onClick={handleFullscreen}>
+              <img src={fsIcon} className="icon-white" />
+            </button>
           </div>
         </div>
       )}
