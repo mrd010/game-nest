@@ -12,11 +12,11 @@ const GameScoreTitle = ({ children }) => {
   return <span className="uppercase text-2xl text-gray-500/80">{children}</span>;
 };
 
-const GameScoreRateMeta = ({ score }) => {
+const GameScoreRateMeta = ({ score, className }) => {
   return (
     <span
       style={{ backgroundColor: getMetascoreColor(score) }}
-      className="rounded-md p-1 text-2xl size-10 text-center grid place-items-center"
+      className={`rounded-md p-1 text-2xl size-10 text-center grid place-items-center ${className ? className : ''}`}
     >
       {typeof score === 'number' ? score : '?'}
     </span>
@@ -50,6 +50,7 @@ GameScoreTitle.propTypes = {
 };
 GameScoreRateMeta.propTypes = {
   score: PropTypes.number.isRequired,
+  className: PropTypes.string,
 };
 GameScoreRateSteam.propTypes = {
   score: PropTypes.number.isRequired,
