@@ -33,9 +33,8 @@ const VideoSlideShow = ({ videoList }) => {
               <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
             </h3>
             {currentVideo.name.length >= 10 &&
-              currentVideo.target.name.toLowerCase() !== currentVideo.name.toLowerCase() && (
-                <p>{currentVideo.name}</p>
-              )}
+              currentVideo.target.name.toLowerCase() !== currentVideo.name.toLowerCase() &&
+              !currentVideo.name.includes('_') && <p>{currentVideo.name}</p>}
           </div>
           <div className="self-center">
             <AvailableOSs

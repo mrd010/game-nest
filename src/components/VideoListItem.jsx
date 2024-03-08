@@ -17,7 +17,9 @@ const VideoListItem = ({ thumbnail, gameName, name, onSelect }) => {
       </div>
       <div className="text-left group-hover:text-yellow-600 flex flex-col gap-3 py-1">
         <h4 className="font-bold text-lg leading-5">{gameName}</h4>
-        {name.length >= 10 && <p className="break-words text-sm leading-5 line-clamp-3">{name}</p>}
+        {name.length >= 10 && !name.includes('_') && (
+          <p className="break-words text-sm leading-5 line-clamp-3">{name}</p>
+        )}
       </div>
     </button>
   );
