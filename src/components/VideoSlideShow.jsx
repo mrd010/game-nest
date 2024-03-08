@@ -36,7 +36,7 @@ const VideoSlideShow = ({ videoList }) => {
               currentVideo.target.name.toLowerCase() !== currentVideo.name.toLowerCase() &&
               !currentVideo.name.includes('_') && <p>{currentVideo.name}</p>}
           </div>
-          <div className="self-center">
+          <div className="self-center px-5">
             <AvailableOSs
               mac={currentVideo.target.mac_available}
               linux={currentVideo.target.linux_available}
