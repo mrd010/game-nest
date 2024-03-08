@@ -206,7 +206,7 @@
 
     input[type='range'] {
       color: #facc15;
-      --thumb-height: 15px;
+      --thumb-height: 10px;
       --track-height: 0.125em;
       --track-color: rgba(0, 0, 0, 0.2);
       --brightness-hover: 140%;
