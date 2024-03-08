@@ -3,7 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const VideoListItem = ({ thumbnail, gameName, name, onSelect }) => {
   return (
     <button className="grid grid-cols-[200px_200px] group gap-4" onClick={onSelect}>
-      <div className="relative aspect-video">
+      <div className="relative aspect-video  shadow-sm">
         <LazyLoadImage
           src={thumbnail}
           alt={name}

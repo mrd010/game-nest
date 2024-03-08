@@ -43,7 +43,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   };
 
   return (
-    <div className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden">
+    <div className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden shadow-sm">
       <div
         onClick={() => {
           if (isStarted) {
