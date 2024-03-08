@@ -18,7 +18,6 @@ const Header = () => {
         <nav className="grid grid-cols-3 items-center gap-5">
           <HeaderNavLink text="Home" link="home"></HeaderNavLink>
           <HeaderNavLink text="Games" link="games"></HeaderNavLink>
-          <HeaderNavLink text="Deals" link="deals"></HeaderNavLink>
         </nav>
         <div>
           <HeaderSearch></HeaderSearch>

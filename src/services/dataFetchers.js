@@ -63,9 +63,3 @@ export const getNews = async (stringifiedGameIds) => {
       throw e;
     });
 };
-
-// get best deals unique by id
-export const getBestDeals = async (minScore, count) => {
-  const deals = await getData(`${dealsApi}?AAA=1&metacritic=${minScore}&pageSize=20`);
-  return extractUniqueDealsById(deals).slice(0, count);
-};
