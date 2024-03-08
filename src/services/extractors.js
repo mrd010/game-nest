@@ -5,6 +5,14 @@ export const extractRefinedGamesArray = (gameArray) => {
   return [...new Map(gameArray.map((item) => [item.id, item])).values()];
 };
 
+export const extractUniqueDealsById = (games) => {
+  return [
+    ...new Map(games.map((game) => [game.internalName, game]))
+      .values()
+      .filter((uGame) => uGame.steamAppID),
+  ];
+};
+
 // extracts system requirements of a game from its steam data. doing it via parsing html to text
 export const extractGameSysReq = (gameData) => {
   let systemRequirements = {};

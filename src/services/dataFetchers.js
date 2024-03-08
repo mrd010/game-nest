@@ -1,3 +1,5 @@
+import { extractUniqueDealsById } from './extractors';
+
 const dealsApi = `https://www.cheapshark.com/api/1.0/deals`;
 const featuredCategoriesApi = '/api/featuredcategories';
 const trailersApi = `/api/trailerslideshow`;
@@ -25,11 +27,7 @@ export const getRecommendedGames = async (minScore) => {
   const games = await getData(`${dealsApi}?AAA=1&sortBy=Release&metacritic=${minScore}`);
 
   //   extract unique (non repetitive) games
-  const recommendedGames = [
-    ...new Map(games.map((game) => [game.internalName, game]))
-      .values()
-      .filter((uGame) => uGame.steamAppID),
-  ];
+  const recommendedGames = extractUniqueDealsById(games);
   return recommendedGames;
 };
 
