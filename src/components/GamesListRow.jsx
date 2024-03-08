@@ -17,9 +17,7 @@ const GamesListRow = (props) => {
         width={184}
         height={69}
       ></LazyLoadImage>
-      <span
-        className={`p-1 line-clamp-1 text-left  transition-transform ${props.isSelected ? 'translate-x-4 font-bold' : ''}`}
-      >
+      <span className={`p-1 line-clamp-1 text-left ${props.isSelected ? 'font-bold' : ''}`}>
         {props.name}
       </span>
       <AvailableOSs
