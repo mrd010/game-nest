@@ -11,7 +11,6 @@ import playIcon from '../assets/icons/player-icons/play.svg';
 import playBigIcon from '../assets/icons/player-icons/play_circle.svg';
 import muteIcon from '../assets/icons/player-icons/volume_off.svg';
 import volumeIcon from '../assets/icons/player-icons/volume_up.svg';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { secondsToMinutesPlus } from '../services/utilities';
 
 const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
@@ -54,7 +53,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
           muted={isMuted}
           volume={volume}
           playing={isPlaying}
-          playIcon={<LazyLoadImage src={playBigIcon} className="icon-white w-40"></LazyLoadImage>}
+          playIcon={<img src={playBigIcon} className="icon-white w-40"></img>}
           width={'100%'}
           height={'100%'}
           // ----------------------
