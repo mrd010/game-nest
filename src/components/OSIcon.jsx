@@ -8,7 +8,7 @@ const OSIcon = ({ src, isAvailable, size = 18 }) => {
         alt="OS Icon"
         width={size}
         height={size}
-        className={`os-icon ${isAvailable ? 'opacity-100' : 'opacity-30'}`}
+        className={`os-icon ${isAvailable ? 'opacity-100' : 'opacity-15'}`}
       />
     </div>
   );
