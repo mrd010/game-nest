@@ -9,7 +9,7 @@ const HeaderNavLink = ({ text, link, children }) => {
   const handleShowMenu = () => {
     timer.current = setTimeout(() => {
       setOpened(true);
-    }, 300);
+    }, 500);
   };
 
   const handleCloseMenu = () => {
@@ -24,7 +24,7 @@ const HeaderNavLink = ({ text, link, children }) => {
     <div className="relative grid items-center pr-8" onMouseLeave={handleCloseMenu}>
       <Link
         to={link}
-        className={`font-semibold text-lg py-2 px-4 rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
+        className={`font-semibold text-lg py-2 px-4 text-center rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
         onMouseEnter={handleShowMenu}
         onClick={handleCloseMenu}
       >
