@@ -5,6 +5,7 @@ const featuredCategoriesApi = '/api/featuredcategories';
 const trailersApi = `/api/trailerslideshow`;
 const genreListApi = '/api/getgenrelist';
 const newReleasesApi = '/api/getappsincategory/?category=cat_newreleases';
+const genreGamesApi = '/api/getappsingenre';
 
 // checks if response is ok and throws error on 400> status
 export const checkResponse = (response) => {
@@ -77,9 +78,26 @@ export const getGenresList = async (language) => {
 
 // get new releases for games page
 export const getNewReleases = async (language) => {
-  const newReleasedGames = await getData(`${newReleasesApi}${language ? `/?l=${language}` : ''}`);
+  const newReleasedGames = await getData(`${newReleasesApi}${language ? `&?l=${language}` : ''}`);
   if (newReleasedGames && newReleasedGames.status === 1) {
     return newReleasedGames.tabs;
   }
+  return null;
+};
+
+// get games for selected genre
+export const getGamesInGenre = async (genre, language) => {
+  // if not provided genre name
+  if (!genre) {
+    return null;
+  }
+
+  const gamesInGenre = await getData(
+    `${genreGamesApi}/?genre=${genre}${language ? `&l=${language}` : ''}`
+  );
+  if (gamesInGenre && gamesInGenre.status === 1) {
+    return gamesInGenre.tabs;
+  }
+
   return null;
 };
