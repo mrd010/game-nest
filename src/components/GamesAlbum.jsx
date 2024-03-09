@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import PageNavNumbers from './PageNavNumbers';
+import GamesAlbumCard from './GamesAlbumCard';
 const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const firstIndex = pageNumber * itemsPerPage;
@@ -14,7 +15,7 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
     <div>
       <div>
         {gameIds.slice(firstIndex, lastIndex).map((id) => (
-          <p key={id}>{id}</p>
+          <GamesAlbumCard key={id} id={id}></GamesAlbumCard>
         ))}
       </div>
       <PageNavNumbers
