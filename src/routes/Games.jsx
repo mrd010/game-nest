@@ -6,11 +6,13 @@ const Games = () => {
   const categories = useOutletContext();
 
   return (
-    <div>
+    <div className="grid grid-cols-[auto_1fr] gap-5">
       {/* side nav categories */}
       <CategoriesSideNav categoryList={categories}></CategoriesSideNav>
       {/* main content */}
-      <Outlet></Outlet>
+      <div className="px-10 py-20 my-2 rounded-md bg-zinc-100">
+        <Outlet></Outlet>
+      </div>
     </div>
   );
 };
