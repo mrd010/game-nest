@@ -4,6 +4,7 @@ const CategoriesSideNav = ({ categoryList }) => {
   return (
     <nav className="w-[300px]">
       <ul className="divide-y-2">
+        {/* main nav link (default page) */}
         <li className={`text-2xl px-4 hover:text-yellow-600  `}>
           <NavLink
             to="new releases"
@@ -12,6 +13,7 @@ const CategoriesSideNav = ({ categoryList }) => {
             New Releases
           </NavLink>
         </li>
+        {/* categories nav link */}
         {categoryList.map((category) => (
           <li
             key={category.id}
