@@ -16,12 +16,16 @@ const Header = ({ categories }) => {
             </Link>
           </h1>
         </div>
-        <nav className="grid grid-cols-3 gap-5 h-full">
+        <nav className="grid grid-cols-3 h-full">
           <HeaderNavLink text="Home" link="home"></HeaderNavLink>
           <HeaderNavLink text="Games" link="games">
             {categories.map((cat) =>
               cat.id === cat.name ? (
-                <Link key={cat.id} to={`/games/${cat.id}`}>
+                <Link
+                  key={cat.id}
+                  to={`/games/${cat.id}`}
+                  className="text-gray-800/85 p-1 font-light text-lg hover:pl-4 transition-[padding] hover:font-bold"
+                >
                   {cat.name}
                 </Link>
               ) : null

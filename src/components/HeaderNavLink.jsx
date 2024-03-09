@@ -8,7 +8,7 @@ const HeaderNavLink = ({ text, link, children }) => {
   // links in header of page which navigates to different main pages of app
   return (
     <div
-      className="relative grid items-center"
+      className="relative grid items-center pr-8"
       onMouseLeave={() => {
         clearTimeout(timer.current);
         setOpened(false);
@@ -16,7 +16,7 @@ const HeaderNavLink = ({ text, link, children }) => {
     >
       <Link
         to={link}
-        className={`font-semibold py-2 px-4 rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
+        className={`font-semibold text-lg py-2 px-4 rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
         onMouseEnter={() => {
           timer.current = setTimeout(() => {
             setOpened(true);
@@ -27,7 +27,7 @@ const HeaderNavLink = ({ text, link, children }) => {
       </Link>
       {children && (
         <div
-          className={`absolute z-10 w-max p-2 text-gray-800 bg-gray-100 shadow-2xl rounded-b border-x-[3px] top-full left-0 grid grid-flow-row transition-opacity ${opened ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute z-10 w-max text-gray-800 bg-gray-100 shadow-2xl rounded-b border-x-[3px] top-full -left-5 grid grid-rows-10 gap-x-10 p-6 grid-flow-col auto-cols-[200px] transition-opacity ${opened ? 'opacity-100' : 'opacity-0'}`}
         >
           {children}
         </div>
