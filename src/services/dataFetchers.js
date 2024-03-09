@@ -3,6 +3,7 @@ import { extractUniqueDealsById } from './extractors';
 const dealsApi = `https://www.cheapshark.com/api/1.0/deals`;
 const featuredCategoriesApi = '/api/featuredcategories';
 const trailersApi = `/api/trailerslideshow`;
+const genreListApi = '/api/getgenrelist';
 
 // checks if response is ok and throws error on 400> status
 export const checkResponse = (response) => {
@@ -62,4 +63,13 @@ export const getNews = async (stringifiedGameIds) => {
     .catch((e) => {
       throw e;
     });
+};
+
+// get genre list of games
+export const getGenresList = async (language) => {
+  const genresData = await getData(`${genreListApi}${language ? `/?l=${language}` : ''}`);
+  if (genresData && genresData.status === 1) {
+    return genresData.genres;
+  }
+  return null;
 };
