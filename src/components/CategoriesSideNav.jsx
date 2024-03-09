@@ -5,7 +5,7 @@ const CategoriesSideNav = ({ categoryList }) => {
     <nav className="w-[300px]">
       <ul className="divide-y-2">
         {/* main nav link (default page) */}
-        <li className={`text-2xl px-4 hover:text-yellow-600  `}>
+        <li className={`text-xl px-6 hover:text-yellow-600  `}>
           <NavLink
             to="new releases"
             className={`inline-block w-full py-4 transition-all font-bold`}
