@@ -4,6 +4,7 @@ const dealsApi = `https://www.cheapshark.com/api/1.0/deals`;
 const featuredCategoriesApi = '/api/featuredcategories';
 const trailersApi = `/api/trailerslideshow`;
 const genreListApi = '/api/getgenrelist';
+const newReleasesApi = '/api/getappsincategory/?category=cat_newreleases';
 
 // checks if response is ok and throws error on 400> status
 export const checkResponse = (response) => {
@@ -70,6 +71,15 @@ export const getGenresList = async (language) => {
   const genresData = await getData(`${genreListApi}${language ? `/?l=${language}` : ''}`);
   if (genresData && genresData.status === 1) {
     return genresData.genres;
+  }
+  return null;
+};
+
+// get new releases for games page
+export const getNewReleases = async (language) => {
+  const newReleasedGames = await getData(`${newReleasesApi}${language ? `/?l=${language}` : ''}`);
+  if (newReleasedGames && newReleasedGames.status === 1) {
+    return newReleasedGames.tabs;
   }
   return null;
 };
