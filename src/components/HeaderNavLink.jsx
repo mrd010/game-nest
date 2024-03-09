@@ -5,29 +5,34 @@ import { useRef, useState } from 'react';
 const HeaderNavLink = ({ text, link, children }) => {
   const [opened, setOpened] = useState(false);
   const timer = useRef(null);
+
+  const handleShowMenu = () => {
+    timer.current = setTimeout(() => {
+      setOpened(true);
+    }, 300);
+  };
+
+  const handleCloseMenu = () => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    setOpened(false);
+  };
+
   // links in header of page which navigates to different main pages of app
   return (
-    <div
-      className="relative grid items-center pr-8"
-      onMouseLeave={() => {
-        clearTimeout(timer.current);
-        setOpened(false);
-      }}
-    >
+    <div className="relative grid items-center pr-8" onMouseLeave={handleCloseMenu}>
       <Link
         to={link}
         className={`font-semibold text-lg py-2 px-4 rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
-        onMouseEnter={() => {
-          timer.current = setTimeout(() => {
-            setOpened(true);
-          }, 300);
-        }}
+        onMouseEnter={handleShowMenu}
+        onClick={handleCloseMenu}
       >
         {text}
       </Link>
-      {children && (
+      {children && opened && (
         <div
-          className={`absolute z-10 w-max text-gray-800 bg-gray-100 shadow-2xl rounded-b border-x-[3px] top-full -left-5 grid grid-rows-10 gap-x-10 p-6 grid-flow-col auto-cols-[200px] transition-opacity ${opened ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute z-10 w-max text-gray-800 bg-gray-100 shadow-2xl rounded-b border-x-[3px] top-full -left-5 grid grid-rows-10 gap-x-10 p-6 grid-flow-col auto-cols-[200px]`}
         >
           {children}
         </div>
