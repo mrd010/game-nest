@@ -96,7 +96,7 @@ export const getGamesInGenre = async (genre, language) => {
     `${genreGamesApi}/?genre=${genre}${language ? `&l=${language}` : ''}`
   );
   if (gamesInGenre && gamesInGenre.status === 1) {
-    return gamesInGenre.tabs;
+    return { id: gamesInGenre.id, name: gamesInGenre.name, data: gamesInGenre.tabs };
   }
 
   return null;
