@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import HeaderNavLink from './HeaderNavLink';
 import HeaderProfile from './HeaderProfile';
 import HeaderSearch from './HeaderSearch';
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = ({ categories }) => {
   // top header of app
   return (
     <header className="bg-gray-950 text-gray-50 min-w-min">
@@ -17,7 +18,17 @@ const Header = () => {
         </div>
         <nav className="grid grid-cols-3 items-center gap-5">
           <HeaderNavLink text="Home" link="home"></HeaderNavLink>
-          <HeaderNavLink text="Games" link="games"></HeaderNavLink>
+          <HeaderNavLink text="Games" link="games">
+            <div>
+              {categories.map((cat) =>
+                cat.id === cat.name ? (
+                  <Link key={cat.id} to={`/games/${cat.id}`}>
+                    {cat.name}
+                  </Link>
+                ) : null
+              )}
+            </div>
+          </HeaderNavLink>
         </nav>
         <div>
           <HeaderSearch></HeaderSearch>
@@ -28,6 +39,11 @@ const Header = () => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.exact({ id: PropTypes.string, name: PropTypes.string }))
+    .isRequired,
 };
 
 export default Header;
