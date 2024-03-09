@@ -10,8 +10,10 @@ import Games from './routes/Games';
 import { homeLoader } from './loaders/homeLoader';
 
 import { appLoader } from './loaders/appLoader';
-import { gamesLoader } from './loaders/gamesLoader';
-import GamesContent from './components/GamesContent';
+import { genreGamesLoader } from './loaders/genreGamesLoader';
+import NewReleasedGames from './routes/NewReleasedGames';
+import GenreGames from './routes/GenreGames';
+import { newReleasesLoader } from './loaders/newReleasesLoader';
 
 const Router = () => {
   const router = createBrowserRouter(
@@ -20,8 +22,21 @@ const Router = () => {
         <Route index element={<Home />} loader={homeLoader}></Route>
         <Route path="home" element={<Home />} loader={homeLoader}></Route>
         <Route path="games" element={<Games />}>
-          <Route index element={<GamesContent></GamesContent>} loader={gamesLoader}></Route>
-          <Route path=":catId" element={<GamesContent></GamesContent>} loader={gamesLoader}></Route>
+          <Route
+            index
+            element={<NewReleasedGames></NewReleasedGames>}
+            loader={newReleasesLoader}
+          ></Route>
+          <Route
+            path="new releases"
+            element={<NewReleasedGames></NewReleasedGames>}
+            loader={newReleasesLoader}
+          ></Route>
+          <Route
+            path=":catId"
+            element={<GenreGames></GenreGames>}
+            loader={genreGamesLoader}
+          ></Route>
         </Route>
       </Route>
     )
