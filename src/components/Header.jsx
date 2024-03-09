@@ -9,6 +9,7 @@ const Header = ({ categories }) => {
   return (
     <header className="bg-gray-950 text-gray-50 min-w-min">
       <div className="grid grid-cols-[auto_auto_1fr_auto] items-center content-center mx-auto w-[1280px] justify-between gap-8">
+        {/* header title - app title */}
         <div className="mr-10 p-4">
           <h1>
             <Link className="text-4xl font-extrabold">
@@ -16,25 +17,31 @@ const Header = ({ categories }) => {
             </Link>
           </h1>
         </div>
+        {/* app nav menu */}
         <nav className="grid grid-cols-3 h-full">
           <HeaderNavLink text="Home" link="home"></HeaderNavLink>
           <HeaderNavLink text="Games" link="games">
-            {categories.map((cat) =>
-              cat.id === cat.name ? (
-                <Link
-                  key={cat.id}
-                  to={`/games/${cat.id}`}
-                  className="text-gray-800/85 p-1 font-light text-lg hover:pl-4 transition-[padding] hover:font-bold"
-                >
-                  {cat.name}
-                </Link>
-              ) : null
-            )}
+            {
+              // sub menu - appears on hover
+              categories.map((cat) =>
+                cat.id === cat.name ? (
+                  <Link
+                    key={cat.id}
+                    to={`/games/${cat.id}`}
+                    className="text-gray-800/85 p-1 font-light text-lg hover:pl-4 transition-[padding] hover:font-bold"
+                  >
+                    {cat.name}
+                  </Link>
+                ) : null
+              )
+            }
           </HeaderNavLink>
         </nav>
+        {/* search bar */}
         <div>
           <HeaderSearch></HeaderSearch>
         </div>
+        {/* profile section - its login button or profile icon */}
         <div>
           <HeaderProfile isLoggedIn={false}></HeaderProfile>
         </div>
