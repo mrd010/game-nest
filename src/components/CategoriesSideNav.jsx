@@ -2,17 +2,30 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 const CategoriesSideNav = ({ categoryList }) => {
   return (
-    <nav>
-      <div>
-        <NavLink to="new releases">New Releases</NavLink>
-      </div>
-      <div>
-        {categoryList.map((category) => (
-          <NavLink key={category} to={category}>
-            {category}
+    <nav className="w-[300px]">
+      <ul className="divide-y-2">
+        <li className={`text-2xl px-4 hover:text-yellow-600  `}>
+          <NavLink
+            to="new releases"
+            className={`inline-block w-full py-4 transition-all font-bold`}
+          >
+            New Releases
           </NavLink>
+        </li>
+        {categoryList.map((category) => (
+          <li
+            key={category.id}
+            className="px-6 hover:bg-gradient-to-r from-transparent to-transparent via-gray-500/10 via-15%"
+          >
+            <NavLink
+              to={category.id}
+              className={`text-lg w-full inline-block py-2 transition-transform text-gray-800/75`}
+            >
+              {category.name}
+            </NavLink>
+          </li>
         ))}
-      </div>
+      </ul>
     </nav>
   );
 };
