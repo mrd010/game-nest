@@ -5,6 +5,7 @@ export const extractRefinedGamesArray = (gameArray) => {
   return [...new Map(gameArray.map((item) => [item.id, item])).values()];
 };
 
+// gets game deals and make them unique by id and also available id
 export const extractUniqueDealsById = (games) => {
   return [
     ...new Map(games.map((game) => [game.internalName, game]))
@@ -109,4 +110,9 @@ export const extractImportantGameIds = (recommendedGames, topSellers) => {
 // get trailers filtered by id. every just 1 video for each game not more.
 export const getRefinedTrailers = (trailersData) => {
   return [...new Map(trailersData.map((trailer) => [trailer.target.id, trailer])).values()];
+};
+
+// get only game ids
+export const extractJustGames = (gameIds) => {
+  return gameIds.filter((game) => game.type === 0).map((game) => game.id);
 };
