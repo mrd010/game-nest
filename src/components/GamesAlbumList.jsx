@@ -38,7 +38,7 @@ const GamesAlbumList = ({ gamesListIds, isActive }) => {
   return (
     <>
       {isActive && (
-        <div className="flex flex-col flex-nowrap divide-y-4">
+        <div className="flex flex-col flex-nowrap gap-5 my-4">
           {gamesData.map((data, index) =>
             data && data.status === 1 ? (
               <GamesAlbumCard key={data.appid} gameData={data}></GamesAlbumCard>

@@ -6,22 +6,24 @@ import { Link } from 'react-router-dom';
 
 const GamesAlbumCard = ({ gameData }) => {
   return (
-    <div className="grid grid-cols-[auto_minmax(0,2fr)] gap-5 h-min items-center hover:opacity-85 transition-opacity">
-      <Link to={`/games/${gameData.appid}`} className="">
+    <Link
+      to={`/games/${gameData.appid}`}
+      className="group grid grid-cols-[auto_minmax(0,2fr)] gap-2 h-min items-center transition-opacity drop-shadow-md hover:drop-shadow-xl rounded-lg bg-slate-50 overflow-hidden"
+    >
+      <div className="absolute left-0 -top-12 w-full h-[420px] bg-gradient-to-t from-amber-500 to-yellow-300 -z-50 transition-transform duration-300 rotate-[62deg] -translate-x-[400px] group-hover:-translate-x-10"></div>
+      <div className="">
         <LazyLoadImage
           src={steamHeaderImage(gameData.appid)}
           placeholder={<div className="content-loader h-full w-full"></div>}
-          className="shadow-md contrast-[110%]"
+          className="shadow-md contrast-[110%] rounded-l-lg transition-transform group-hover:scale-90 group-hover:rounded-lg duration-300"
         ></LazyLoadImage>
-      </Link>
-      <div className="grid grid-rows-[auto_minmax(0,1fr)_auto] gap-1 py-4 h-full">
+      </div>
+      <div className="grid grid-rows-[auto_minmax(0,1fr)_auto] gap-1 p-4 h-full drop-shadow-md">
         <div>
-          <h4 className="text-xl font-bold line-clamp-1 hover:text-yellow-600 underline">
-            <Link to={`/games/${gameData.appid}`}>{gameData.name}</Link>
-          </h4>
+          <h4 className="text-xl font-bold line-clamp-1">{gameData.name}</h4>
         </div>
         <div className="overflow-hidden">
-          <p className="text-gray-600/85 line-clamp-3">{gameData.strSnippet}</p>
+          <p className="text-gray-700/85 line-clamp-3">{gameData.strSnippet}</p>
         </div>
         <div className="grid grid-cols-2">
           <PubDevRow>
@@ -34,7 +36,7 @@ const GamesAlbumCard = ({ gameData }) => {
           </PubDevRow>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 GamesAlbumCard.propTypes = {
