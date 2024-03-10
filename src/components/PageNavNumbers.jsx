@@ -3,14 +3,14 @@ const PageNavNumbers = ({ currentPageNumber, totalPageNumbers, onSelect }) => {
   // component which shows currently active page
 
   return (
-    <div className="flex flex-row flex-nowrap gap-1">
+    <div className="flex flex-row flex-nowrap gap-2">
       {
         // create numbered buttons from 1 to number of pages
         [...Array(totalPageNumbers)].map((x, index) => (
           <button
             key={index}
             onClick={() => onSelect(index)}
-            className={`border-[1px] h-8 w-16 font-bold rounded-[4px] hover:text-gray-900 border-gray-500/40 ${index === currentPageNumber ? 'bg-yellow-400  text-gray-900' : 'text-gray-900/60'} ${index !== currentPageNumber ? 'hover:bg-yellow-100' : ''}`}
+            className={`size-10 text-lg font-bold bg-gray-900 rounded-full transition-opacity duration-75 ${index === currentPageNumber ? 'bg-yellow-300 text-gray-900' : 'text-gray-50 opacity-20 hover:opacity-75'}`}
           >
             {index + 1}
           </button>

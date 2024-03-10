@@ -12,7 +12,7 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col flex-nowrap gap-6 items-center">
       {[...Array(numberOfPages)].map((v, index) => {
         const firstIndex = index * itemsPerPage;
         const lastIndex = index * itemsPerPage + itemsPerPage;
