@@ -2,13 +2,15 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { getGamesMiniData } from '../services/dataFetchers';
 import GamesAlbumCard from './GamesAlbumCard';
+import ContentLoader from './ContentLoader';
 const GamesAlbumList = ({ gamesListIds, isActive }) => {
-  const [gamesData, setGamesData] = useState([]);
+  const [gamesData, setGamesData] = useState(new Array(gamesListIds.length).fill(null));
   const [loaded, setLoaded] = useState(false);
 
   // use stringified version for preventing re-renders
   const stringifiedIds = JSON.stringify(gamesListIds);
-  console.log(gamesData);
+
+  // if ids changed set loaded false and fetch again
   useEffect(() => {
     if (stringifiedIds) {
       setLoaded(false);
@@ -36,12 +38,22 @@ const GamesAlbumList = ({ gamesListIds, isActive }) => {
   return (
     <>
       {isActive && (
-        <div>
-          {gamesData.map(
-            (data) =>
-              data.status === 1 && (
-                <GamesAlbumCard key={data.appid} gameData={data}></GamesAlbumCard>
-              )
+        <div className="flex flex-col flex-nowrap divide-y-4">
+          {gamesData.map((data, index) =>
+            data && data.status === 1 ? (
+              <GamesAlbumCard key={data.appid} gameData={data}></GamesAlbumCard>
+            ) : (
+              <div key={index} className="grid grid-cols-2 gap-4 h-[215px]">
+                <div>
+                  <ContentLoader size="100%"></ContentLoader>
+                </div>
+                <div className="grid grid-rows-[auto_1fr_auto] gap-2 py-4">
+                  <ContentLoader size="30px"></ContentLoader>
+                  <ContentLoader size="70px"></ContentLoader>
+                  <ContentLoader size="35px"></ContentLoader>
+                </div>
+              </div>
+            )
           )}
         </div>
       )}
