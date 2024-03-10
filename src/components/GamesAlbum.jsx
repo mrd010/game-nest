@@ -12,7 +12,7 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
   };
 
   return (
-    <div className="flex flex-col flex-nowrap gap-6 items-center">
+    <div className="flex flex-col flex-nowrap gap-4">
       {[...Array(numberOfPages)].map((v, index) => {
         const firstIndex = index * itemsPerPage;
         const lastIndex = index * itemsPerPage + itemsPerPage;
@@ -24,11 +24,13 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
           ></GamesAlbumList>
         );
       })}
-      <PageNavNumbers
-        totalPageNumbers={numberOfPages}
-        currentPageNumber={pageNumber}
-        onSelect={handleChangePage}
-      ></PageNavNumbers>
+      <div className="self-center">
+        <PageNavNumbers
+          totalPageNumbers={numberOfPages}
+          currentPageNumber={pageNumber}
+          onSelect={handleChangePage}
+        ></PageNavNumbers>
+      </div>
     </div>
   );
 };
