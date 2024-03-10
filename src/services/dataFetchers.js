@@ -104,7 +104,8 @@ export const getGamesInGenre = async (genre, language) => {
 };
 
 // get an array of game ids and fetch their mini info
-export const getGamesMiniData = async (gamesIds) => {
+export const getGamesMiniData = async (stringifiedIds) => {
+  const gamesIds = JSON.parse(stringifiedIds);
   const gamesDataPromises = gamesIds.map((id) => getData(`${gameMiniDataAPi}/?appid=${id}`));
 
   // return only those fulfilled and successfully fetched
