@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { steamHeaderImage } from '../services/utilities';
-import ContentLoader from './ContentLoader';
 import PubDevRow from './PubDevRow';
 import { Link } from 'react-router-dom';
 
