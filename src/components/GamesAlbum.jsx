@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import PageNavNumbers from './PageNavNumbers';
-import GamesAlbumCard from './GamesAlbumCard';
+import GamesAlbumList from './GamesAlbumList';
 const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
   const [pageNumber, setPageNumber] = useState(0);
-  const firstIndex = pageNumber * itemsPerPage;
-  const lastIndex = (pageNumber + 1) * itemsPerPage;
+
+  const numberOfPages = Math.ceil(gameIds.length / itemsPerPage);
 
   const handleChangePage = (num) => {
     setPageNumber(num);
@@ -13,13 +13,19 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
 
   return (
     <div>
-      <div>
-        {gameIds.slice(firstIndex, lastIndex).map((id) => (
-          <GamesAlbumCard key={id} id={id}></GamesAlbumCard>
-        ))}
-      </div>
+      {[...Array(numberOfPages)].map((v, index) => {
+        const firstIndex = index * itemsPerPage;
+        const lastIndex = index * itemsPerPage + itemsPerPage;
+        return (
+          <GamesAlbumList
+            key={index}
+            gamesListIds={gameIds.slice(firstIndex, lastIndex)}
+            isActive={pageNumber === index}
+          ></GamesAlbumList>
+        );
+      })}
       <PageNavNumbers
-        totalPageNumbers={Math.ceil(gameIds.length / itemsPerPage)}
+        totalPageNumbers={numberOfPages}
         currentPageNumber={pageNumber}
         onSelect={handleChangePage}
       ></PageNavNumbers>
