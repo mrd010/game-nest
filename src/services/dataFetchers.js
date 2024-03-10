@@ -6,6 +6,7 @@ const trailersApi = `/api/trailerslideshow`;
 const genreListApi = '/api/getgenrelist';
 const newReleasesApi = '/api/getappsincategory/?category=cat_newreleases';
 const genreGamesApi = '/api/getappsingenre';
+const gameMiniDataAPi = '/api/libraryappdetails';
 
 // checks if response is ok and throws error on 400> status
 export const checkResponse = (response) => {
@@ -100,4 +101,18 @@ export const getGamesInGenre = async (genre, language) => {
   }
 
   return null;
+};
+
+// get an array of game ids and fetch their mini info
+export const getGamesMiniData = async (gamesIds) => {
+  const gamesDataPromises = gamesIds.map((id) => getData(`${gameMiniDataAPi}/?appid=${id}`));
+
+  // return only those fulfilled and successfully fetched
+  const gamesData = await Promise.allSettled(gamesDataPromises).then((results) =>
+    results
+      .filter((result) => result.status === 'fulfilled' && result.value.status === 1)
+      .map((result) => result.value)
+  );
+
+  return gamesData;
 };
