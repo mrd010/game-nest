@@ -43,6 +43,7 @@ const GamesAlbumList = ({ gamesListIds, isActive }) => {
             data && data.status === 1 ? (
               <GamesAlbumCard key={data.appid} gameData={data}></GamesAlbumCard>
             ) : (
+              // load loader placeholder if no data received yet
               <div key={index} className="grid grid-cols-2 gap-4 h-[215px]">
                 <div>
                   <ContentLoader size="100%"></ContentLoader>

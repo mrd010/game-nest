@@ -5,6 +5,7 @@ import GamesAlbumList from './GamesAlbumList';
 const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
   const [pageNumber, setPageNumber] = useState(0);
 
+  // total number of pages according to number of items
   const numberOfPages = Math.ceil(gameIds.length / itemsPerPage);
 
   const handleChangePage = (num) => {
@@ -13,17 +14,23 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
 
   return (
     <div className="flex flex-col flex-nowrap gap-4">
-      {[...Array(numberOfPages)].map((v, index) => {
-        const firstIndex = index * itemsPerPage;
-        const lastIndex = index * itemsPerPage + itemsPerPage;
-        return (
-          <GamesAlbumList
-            key={index}
-            gamesListIds={gameIds.slice(firstIndex, lastIndex)}
-            isActive={pageNumber === index}
-          ></GamesAlbumList>
-        );
-      })}
+      {
+        // divide ids according to [itemsPerPage] and give each set to a different game list
+        [...Array(numberOfPages)].map((v, index) => {
+          // first index of slice
+          const firstIndex = index * itemsPerPage;
+          // last index of slice
+          const lastIndex = index * itemsPerPage + itemsPerPage;
+          return (
+            <GamesAlbumList
+              key={index}
+              gamesListIds={gameIds.slice(firstIndex, lastIndex)}
+              isActive={pageNumber === index}
+            ></GamesAlbumList>
+          );
+        })
+      }
+      {/* bottom page numbers */}
       <div className="self-center">
         <PageNavNumbers
           totalPageNumbers={numberOfPages}
