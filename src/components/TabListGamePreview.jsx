@@ -11,6 +11,7 @@ import ContentLoader from './ContentLoader';
 import noDataImg from '../assets/img/no_data.png';
 import { Link } from 'react-router-dom';
 import ErrorOverlay from './ErrorOverlay';
+import PubDevRow from './PubDevRow';
 
 const TabListGamePreview = ({ id }) => {
   // if a game selected fetch its data else data is empty
@@ -96,31 +97,35 @@ const TabListGamePreview = ({ id }) => {
             {
               // if data exists and game data has developers
               gameData.developers && gameData.developers.length && (
-                <div className="flex flex-col">
-                  <span className="font-bold">Developer</span>
+                <PubDevRow className="flex flex-col">
+                  <PubDevRow.Title className="font-bold">Developer</PubDevRow.Title>
                   <div>
                     {isLoading || hasError ? (
                       <ContentLoader size="20px" length={15}></ContentLoader>
                     ) : (
-                      <span className="text-sm text-gray-500/90">{gameData.developers[0]}</span>
+                      <PubDevRow.Value className="text-sm text-gray-500/90">
+                        {gameData.developers[0]}
+                      </PubDevRow.Value>
                     )}
                   </div>
-                </div>
+                </PubDevRow>
               )
             }
             {
               // if data exists and game data has publishers
               gameData.publishers && gameData.publishers.length && (
-                <div className="flex flex-col">
-                  <span className="font-bold">Publisher</span>
+                <PubDevRow className="flex flex-col">
+                  <PubDevRow.Title className="font-bold">Publisher</PubDevRow.Title>
                   <div>
                     {isLoading || hasError ? (
                       <ContentLoader size="20px" length={15}></ContentLoader>
                     ) : (
-                      <span className="text-sm text-gray-500/90">{gameData.publishers[0]}</span>
+                      <PubDevRow.Value className="text-sm text-gray-500/90">
+                        {gameData.publishers[0]}
+                      </PubDevRow.Value>
                     )}
                   </div>
-                </div>
+                </PubDevRow>
               )
             }
           </div>
