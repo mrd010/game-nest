@@ -19,7 +19,7 @@ const NewReleasedGames = () => {
   const gameDLCS = dlc && dlc.items && dlc.items.length > 0 ? extractJustGames(dlc.items) : null;
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-12">
       <header>
         <h1 className="text-4xl my-2 font-extrabold">What Games to Play Right Now</h1>
         <p className="text-lg">
