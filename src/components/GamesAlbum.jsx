@@ -13,7 +13,7 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
   };
 
   return (
-    <div className="flex flex-col flex-nowrap gap-4">
+    <div className="flex flex-col flex-nowrap gap-2">
       {
         // divide ids according to [itemsPerPage] and give each set to a different game list
         [...Array(numberOfPages)].map((v, index) => {
@@ -31,7 +31,7 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
         })
       }
       {/* bottom page numbers */}
-      <div className="self-center">
+      <div className="self-center border-y-2 py-4">
         <PageNavNumbers
           totalPageNumbers={numberOfPages}
           currentPageNumber={pageNumber}
