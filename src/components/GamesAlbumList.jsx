@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import { getGamesMiniData } from '../services/dataFetchers';
 import GamesAlbumCard from './GamesAlbumCard';
 import ContentLoader from './ContentLoader';
+import { useInView } from 'react-intersection-observer';
 const GamesAlbumList = ({ gamesListIds, isActive }) => {
   const [gamesData, setGamesData] = useState(new Array(gamesListIds.length).fill(null));
   const [loaded, setLoaded] = useState(false);
+  const { ref, inView } = useInView({ triggerOnce: true });
 
   // use stringified version for preventing re-renders
   const stringifiedIds = JSON.stringify(gamesListIds);
@@ -29,16 +31,16 @@ const GamesAlbumList = ({ gamesListIds, isActive }) => {
     };
 
     // if got data before don't fetch. use that instead
-    if (!loaded && isActive) {
+    if (!loaded && isActive && inView) {
       getGamesData();
     }
 
     return () => (ignore = true);
-  }, [stringifiedIds, loaded, isActive]);
+  }, [stringifiedIds, loaded, isActive, inView]);
   return (
     <>
       {isActive && (
-        <div className="flex flex-col flex-nowrap gap-5 my-4">
+        <div ref={ref} className="flex flex-col flex-nowrap gap-5 my-4">
           {gamesData.map((data, index) =>
             data && data.status === 1 ? (
               <GamesAlbumCard key={data.appid} gameData={data}></GamesAlbumCard>
