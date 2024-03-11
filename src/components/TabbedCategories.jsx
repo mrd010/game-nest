@@ -4,12 +4,12 @@ import GamesListRow from './GamesListRow';
 import PageNavNumbers from './PageNavNumbers';
 import TabListPreviewPanel from '../components/TabListGamePreview';
 import TabMenu from './TabMenu';
+import { useTabs } from '../hooks/useTabs';
 
 const TabbedCategories = ({ categoriesData }) => {
   // tabbed list with tabs for each key in categoriesData
 
-  // currently active tab in featured categories
-  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const { selectedTabIndex, changeTab } = useTabs(() => setPageNumber(0));
   // pagination for each category with number of items greater than 10
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -19,14 +19,6 @@ const TabbedCategories = ({ categoriesData }) => {
   // max number of pages for active category
   const categoryIds = ['new_releases', 'top_sellers', 'coming_soon'];
   const numberOfPages = Math.ceil(categoriesData[categoryIds[selectedTabIndex]].length / 10);
-
-  // when change tabs reset showing page to first page
-  const handleTabChange = (tabIndex) => {
-    if (tabIndex !== selectedTabIndex) {
-      setPageNumber(0);
-      setSelectedTabIndex(tabIndex);
-    }
-  };
 
   const handlePageChange = (number) => {
     setPageNumber(number);
@@ -41,7 +33,7 @@ const TabbedCategories = ({ categoriesData }) => {
       <TabMenu
         selectedTabIndex={selectedTabIndex}
         tabsList={['New Releases', 'Top Sellers', 'Coming Soon']}
-        onTabChange={handleTabChange}
+        onTabChange={changeTab}
       ></TabMenu>
       <div className="flex flex-nowrap gap-12 w-full h-[780px]">
         <div className="relative grow">
