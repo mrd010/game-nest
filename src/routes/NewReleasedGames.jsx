@@ -6,8 +6,10 @@ import { extractJustGames } from '../services/extractors';
 const numberOfGamesPerPage = 5;
 
 const NewReleasedGames = () => {
+  // get data of new release games in 4 category. some categories may be null
   const { viewall, topsellers, specials, dlc } = useLoaderData();
 
+  // check for correctness of data received and filter incorrect data and non game apps from data array
   const allGames =
     viewall && viewall.items && viewall.items.length > 0 ? extractJustGames(viewall.items) : null;
   const topSellerGames =
@@ -28,6 +30,7 @@ const NewReleasedGames = () => {
           Find newly Released and Top Seller games for PC and filter by genre.
         </p>
       </header>
+      {/* for each category if data is valid create section for it */}
       {allGames && (
         <section>
           <HomeSectionTitle>New Releases</HomeSectionTitle>
