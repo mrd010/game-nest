@@ -37,11 +37,15 @@ const GamesAlbumCard = ({ gameData }) => {
         <div className="grid grid-cols-2">
           <PubDevRow>
             <PubDevRow.Title>Publisher</PubDevRow.Title>
-            <PubDevRow.Value>{gameData.rgPublishers[0].name}</PubDevRow.Value>
+            <PubDevRow.Value>
+              {gameData.rgPublishers[0].name ? gameData.rgPublishers[0].name : '-'}
+            </PubDevRow.Value>
           </PubDevRow>
           <PubDevRow>
             <PubDevRow.Title>Developers</PubDevRow.Title>
-            <PubDevRow.Value>{gameData.rgDevelopers[0].name}</PubDevRow.Value>
+            <PubDevRow.Value>
+              {gameData.rgDevelopers[0].name ? gameData.rgDevelopers[0].name : '-'}
+            </PubDevRow.Value>
           </PubDevRow>
         </div>
       </div>
@@ -55,6 +59,6 @@ GamesAlbumCard.propTypes = {
     strSnippet: PropTypes.string,
     rgDevelopers: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
     rgPublishers: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
-  }).isRequired,
+  }),
 };
 export default GamesAlbumCard;
