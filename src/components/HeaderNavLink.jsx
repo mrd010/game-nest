@@ -38,7 +38,7 @@ const HeaderNavLink = ({ text, link, children }) => {
       {/* sub menu - items come from parent*/}
       {children && opened && (
         <div
-          className={`absolute z-10 w-max text-gray-800 bg-gray-100 shadow-2xl rounded-b border-x-[3px] top-full -left-5 grid grid-rows-10 gap-x-10 p-6 grid-flow-col auto-cols-[200px]`}
+          className={`absolute z-10 w-max text-gray-800 bg-gray-100 shadow-2xl rounded-b border-x-[3px] top-full -left-5 grid grid-rows-10 gap-x-10 p-6 pb-10 grid-flow-col auto-cols-[200px]`}
         >
           {children}
         </div>

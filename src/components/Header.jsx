@@ -28,7 +28,7 @@ const Header = ({ categories }) => {
                   <Link
                     key={cat.id}
                     to={`/games/${cat.id}`}
-                    className="text-gray-800/85 p-1 font-light text-lg hover:pl-4 transition-[padding] hover:font-bold"
+                    className="text-gray-800/85 p-1 relative font-light text-lg hover:pl-4 transition-[padding] hover:font-bold after:content-[' '] after:w-full after:h-1 after:bg-yellow-400 after:absolute after:bottom-0 after:left-0 after:scale-x-0 hover:after:scale-x-75 after:transition-transform after:origin-left after:scale-y-50 after:duration-200"
                   >
                     {cat.name}
                   </Link>
