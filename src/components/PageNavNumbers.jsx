@@ -10,7 +10,7 @@ const PageNavNumbers = ({ currentPageNumber, totalPageNumbers, onSelect }) => {
           <button
             key={index}
             onClick={() => onSelect(index)}
-            className={`size-8 font-bold bg-gray-900 rounded-full transition-opacity duration-75 ${index === currentPageNumber ? 'bg-yellow-300 text-gray-900' : 'text-gray-50 opacity-20 hover:opacity-75'}`}
+            className={`size-8 font-bold rounded-full transition-all ${index === currentPageNumber ? 'bg-yellow-300 text-gray-900 scale-125' : 'text-gray-50 bg-gray-900 opacity-20 hover:opacity-75'}`}
           >
             {index + 1}
           </button>
