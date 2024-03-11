@@ -3,6 +3,8 @@ import HomeSectionTitle from '../components/HomeSectionTitle';
 import GamesAlbum from '../components/GamesAlbum';
 import { extractJustGames } from '../services/extractors';
 
+const numberOfGamesPerPage = 5;
+
 const NewReleasedGames = () => {
   const { viewall, topsellers, specials, dlc } = useLoaderData();
 
@@ -26,10 +28,28 @@ const NewReleasedGames = () => {
           Find newly Released and Top Seller games for PC and filter by genre.
         </p>
       </header>
-      {viewall && (
+      {allGames && (
         <section>
           <HomeSectionTitle>New Releases</HomeSectionTitle>
-          <GamesAlbum gameIds={allGames} itemsPerPage={10}></GamesAlbum>
+          <GamesAlbum gameIds={allGames} itemsPerPage={numberOfGamesPerPage}></GamesAlbum>
+        </section>
+      )}
+      {topSellerGames && (
+        <section>
+          <HomeSectionTitle>Top Sellers</HomeSectionTitle>
+          <GamesAlbum gameIds={topSellerGames} itemsPerPage={numberOfGamesPerPage}></GamesAlbum>
+        </section>
+      )}
+      {specialGames && (
+        <section>
+          <HomeSectionTitle>Specials</HomeSectionTitle>
+          <GamesAlbum gameIds={specialGames} itemsPerPage={numberOfGamesPerPage}></GamesAlbum>
+        </section>
+      )}
+      {gameDLCS && (
+        <section>
+          <HomeSectionTitle>DLCs</HomeSectionTitle>
+          <GamesAlbum gameIds={gameDLCS} itemsPerPage={numberOfGamesPerPage}></GamesAlbum>
         </section>
       )}
     </div>
