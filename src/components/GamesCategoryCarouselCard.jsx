@@ -3,12 +3,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { steamHeaderImage } from '../services/utilities';
 import PubDevRow from './PubDevRow';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import placeholder from '../assets/img/placeH.png';
 
 const GamesCategoryCarouselCard = ({ gameData }) => {
   // used for animations. animations only work when image loads
-  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <div className="group grid grid-rows-[auto_minmax(0,1fr)] size-full pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative">
       {
@@ -22,7 +21,6 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
       >
         <LazyLoadImage
           src={steamHeaderImage(gameData.appid)}
-          onLoad={() => setImageLoaded(true)}
           placeholder={
             <img
               className="rounded-t-md group-hover:rounded-xl group-hover:shadow"
@@ -61,7 +59,9 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
         {/* game publishers */}
         <div className="py-1 mx-4">
           <PubDevRow>
-            <PubDevRow.Title>Publisher</PubDevRow.Title>
+            <PubDevRow.Title>
+              Publisher{gameData.rgPublishers && gameData.rgPublishers.length > 1 && 's'}
+            </PubDevRow.Title>
             {gameData.rgPublishers && (
               <PubDevRow.Values
                 values={gameData.rgPublishers.map((pub) => pub.name)}
@@ -72,7 +72,9 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
         {/* game developers */}
         <div className="py-1 mx-4">
           <PubDevRow>
-            <PubDevRow.Title>Developers</PubDevRow.Title>
+            <PubDevRow.Title>
+              Developer{gameData.rgDevelopers && gameData.rgDevelopers.length > 1 && 's'}
+            </PubDevRow.Title>
             {gameData.rgDevelopers && (
               <PubDevRow.Values
                 values={gameData.rgDevelopers.map((pub) => pub.name)}
