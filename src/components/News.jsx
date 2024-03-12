@@ -8,7 +8,7 @@ const News = ({ appId, title, url }) => {
     <a
       href={url}
       target="_blank"
-      className="w-[230px] group relative grid grid-rows-[107.5px_1fr] gap-2"
+      className="group h-full relative grid grid-rows-[107.5px_1fr] gap-2"
     >
       <div className="">
         {appId ? (

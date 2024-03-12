@@ -36,16 +36,13 @@ const NewsSection = ({ importantGameIds }) => {
   return (
     <>
       {!error && (
-        <Carousel itemWidth={230} steps={4} title="News">
+        <Carousel itemWidth={250} steps={4} title="News">
           {newsData
             ? newsData.map((news) =>
                 news.title.length > 20 ? (
-                  <News
-                    key={news.appid}
-                    appId={news.appid}
-                    title={news.title}
-                    url={news.url}
-                  ></News>
+                  <div key={news.appid} className="w-[250px] px-2">
+                    <News appId={news.appid} title={news.title} url={news.url}></News>
+                  </div>
                 ) : null
               )
             : [...Array(6)].map((v, index) => <News key={index}></News>)}
