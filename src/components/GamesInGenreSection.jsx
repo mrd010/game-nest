@@ -34,14 +34,15 @@ const GamesInGenreSection = ({ name, items }) => {
 
   return (
     <div ref={ref}>
-      <Carousel title={name} itemWidth={400} steps={2}>
+      <Carousel title={name} itemWidth={400} steps={1}>
         {gamesData.map((data, index) =>
           data && data.status === 1 ? (
-            <GamesCategoryCarouselCard
-              key={data.appid}
-              gameData={data}
-              cardWidth={400}
-            ></GamesCategoryCarouselCard>
+            <div key={data.appid} className="px-2 w-[400px] bg-transparent">
+              <GamesCategoryCarouselCard
+                gameData={data}
+                cardWidth={400}
+              ></GamesCategoryCarouselCard>
+            </div>
           ) : (
             // load loader placeholder if no data received yet
             <div key={index} className="grid grid-cols-2 gap-4 h-[215px]">

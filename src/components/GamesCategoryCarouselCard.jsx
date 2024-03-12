@@ -4,36 +4,48 @@ import { steamHeaderImage } from '../services/utilities';
 import PubDevRow from './PubDevRow';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import placeholder from '../assets/img/placeH.png';
 
-const GamesCategoryCarouselCard = ({ gameData, cardWidth }) => {
+const GamesCategoryCarouselCard = ({ gameData }) => {
   // used for animations. animations only work when image loads
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
-    <Link
-      to={`/games/${gameData.appid}`}
-      className="group grid grid-rows-[auto_minmax(0,1fr)] pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative"
-      style={{ width: `${cardWidth}px` }}
-    >
+    <div className="group grid grid-rows-[auto_minmax(0,1fr)] size-full pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative">
       {
         // a fancy style container . no use
-        imageLoaded && (
-          <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 opacity-95 scale-y-0 origin-top group-hover:scale-y-100"></div>
-        )
+        <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 opacity-95 scale-y-0 origin-top group-hover:scale-y-100"></div>
       }
       {/* card picture */}
-      <div className="group-hover:scale-90 scale-100 transition-transform">
+      <Link
+        to={`/games/${gameData.appid}`}
+        className={`group-hover:scale-90 scale-100 transition-transform`}
+      >
         <LazyLoadImage
           src={steamHeaderImage(gameData.appid)}
-          placeholder={<div className="content-loader h-full w-full"></div>}
           onLoad={() => setImageLoaded(true)}
-          className="rounded-t-md group-hover:rounded-md group-hover:shadow"
+          placeholder={
+            <img
+              className="rounded-t-md group-hover:rounded-xl group-hover:shadow"
+              src={placeholder}
+            ></img>
+          }
+          width={460}
+          height={215}
+          className="rounded-t-md group-hover:rounded-xl group-hover:shadow"
         ></LazyLoadImage>
-      </div>
+      </Link>
       {/* card details */}
       <div className="grid grid-rows-[auto_auto_auto_minmax(0,1fr)] items-start h-full divide-y-2 z-10">
-        {/* game name and description */}
-        <div className="py-6 mx-4">
-          <h4 className="text-2xl uppercase font-bold line-clamp-1">{gameData.name}</h4>
+        {/* game name and release date */}
+        <div className="py-6 mx-4 flex flex-col flex-nowrap h-36">
+          {/* name */}
+          <Link to={`/games/${gameData.appid}`} className="mb-auto">
+            <h4
+              className={`text-2xl uppercase font-bold line-clamp-2 group-hover:underline transition-colors hover:text-gray-50`}
+            >
+              {gameData.name}
+            </h4>
+          </Link>
           {/* game release date */}
           <div className="space-x-2">
             <PubDevRow.Title>Release Date</PubDevRow.Title>
@@ -72,7 +84,7 @@ const GamesCategoryCarouselCard = ({ gameData, cardWidth }) => {
           <PubDevRow.Value>{gameData.strSnippet}</PubDevRow.Value>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 GamesCategoryCarouselCard.propTypes = {
@@ -84,6 +96,5 @@ GamesCategoryCarouselCard.propTypes = {
     rgPublishers: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
     releasedata: PropTypes.shape({ strSteamReleaseDate: PropTypes.string }),
   }),
-  cardWidth: PropTypes.number.isRequired,
 };
 export default GamesCategoryCarouselCard;
