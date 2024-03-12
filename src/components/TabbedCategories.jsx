@@ -55,7 +55,7 @@ const TabbedCategories = ({ categoriesData }) => {
           {
             // show page navigator only when more than one page exists
             numberOfPages > 1 && (
-              <div className="my-4 absolute bottom-full right-0">
+              <div className="my-4 absolute grid justify-center bottom-0 left-1/2 -translate-x-1/2">
                 <PageNavNumbers
                   currentPageNumber={pageNumber}
                   totalPageNumbers={numberOfPages}
