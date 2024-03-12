@@ -12,30 +12,22 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
     <div className="group grid grid-rows-[auto_minmax(0,1fr)] size-full pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative">
       {
         // a fancy style container . no use
-        <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 opacity-95 scale-y-0 origin-top group-hover:scale-y-100"></div>
+        <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 opacity-95 scale-y-[20%] origin-top group-hover:scale-y-100"></div>
       }
       {/* card picture */}
-      <Link
-        to={`/games/${gameData.appid}`}
-        className={`group-hover:scale-90 scale-100 transition-transform`}
-      >
+      <Link to={`/games/${gameData.appid}`} className={`scale-90`}>
         <LazyLoadImage
           src={steamHeaderImage(gameData.appid)}
-          placeholder={
-            <img
-              className="rounded-t-md group-hover:rounded-xl group-hover:shadow"
-              src={placeholder}
-            ></img>
-          }
+          placeholder={<img className="rounded-xl shadow" src={placeholder}></img>}
           width={460}
           height={215}
-          className="rounded-t-md group-hover:rounded-xl group-hover:shadow"
+          className="rounded-xl shadow"
         ></LazyLoadImage>
       </Link>
       {/* card details */}
       <div className="grid grid-rows-[auto_auto_auto_minmax(0,1fr)] items-start h-full divide-y-2 z-10">
         {/* game name and release date */}
-        <div className="py-6 mx-4 flex flex-col flex-nowrap h-36">
+        <div className="pt-6 pb-2 mx-4 flex flex-col flex-nowrap h-36">
           {/* name */}
           <Link to={`/games/${gameData.appid}`} className="mb-auto">
             <h4
@@ -83,7 +75,7 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
           </PubDevRow>
         </div>
         <div className="p-4 h-full">
-          <PubDevRow.Value>{gameData.strSnippet}</PubDevRow.Value>
+          <p className="line-clamp-4 text-sm text-gray-700/85">{gameData.strSnippet}</p>
         </div>
       </div>
     </div>
