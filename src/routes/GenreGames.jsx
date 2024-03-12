@@ -4,9 +4,9 @@ import GamesInGenreSection from '../components/GamesInGenreSection';
 
 const GenreGames = () => {
   const { id, name, data } = useLoaderData();
-  console.log(data);
+
   return (
-    <div>
+    <div className="space-y-20">
       <header>
         <h1 className="text-5xl my-2 font-extrabold">{name} Games</h1>
         <p className="text-lg">
