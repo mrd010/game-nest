@@ -21,7 +21,7 @@ const Carousel = ({ title, itemWidth, steps, children }) => {
 
   useEffect(() => {
     // after set of position scroll container to that position
-    carousel.current.scrollLeft = currentPosition * (itemWidth + 8);
+    carousel.current.scrollLeft = currentPosition * itemWidth;
   }, [itemWidth, currentPosition]);
   return (
     <div
@@ -41,7 +41,7 @@ const Carousel = ({ title, itemWidth, steps, children }) => {
       </div>
       {children && (
         <div
-          className="grid grid-flow-col auto-cols-max gap-4 scroll-smooth col-span-2 overflow-hidden pb-2 carousel"
+          className="grid grid-flow-col auto-cols-max scroll-smooth col-span-2 overflow-hidden pb-2 carousel"
           ref={carousel}
         >
           {children}
