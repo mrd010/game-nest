@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { getGamesMiniData } from '../services/dataFetchers';
 import { useInView } from 'react-intersection-observer';
 import ContentLoader from './ContentLoader';
+import { toKebabCase } from '../services/utilities';
 const GamesInGenreSection = ({ name, items }) => {
   // init data with and array of empty data
   const initialData = [...items].fill({});
   const [gamesData, setGamesData] = useState(initialData);
-  console.log(gamesData);
 
   const { ref, inView } = useInView({ triggerOnce: true });
   // use stringified version for preventing re-renders
@@ -33,15 +33,12 @@ const GamesInGenreSection = ({ name, items }) => {
   }, [stringifiedIds, inView]);
 
   return (
-    <div ref={ref}>
-      <Carousel title={name} itemWidth={400} steps={1}>
+    <div ref={ref} id={toKebabCase(name)} className="py-4">
+      <Carousel title={name} itemWidth={410} steps={1}>
         {gamesData.map((data, index) =>
           data && data.status === 1 ? (
-            <div key={data.appid} className="px-2 w-[400px] bg-transparent">
-              <GamesCategoryCarouselCard
-                gameData={data}
-                cardWidth={400}
-              ></GamesCategoryCarouselCard>
+            <div key={data.appid} className="px-2 w-[410px] bg-transparent">
+              <GamesCategoryCarouselCard gameData={data}></GamesCategoryCarouselCard>
             </div>
           ) : (
             // load loader placeholder if no data received yet

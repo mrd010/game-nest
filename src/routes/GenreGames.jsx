@@ -1,12 +1,27 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { extractJustGames } from '../services/extractors';
 import GamesInGenreSection from '../components/GamesInGenreSection';
+import { useCallback, useEffect } from 'react';
 
 const GenreGames = () => {
-  const { id, name, data } = useLoaderData();
+  const { name, data } = useLoaderData();
+  const setCurrentSubCats = useOutletContext();
+
+  const subCategories = Object.values(data).map((sub) => sub.name);
+
+  const changeSubCategories = useCallback(
+    () => setCurrentSubCats(subCategories),
+    [subCategories, setCurrentSubCats]
+  );
+
+  useEffect(() => {
+    changeSubCategories();
+  }, [changeSubCategories]);
+
+  console.log(data);
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-14">
       <header>
         <h1 className="text-5xl my-2 font-extrabold">{name} Games</h1>
         <p className="text-lg">
