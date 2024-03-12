@@ -4,7 +4,6 @@ import GamesInGenreSection from '../components/GamesInGenreSection';
 
 const GenreGames = () => {
   const { id, name, data } = useLoaderData();
-
   console.log(data);
   return (
     <div>
@@ -14,7 +13,7 @@ const GenreGames = () => {
           Find newly Released, Top Seller and Upcoming games in {name} genre
         </p>
       </header>
-      {data &&
+      {data ? (
         Object.values(data).map(
           (categoryData) =>
             categoryData.items &&
@@ -25,7 +24,10 @@ const GenreGames = () => {
                 items={extractJustGames(categoryData.items)}
               ></GamesInGenreSection>
             )
-        )}
+        )
+      ) : (
+        <h4>No Games found yet</h4>
+      )}
     </div>
   );
 };
