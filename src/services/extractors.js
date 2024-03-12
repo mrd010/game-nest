@@ -116,5 +116,5 @@ export const getRefinedTrailers = (trailersData) => {
 export const extractJustGames = (gameIds) => {
   const onlyGames = gameIds.filter((game) => game.type === 0).map((game) => game.id);
   onlyGames.sort((a, b) => a - b);
-  return onlyGames;
+  return [...new Set(onlyGames)];
 };
