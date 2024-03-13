@@ -45,7 +45,11 @@ const NewsSection = ({ importantGameIds }) => {
                   </div>
                 ) : null
               )
-            : [...Array(6)].map((v, index) => <News key={index}></News>)}
+            : [...Array(6)].map((v, index) => (
+                <div key={index} className="w-[250px] px-2">
+                  <News></News>
+                </div>
+              ))}
         </Carousel>
       )}
     </>
