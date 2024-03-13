@@ -3,12 +3,34 @@ import MainContentHeader from '../components/MainContentHeader';
 import MainContentContainer from '../components/MainContentContainer';
 import VideoListItem from '../components/VideoListItem';
 import { getCleanUrl } from '../services/utilities';
+import { useState } from 'react';
+import VideoPlayerOverlay from '../components/VideoPlayerOverlay';
 
 const Trailers = () => {
   const trailers = useLoaderData();
+
+  // state when video selected and overlay should open
+  const [currentVideo, setCurrentVideo] = useState(null);
+
+  // extract video urls
+  const videoUrls = currentVideo && currentVideo.webm;
+  const lowQualityVideo = videoUrls && videoUrls['480'];
+  const highQualityVideo = videoUrls && videoUrls['max'];
   console.log(trailers);
 
-  const handleVideoOpen = () => {};
+  // on select video set video as active video
+  const handleVideoOpen = (id, name) => {
+    const video = trailers.find((trailer) => trailer.name === name && trailer.target.id === id);
+    if (video) {
+      setCurrentVideo(video);
+    }
+  };
+
+  // close overlay when x button pressed
+  const handleVideoClose = () => {
+    setCurrentVideo(null);
+  };
+
   return (
     <MainContentContainer>
       {/* header */}
@@ -21,6 +43,7 @@ const Trailers = () => {
         {trailers.map((trailerData) => (
           <VideoListItem
             key={`${trailerData.target.id}${trailerData.name}`}
+            id={trailerData.target.id}
             gameName={trailerData.target.name}
             name={trailerData.name}
             thumbnail={getCleanUrl(trailerData.thumbnail)}
@@ -30,6 +53,12 @@ const Trailers = () => {
           ></VideoListItem>
         ))}
       </section>
+      <VideoPlayerOverlay
+        isOpen={!!currentVideo}
+        hqUrl={highQualityVideo}
+        lqUrl={lowQualityVideo}
+        onClose={handleVideoClose}
+      ></VideoPlayerOverlay>
     </MainContentContainer>
   );
 };
