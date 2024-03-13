@@ -25,8 +25,6 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   const [isMuted, setIsMuted] = useState(!previewImage);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  console.log(screenfull.isEnabled && screenfull.isFullscreen);
-
   const [showControls, setShowControls] = useState(false);
   // using percent for seeking and using seconds for displaying time
   // seconds format
@@ -39,13 +37,14 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const player = useRef(null);
+  // timer for show hide controls
   const hideTimer = useRef(null);
 
   const handlePlayPause = (status) => {
     setIsPlaying(status);
   };
 
-  //
+  // toggle fullscreen
   const handleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
     screenfull.toggle(document.querySelector('.react-player'));
@@ -65,6 +64,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
     }, 3000);
   };
 
+  // if fullscreen changed without fs button sync fs state
   const isFS = screenfull.isFullscreen;
   useEffect(() => {
     setIsFullscreen(isFS);
