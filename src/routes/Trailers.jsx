@@ -11,10 +11,12 @@ const Trailers = () => {
   const handleVideoOpen = () => {};
   return (
     <MainContentContainer>
+      {/* header */}
       <MainContentHeader
         title={'Recent Videos'}
         desc={'Watch the most recent videos of games for pc'}
       ></MainContentHeader>
+      {/* videos mini */}
       <section className="grid grid-cols-4 gap-x-10 gap-y-16">
         {trailers.map((trailerData) => (
           <VideoListItem
