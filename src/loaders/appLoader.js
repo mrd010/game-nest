@@ -1,3 +1,4 @@
+import genreFilterList from '../data/genres';
 import { getGenresList } from '../services/dataFetchers';
 import getUserLanguage from '../services/userLocaleServices';
 
@@ -6,5 +7,9 @@ const userLanguage = getUserLanguage();
 
 export const appLoader = async () => {
   const genres = await getGenresList(userLanguage);
-  return genres.map((genre) => ({ id: genre.id, name: genre.name }));
+  // filter no use genres and genres which their id is not equal to their names before return
+  const filteredGenres = genres.filter(
+    (genre) => !genreFilterList.includes(genre.id) && genre.id === genre.name
+  );
+  return filteredGenres.map((genre) => genre.name);
 };
