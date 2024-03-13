@@ -56,6 +56,7 @@ const VideoSlideShow = ({ videoList }) => {
               name={video.name}
               thumbnail={getCleanUrl(video.thumbnail)}
               onSelect={() => setSelectedId(video.target.id)}
+              className="grid grid-cols-[200px_200px] gap-4"
             ></VideoListItem>
           ))}
         </div>
