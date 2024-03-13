@@ -23,7 +23,7 @@ const NewReleasedGames = () => {
   const gameDLCS = dlc && dlc.items && dlc.items.length > 0 ? extractJustGames(dlc.items) : null;
 
   return (
-    <div className="space-y-16">
+    <>
       <header>
         <h1 className="text-5xl my-2 font-extrabold">What Games to Play Right Now</h1>
         <p className="text-lg">
@@ -55,7 +55,7 @@ const NewReleasedGames = () => {
           <GamesAlbum gameIds={gameDLCS} itemsPerPage={numberOfGamesPerPage}></GamesAlbum>
         </section>
       )}
-    </div>
+    </>
   );
 };
 export default NewReleasedGames;

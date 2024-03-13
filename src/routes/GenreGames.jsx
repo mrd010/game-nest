@@ -2,6 +2,7 @@ import { useLoaderData, useOutletContext } from 'react-router-dom';
 import { extractJustGames } from '../services/extractors';
 import GamesInGenreSection from '../components/GamesInGenreSection';
 import { useCallback, useEffect } from 'react';
+import MainContentHeader from '../components/MainContentHeader';
 
 const GenreGames = () => {
   const { name, data } = useLoaderData();
@@ -19,13 +20,11 @@ const GenreGames = () => {
   }, [changeSubCategories]);
 
   return (
-    <div className="space-y-14">
-      <header>
-        <h1 className="text-5xl my-2 font-extrabold">{name} Games</h1>
-        <p className="text-lg">
-          Find newly Released, Top Seller and Upcoming games in {name} genre
-        </p>
-      </header>
+    <>
+      <MainContentHeader
+        title={`${name} Games`}
+        desc={`Find newly Released, Top Seller and Upcoming games in ${name} genre`}
+      ></MainContentHeader>
       {data ? (
         Object.values(data).map(
           (categoryData) =>
@@ -41,7 +40,7 @@ const GenreGames = () => {
       ) : (
         <h4>No Games found yet</h4>
       )}
-    </div>
+    </>
   );
 };
 export default GenreGames;

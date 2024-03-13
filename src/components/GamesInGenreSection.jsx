@@ -33,7 +33,7 @@ const GamesInGenreSection = ({ name, items }) => {
   }, [stringifiedIds, inView]);
 
   return (
-    <div ref={ref} id={toKebabCase(name)} className="py-4">
+    <div ref={ref} id={toKebabCase(name)}>
       <Carousel title={name} itemWidth={410} steps={1}>
         {gamesData.map((data, index) =>
           data && data.status === 1 ? (

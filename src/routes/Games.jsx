@@ -1,6 +1,7 @@
 import { Outlet, useOutletContext } from 'react-router-dom';
 import CategoriesSideNav from '../components/CategoriesSideNav';
 import { useState } from 'react';
+import MainContentContainer from '../components/MainContentContainer';
 
 const Games = () => {
   // get categories from app parent
@@ -15,9 +16,9 @@ const Games = () => {
         subCategories={currentSubCats}
       ></CategoriesSideNav>
       {/* main content */}
-      <div className="px-10 py-20 my-2 rounded-md bg-zinc-100">
+      <MainContentContainer>
         <Outlet context={setCurrentSubCats}></Outlet>
-      </div>
+      </MainContentContainer>
     </div>
   );
 };
