@@ -7,7 +7,7 @@ const MiniCategoriesList = ({ categoryList }) => {
       {categoryList.map((cat) => (
         <Link
           key={cat.id}
-          to={`/categories/${cat.id}`}
+          to={`/games/${cat.description}`}
           className="text-xs opacity-85 font-bold bg-gray-950 text-gray-100 p-1 rounded shadow-sm hover:opacity-100"
         >
           {cat.description}
