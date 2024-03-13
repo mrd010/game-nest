@@ -38,11 +38,13 @@ const TabListGamePreview = ({ id }) => {
       {status === 'has_data' && (
         // if data loaded and exists
         <div className="grid grid-rows-[240px_150px_60px_65px_265px] drop-shadow-sm items-start">
+          {/* Error overlay */}
           {hasError && (
             <div className="absolute bottom-0 left-0 w-full z-50">
               <ErrorOverlay onDismiss={resetError} onRefresh={retry}></ErrorOverlay>
             </div>
           )}
+          {/* header containing game picture and free game label */}
           <div className="relative rounded-sm">
             <img
               width={460}
@@ -65,6 +67,7 @@ const TabListGamePreview = ({ id }) => {
           </div>
           <div className="pb-2 grid grid-rows-[auto_minmax(0,1fr)]">
             <div className="relative my-2 grid">
+              {/* game title */}
               {isLoading || hasError ? (
                 <div>
                   <ContentLoader size="32px"></ContentLoader>
@@ -79,6 +82,7 @@ const TabListGamePreview = ({ id }) => {
               )}
             </div>
             <div className="relative">
+              {/* game description */}
               {isLoading || hasError ? (
                 <div className="grid grid-flow-row gap-1">
                   <ContentLoader size="16px"></ContentLoader>
@@ -95,7 +99,7 @@ const TabListGamePreview = ({ id }) => {
           </div>
           <div className="border-y-[1px] py-2 grid grid-cols-2">
             {
-              // if data exists and game data has developers
+              // if data exists and game data has developers show main developer
               gameData.developers && gameData.developers.length && (
                 <PubDevRow className="flex flex-col">
                   <PubDevRow.Title className="font-bold">Developer</PubDevRow.Title>
@@ -112,7 +116,7 @@ const TabListGamePreview = ({ id }) => {
               )
             }
             {
-              // if data exists and game data has publishers
+              // if data exists and game data has publishers show main publisher
               gameData.publishers && gameData.publishers.length && (
                 <PubDevRow className="flex flex-col">
                   <PubDevRow.Title className="font-bold">Publisher</PubDevRow.Title>
@@ -130,6 +134,7 @@ const TabListGamePreview = ({ id }) => {
             }
           </div>
           <div className="flex items-start h-full overflow-hidden justify-end flex-wrap gap-1 justify-self-end py-3">
+            {/* game genre categories */}
             {isLoading || hasError ? (
               <>
                 <ContentLoader size="16px" length={5}></ContentLoader>
