@@ -40,7 +40,7 @@ const Router = () => {
             loader={genreGamesLoader}
           ></Route>
         </Route>
-        <Route path="trailers" element={<Trailers />} loader={trailersLoader}></Route>
+        <Route path="videos" element={<Trailers />} loader={trailersLoader}></Route>
       </Route>
     )
   );

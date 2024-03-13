@@ -63,7 +63,7 @@ const VideoSlideShow = ({ videoList }) => {
         <div className="w-full self-center">
           <ButtonLink
             text="More Videos"
-            link="/trailers"
+            link="/videos"
             className="w-full block text-center text-lg py-3"
           ></ButtonLink>
         </div>
