@@ -22,6 +22,8 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   const [highQuality, setHighQuality] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(!previewImage);
+
+  const [showControls, setShowControls] = useState(false);
   // using percent for seeking and using seconds for displaying time
   // seconds format
   const [timePlayed, setTimePlayed] = useState(0);
@@ -33,28 +35,44 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const player = useRef(null);
+  const hideTimer = useRef(null);
 
   const handlePlayPause = (status) => {
     setIsPlaying(status);
   };
 
   const handleFullscreen = () => {
-    screenfull.request(document.querySelector('.react-player'));
+    screenfull.toggle(document.querySelector('.react-player'));
+  };
+
+  // when mouse over player show controls and if idle or outside player hide controls
+  const handleControlsHideShow = () => {
+    if (!showControls) {
+      setShowControls(true);
+    }
+    // reset timer on each mouse move over element
+    if (hideTimer.current) {
+      clearTimeout(hideTimer.current);
+    }
+    hideTimer.current = setTimeout(() => {
+      setShowControls(false);
+    }, 3000);
   };
 
   return (
-    <div className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden shadow-sm">
+    <div className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden shadow-sm react-player">
       <div
         onClick={() => {
           if (isStarted) {
             handlePlayPause(!isPlaying);
           }
         }}
+        onMouseMove={handleControlsHideShow}
         className="bg-gray-900 w-full"
       >
         <ReactPlayer
           ref={player}
-          className="react-player"
+          // className="react-player"
           url={highQuality ? hqUrl : lqUrl}
           light={previewImage ? previewImage : false}
           muted={isMuted}
@@ -94,7 +112,9 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
       )}
       {/* only show controls when video started */}
       {isStarted && (
-        <div className="absolute bottom-0 w-full flex flex-col p-2 video-controls transition-opacity opacity-75 group-hover:opacity-100 bg-gray-900/50">
+        <div
+          className={`absolute bottom-0 w-full flex flex-col p-2 video-controls bg-gray-900/50 transition-transform duration-300 origin-bottom ${showControls ? 'scale-y-100' : 'scale-y-0'}`}
+        >
           <div className="px-2 video-track bg-transparent flex flex-nowrap gap-4 items-center">
             {/* seeking bar */}
             <input
