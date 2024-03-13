@@ -178,6 +178,6 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
 VideoPlayer.propTypes = {
   lqUrl: PropTypes.string.isRequired,
   hqUrl: PropTypes.string.isRequired,
-  previewImage: PropTypes.string,
+  previewImage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 export default VideoPlayer;
