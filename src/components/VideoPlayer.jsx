@@ -124,7 +124,8 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
       {/* only show controls when video started */}
       {isStarted && (
         <div
-          className={`absolute bottom-0 w-full flex flex-col p-2 video-controls bg-gray-900/50 transition-transform duration-300 origin-bottom ${showControls ? 'scale-y-100' : 'scale-y-0'}`}
+          className={`absolute bottom-0 w-full flex flex-col p-2 video-controls bg-gray-900/50 transition-transform duration-300 origin-bottom ${showControls ? 'scale-y-100' : 'scale-y-0 hover:scale-y-100'} `}
+          onMouseMove={handleControlsHideShow}
         >
           <div className="px-2 video-track bg-transparent flex flex-nowrap gap-4 items-center">
             {/* seeking bar */}
