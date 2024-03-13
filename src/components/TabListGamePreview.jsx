@@ -9,7 +9,7 @@ import MiniCategoriesList from './MiniCategoriesList';
 import FreeGameLabel from './FreeGameLabel';
 import ContentLoader from './ContentLoader';
 import noDataImg from '../assets/img/no_data.png';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import ErrorOverlay from './ErrorOverlay';
 import PubDevRow from './PubDevRow';
 
@@ -19,6 +19,9 @@ const TabListGamePreview = ({ id }) => {
     id ? `/api/appdetails?appids=${id}` : null
   );
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  // list of all game genres loaded
+  const genreList = useOutletContext();
 
   // if data fetched and data is for this id and it fetched with succuss set game data
   const { status, gameData } = extractGameData(data);
@@ -37,7 +40,7 @@ const TabListGamePreview = ({ id }) => {
     <>
       {status === 'has_data' && (
         // if data loaded and exists
-        <div className="grid grid-rows-[240px_150px_60px_65px_265px] drop-shadow-sm items-start">
+        <div className="grid grid-rows-[240px_150px_60px_40px_280px] drop-shadow-sm items-start">
           {/* Error overlay */}
           {hasError && (
             <div className="absolute bottom-0 left-0 w-full z-50">
@@ -133,7 +136,7 @@ const TabListGamePreview = ({ id }) => {
               )
             }
           </div>
-          <div className="flex items-start h-full overflow-hidden justify-end flex-wrap gap-1 justify-self-end py-3">
+          <div className="flex items-start h-full overflow-hidden justify-end flex-nowrap gap-1 justify-self-end py-3">
             {/* game genre categories */}
             {isLoading || hasError ? (
               <>
@@ -145,7 +148,11 @@ const TabListGamePreview = ({ id }) => {
               </>
             ) : (
               gameData.genres && (
-                <MiniCategoriesList categoryList={gameData.genres}></MiniCategoriesList>
+                <MiniCategoriesList
+                  categoryList={gameData.genres.filter((genre) =>
+                    genreList.includes(genre.description)
+                  )}
+                ></MiniCategoriesList>
               )
             )}
           </div>

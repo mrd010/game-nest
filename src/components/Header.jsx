@@ -23,17 +23,15 @@ const Header = ({ categories }) => {
           <HeaderNavLink text="Games" link="games">
             {
               // sub menu - appears on hover
-              categories.map((cat) =>
-                cat.id === cat.name ? (
-                  <Link
-                    key={cat.id}
-                    to={`/games/${cat.id}`}
-                    className="text-gray-800/85 p-1 relative font-light text-lg hover:pl-4 transition-[padding] hover:font-bold after:content-[' '] after:w-full after:h-1 after:bg-yellow-400 after:absolute after:bottom-0 after:left-0 after:scale-x-0 hover:after:scale-x-75 after:transition-transform after:origin-left after:scale-y-50 after:duration-200"
-                  >
-                    {cat.name}
-                  </Link>
-                ) : null
-              )
+              categories.map((cat) => (
+                <Link
+                  key={cat}
+                  to={`/games/${cat}`}
+                  className="text-gray-800/85 p-1 relative font-light text-lg hover:pl-4 transition-[padding] hover:font-bold after:content-[' '] after:w-full after:h-1 after:bg-yellow-400 after:absolute after:bottom-0 after:left-0 after:scale-x-0 hover:after:scale-x-75 after:transition-transform after:origin-left after:scale-y-50 after:duration-200"
+                >
+                  {cat}
+                </Link>
+              ))
             }
           </HeaderNavLink>
         </nav>
@@ -51,8 +49,7 @@ const Header = ({ categories }) => {
 };
 
 Header.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.exact({ id: PropTypes.string, name: PropTypes.string }))
-    .isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Header;
