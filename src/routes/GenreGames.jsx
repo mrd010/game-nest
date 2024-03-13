@@ -7,7 +7,7 @@ const GenreGames = () => {
   const { name, data } = useLoaderData();
   const setCurrentSubCats = useOutletContext();
 
-  const subCategories = Object.values(data).map((sub) => sub.name);
+  const subCategories = data && Object.values(data).map((sub) => sub.name);
 
   const changeSubCategories = useCallback(
     () => setCurrentSubCats(subCategories),
@@ -17,8 +17,6 @@ const GenreGames = () => {
   useEffect(() => {
     changeSubCategories();
   }, [changeSubCategories]);
-
-  console.log(data);
 
   return (
     <div className="space-y-14">
