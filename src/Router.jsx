@@ -14,6 +14,8 @@ import { genreGamesLoader } from './loaders/genreGamesLoader';
 import NewReleasedGames from './routes/NewReleasedGames';
 import GenreGames from './routes/GenreGames';
 import { newReleasesLoader } from './loaders/newReleasesLoader';
+import Trailers from './routes/Trailers';
+import { trailersLoader } from './loaders/trailersLoader';
 
 const Router = () => {
   const router = createBrowserRouter(
@@ -38,6 +40,7 @@ const Router = () => {
             loader={genreGamesLoader}
           ></Route>
         </Route>
+        <Route path="trailers" element={<Trailers />} loader={trailersLoader}></Route>
       </Route>
     )
   );
