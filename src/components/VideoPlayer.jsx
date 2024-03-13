@@ -17,11 +17,11 @@ import { secondsToMinutesPlus } from '../services/utilities';
 
 const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   // video player with custom controls
-  const [isStarted, setIsStarted] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isStarted, setIsStarted] = useState(!previewImage);
+  const [isPlaying, setIsPlaying] = useState(!previewImage);
   const [highQuality, setHighQuality] = useState(false);
   const [volume, setVolume] = useState(0.8);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(!previewImage);
   // using percent for seeking and using seconds for displaying time
   // seconds format
   const [timePlayed, setTimePlayed] = useState(0);
@@ -56,7 +56,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
           ref={player}
           className="react-player"
           url={highQuality ? hqUrl : lqUrl}
-          light={previewImage ? previewImage : true}
+          light={previewImage ? previewImage : false}
           muted={isMuted}
           volume={volume}
           playing={isPlaying}
