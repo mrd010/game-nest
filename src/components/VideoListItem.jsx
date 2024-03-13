@@ -3,6 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import playIcon from '../assets/icons/player-icons/play_circle_FILL.svg';
 
 const VideoListItem = ({
+  id,
   thumbnail,
   gameName,
   name,
@@ -11,7 +12,7 @@ const VideoListItem = ({
   className = '',
 }) => {
   return (
-    <button className={`group ${className}`} onClick={onSelect}>
+    <button className={`group ${className}`} onClick={() => onSelect(id, name)}>
       <div className="relative aspect-video shadow-sm">
         <LazyLoadImage
           src={thumbnail}
@@ -41,6 +42,7 @@ const VideoListItem = ({
   );
 };
 VideoListItem.propTypes = {
+  id: PropTypes.number,
   thumbnail: PropTypes.string.isRequired,
   gameName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
