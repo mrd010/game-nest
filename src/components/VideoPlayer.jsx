@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
 
@@ -12,6 +12,7 @@ import playBigIcon from '../assets/icons/player-icons/play_circle.svg';
 import muteIcon from '../assets/icons/player-icons/volume_off.svg';
 import volumeIcon from '../assets/icons/player-icons/volume_up.svg';
 import fsIcon from '../assets/icons/player-icons/fullscreen.svg';
+import fsCloseIcon from '../assets/icons/player-icons/close_fullscreen.svg';
 import screenfull from 'screenfull';
 import { secondsToMinutesPlus } from '../services/utilities';
 
@@ -22,6 +23,9 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   const [highQuality, setHighQuality] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(!previewImage);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  console.log(screenfull.isEnabled && screenfull.isFullscreen);
 
   const [showControls, setShowControls] = useState(false);
   // using percent for seeking and using seconds for displaying time
@@ -41,7 +45,9 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
     setIsPlaying(status);
   };
 
+  //
   const handleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
     screenfull.toggle(document.querySelector('.react-player'));
   };
 
@@ -58,6 +64,11 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
       setShowControls(false);
     }, 3000);
   };
+
+  const isFS = screenfull.isFullscreen;
+  useEffect(() => {
+    setIsFullscreen(isFS);
+  }, [isFS]);
 
   return (
     <div className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden shadow-sm react-player">
@@ -187,7 +198,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
               </button>
             </div>
             <button onClick={handleFullscreen}>
-              <img src={fsIcon} className="icon-white" />
+              <img src={isFullscreen ? fsCloseIcon : fsIcon} className={`icon-white`} />
             </button>
           </div>
         </div>
