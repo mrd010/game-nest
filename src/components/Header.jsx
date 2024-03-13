@@ -34,6 +34,7 @@ const Header = ({ categories }) => {
               ))
             }
           </HeaderNavLink>
+          <HeaderNavLink text="Videos" link={'/videos'}></HeaderNavLink>
         </nav>
         {/* search bar */}
         <div>
