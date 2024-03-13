@@ -9,7 +9,7 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
   // used for animations. animations only work when image loads
 
   return (
-    <div className="group grid grid-rows-[auto_minmax(0,1fr)] size-full pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative">
+    <div className="group grid grid-rows-[auto_minmax(0,1fr)] size-full pt-2 pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative">
       {
         // a fancy style container . no use
         <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 opacity-95 scale-y-[20%] origin-top group-hover:scale-y-100"></div>
