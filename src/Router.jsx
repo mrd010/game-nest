@@ -25,7 +25,7 @@ const Router = () => {
       <Route path="/" element={<Layout />} loader={appLoader}>
         <Route index element={<Home />} loader={homeLoader}></Route>
         <Route path="home" element={<Home />} loader={homeLoader}></Route>
-        <Route path="games" element={<Games />}>
+        <Route path="browse" element={<Games />}>
           <Route
             index
             element={<NewReleasedGames></NewReleasedGames>}

@@ -18,7 +18,7 @@ const CategoriesSideNav = ({ categoryList, subCategories }) => {
         {categoryList.map((category) => (
           <li key={category}>
             <NavLink
-              to={`/games/${category}`}
+              to={`/browse/${category}`}
               className={({ isActive, isPending, isTransitioning }) =>
                 `text-lg w-full px-6 inline-block py-2 transition-[padding] text-gray-800/75 hover:bg-gradient-to-r from-transparent to-transparent via-10% ${isActive ? 'via-yellow-200/90 bg-gradient-to-r font-bold peer py-4 is-active' : isPending || isTransitioning ? 'via-gray-400/30 bg-gradient-to-r font-bold' : 'via-gray-500/10'}`
               }

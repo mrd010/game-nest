@@ -30,7 +30,7 @@ const VideoSlideShow = ({ videoList }) => {
         <div className="grid grid-cols-[minmax(0,1fr)_auto] h-24 border-[1px] rounded-md border-gray-900">
           <div className="flex flex-col flex-nowrap gap-1 m-4">
             <h3 className="font-bold text-3xl hover:text-yellow-600">
-              <Link to={`games/${selectedId}`}>{currentVideo.target.name}</Link>
+              <Link to={`/games/${selectedId}`}>{currentVideo.target.name}</Link>
             </h3>
             {currentVideo.name.length >= 10 &&
               currentVideo.target.name.toLowerCase() !== currentVideo.name.toLowerCase() &&

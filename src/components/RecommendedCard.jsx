@@ -20,7 +20,7 @@ const RecommendedCard = ({
   // TODO
   return (
     <Link
-      to={`games/${steamAppID}`}
+      to={`/games/${steamAppID}`}
       className="grid grid-rows-[1fr_auto_auto] p-3 h-full drop-shadow-sm shadow-md bg-gradient-to-b from-amber-300 from-25% to-25% to-gray-100 rounded-md"
     >
       <div className="grid grid-rows-[124px_1fr_auto] gap-3 pb-2">

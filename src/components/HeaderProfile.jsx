@@ -5,7 +5,7 @@ const HeaderProfile = ({ isLoggedIn, userId }) => {
   // user profile notifier. shows login button if no one is logged in
   // TODO
   return isLoggedIn ? (
-    <Link to={`profile/${userId}`}>
+    <Link to={`/profile/${userId}`}>
       <span className="material-symbols-rounded">account_circle</span>
     </Link>
   ) : (
