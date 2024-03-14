@@ -1,4 +1,5 @@
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -26,11 +27,7 @@ const Router = () => {
         <Route index element={<Home />} loader={homeLoader}></Route>
         <Route path="home" element={<Home />} loader={homeLoader}></Route>
         <Route path="browse" element={<Games />}>
-          <Route
-            index
-            element={<NewReleasedGames></NewReleasedGames>}
-            loader={newReleasesLoader}
-          ></Route>
+          <Route index element={<Navigate to="new releases" replace></Navigate>}></Route>
           <Route
             path="new releases"
             element={<NewReleasedGames></NewReleasedGames>}
