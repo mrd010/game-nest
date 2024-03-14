@@ -7,6 +7,7 @@ const genreListApi = '/api/getgenrelist';
 const newReleasesApi = '/api/getappsincategory/?category=cat_newreleases';
 const genreGamesApi = '/api/getappsingenre';
 const gameMiniDataAPi = '/api/libraryappdetails';
+const gameDetailsApi = '/api/appdetails';
 
 // checks if response is ok and throws error on 400> status
 export const checkResponse = (response) => {
@@ -116,4 +117,13 @@ export const getGamesMiniData = async (stringifiedIds) => {
   );
 
   return gamesData;
+};
+
+// get game details full
+export const getGameDetails = async (gameId) => {
+  const response = await getData(`${gameDetailsApi}?appids=${gameId}`);
+
+  // if response got and response is for this game proceed and return game data
+  const gameData = response && response[gameId];
+  return gameData?.success && gameData?.data;
 };
