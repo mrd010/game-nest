@@ -71,14 +71,16 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   }, [isFS]);
 
   return (
-    <div className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden shadow-sm react-player">
+    <div
+      className="relative text-gray-50 grid aspect-video group rounded-md overflow-hidden shadow-sm react-player"
+      onMouseMove={handleControlsHideShow}
+    >
       <div
         onClick={() => {
           if (isStarted) {
             handlePlayPause(!isPlaying);
           }
         }}
-        onMouseMove={handleControlsHideShow}
         className="bg-gray-900 w-full"
       >
         <ReactPlayer
@@ -125,7 +127,6 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
       {isStarted && (
         <div
           className={`absolute bottom-0 w-full flex flex-col p-2 video-controls bg-gray-900/50 transition-transform duration-300 origin-bottom ${showControls ? 'scale-y-100' : 'scale-y-0 hover:scale-y-100'} `}
-          onMouseMove={handleControlsHideShow}
         >
           <div className="px-2 video-track bg-transparent flex flex-nowrap gap-4 items-center">
             {/* seeking bar */}
