@@ -8,7 +8,7 @@ const CategoriesSideNav = ({ categoryList, subCategories }) => {
         {/* main nav link (default page) */}
         <li className={`text-xl px-6 hover:text-yellow-600  `}>
           <NavLink
-            to="/games/new releases"
+            to="/browse/new releases"
             className={`inline-block w-full py-4 transition-all font-bold`}
           >
             New Releases
