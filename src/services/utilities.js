@@ -8,9 +8,9 @@ export const steamHeaderImage = (steamId) => {
   return `https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`;
 };
 // large image
-// export const steamLargeCapsuleImage = (steamId) => {
-//   return `https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`;
-// };
+export const steamLargerImage = (steamId) => {
+  return `https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/capsule_616x353.jpg`;
+};
 // small image
 export const steamThumbnail = (steamId) => {
   return `https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/capsule_184x69.jpg`;
