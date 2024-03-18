@@ -7,15 +7,15 @@ const Title = ({ children }) => {
   return <span className="font-bold">{children}</span>;
 };
 
-const Value = ({ children }) => {
-  return <span className="text-sm text-gray-600/95">{children}</span>;
+const Value = ({ children, className = 'text-gray-600/95' }) => {
+  return <span className={`text-sm ${className}`}>{children}</span>;
 };
 
-const Values = ({ values }) => {
+const Values = ({ values, className }) => {
   return (
     <div className="flex flex-row gap-1">
       {values.map((value, index) => (
-        <Value key={index}>
+        <Value key={index} className={className}>
           {value}
           {values.length > 1 && index < values.length - 1 ? ',' : ''}
         </Value>
@@ -36,9 +36,11 @@ Title.propTypes = {
 };
 Value.propTypes = {
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 Values.propTypes = {
   values: PropTypes.arrayOf(PropTypes.string).isRequired,
+  className: PropTypes.string,
 };
 
 export default PubDevRow;
