@@ -5,6 +5,8 @@ import HomeSectionTitle from '../components/HomeSectionTitle';
 import { useEffect } from 'react';
 import { getCleanUrl, steamLargerImage } from '../services/utilities';
 import GameScore from '../components/GameScore';
+import PubDevRow from '../components/PubDevRow';
+import MiniCategoriesList from '../components/MiniCategoriesList';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
@@ -94,20 +96,38 @@ const GameDetails = () => {
           </div>
         </div>
       </header>
+      {/* game details */}
       <section>
         <HomeSectionTitle>Details</HomeSectionTitle>
-        <div>
-          <p>
-            Description : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, rerum natus
-            impedit cum rem, accusamus nostrum, iure dolores similique veniam tempora corporis
-            voluptatibus dignissimos officiis labore? Laudantium molestias accusamus modi?
-          </p>
-        </div>
-        <div>
-          <div>Developers</div>
-          <div>Publishers</div>
-          <div>Website</div>
-          <div>Genres</div>
+        <div className="grid grid-cols-2 grid-rows-2 py-4 gap-x-4 divide-x-2 divide-gray-200/15">
+          {/* game description */}
+          <div className="row-span-full">
+            <p className="text-lg font-light">{gameData.short_description}</p>
+          </div>
+          {/* game developers and publishers */}
+          <div className="grid grid-cols-2 pl-4">
+            <PubDevRow>
+              <PubDevRow.Title>Developer{gameData.developers.length > 1 && 's'}</PubDevRow.Title>
+              <PubDevRow.Values
+                values={gameData.developers}
+                className="text-gray-50/60"
+              ></PubDevRow.Values>
+            </PubDevRow>
+            <PubDevRow>
+              <PubDevRow.Title>Publisher{gameData.publishers.length > 1 && 's'}</PubDevRow.Title>
+              <PubDevRow.Values
+                values={gameData.publishers}
+                className="text-gray-50/60"
+              ></PubDevRow.Values>
+            </PubDevRow>
+          </div>
+          {/* game genre links to their pages */}
+          <div className="pl-4 flex flex-col flex-nowrap gap-1">
+            <PubDevRow.Title>Genres</PubDevRow.Title>
+            <div className="flex flex-row gap-1">
+              <MiniCategoriesList categoryList={gameData.genres}></MiniCategoriesList>
+            </div>
+          </div>
         </div>
       </section>
       <section>
