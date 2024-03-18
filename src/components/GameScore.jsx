@@ -16,7 +16,7 @@ const GameScoreRateMeta = ({ score, className }) => {
   return (
     <span
       style={{ backgroundColor: getMetascoreColor(score) }}
-      className={`rounded-md p-1 text-2xl size-10 text-center grid place-items-center ${className ? className : ''}`}
+      className={`rounded-md text-2xl size-10 text-center shadow  grid place-items-center ${className ? className : ''}`}
     >
       {typeof score === 'number' ? score : '?'}
     </span>
