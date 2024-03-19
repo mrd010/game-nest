@@ -11,6 +11,8 @@ import { extractGameSysReq } from '../services/extractors';
 import Carousel from '../components/Carousel';
 import { getGamesMiniData } from '../services/dataFetchers';
 import GameDLCCard from '../components/GameDLCCard';
+import imagePlaceholder from '../assets/img/placeH.png';
+import SimpleCarousel from '../components/SimpleCarousel';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
@@ -237,8 +239,27 @@ const GameDetails = () => {
             )}
           </Carousel>
         </section>
-        //
       )}
+      {/* screenshots slider */}
+      <section className="h-[200px]">
+        <HomeSectionTitle>Screenshots</HomeSectionTitle>
+        <SimpleCarousel>
+          {gameData.screenshots.map((image) => (
+            <button
+              key={image.id}
+              className="mx-2 ring-yellow-400 hover:ring-2 transition-shadow rounded"
+            >
+              <LazyLoadImage
+                src={getCleanUrl(image.path_thumbnail)}
+                placeholder={<img src={imagePlaceholder}></img>}
+                width={600}
+                height={338}
+                className="w-72 rounded"
+              ></LazyLoadImage>
+            </button>
+          ))}
+        </SimpleCarousel>
+      </section>
     </MainContentContainer>
   );
 };
