@@ -3,7 +3,14 @@ import ActionButton from './ActionButton';
 import { useEffect, useRef, useState } from 'react';
 import HomeSectionTitle from './HomeSectionTitle';
 
-const Carousel = ({ title, itemWidth, steps, children }) => {
+const Carousel = ({
+  title,
+  itemWidth,
+  steps,
+  children,
+  disabledSidesBlur = false,
+  theme = 'light',
+}) => {
   // carousel component which scrolls horizontally through its children with left and right buttons
 
   // item currently is showing in left of carousel
@@ -25,16 +32,21 @@ const Carousel = ({ title, itemWidth, steps, children }) => {
   }, [itemWidth, currentPosition]);
   return (
     <div
-      className={`grid grid-cols-[1fr_auto] grid-row-2 relative gap-5 ${currentPosition > 0 ? 'before:content-[" "] before:absolute before:bottom-2 before:left-0 before:z-50 before:h-[calc(100%_-_60px)] before:w-10 before:bg-gradient-to-l before:from-transparent before:to-gray-50 before:to-80%' : ''}${currentPosition < nodeChildrenCount - steps - 1 ? 'after:content-[" "] after:w-8 after:right-0 after:bottom-2 after:h-[calc(100%_-_60px)] after:bg-gradient-to-r after:to-80% after:from-transparent after:to-gray-50 after:absolute after:z-50' : ''}`}
+      className={`grid grid-cols-[1fr_auto] grid-row-2 relative gap-5 ${!disabledSidesBlur && currentPosition > 0 ? 'before:content-[" "] before:absolute before:bottom-2 before:left-0 before:z-50 before:h-[calc(100%_-_60px)] before:w-10 before:bg-gradient-to-l before:from-transparent before:to-gray-50 before:to-80%' : ''}${!disabledSidesBlur && currentPosition < nodeChildrenCount - steps - 1 ? 'after:content-[" "] after:w-8 after:right-0 after:bottom-2 after:h-[calc(100%_-_60px)] after:bg-gradient-to-r after:to-80% after:from-transparent after:to-gray-50 after:absolute after:z-50' : ''}`}
     >
       <HomeSectionTitle>{title}</HomeSectionTitle>
       <div className="flex flex-row gap-3 justify-self-end self-end">
-        <ActionButton isDisabled={currentPosition <= 0} onClick={() => handleScrollChange(-steps)}>
+        <ActionButton
+          isDisabled={currentPosition <= 0}
+          onClick={() => handleScrollChange(-steps)}
+          theme={theme}
+        >
           <span className="material-symbols-rounded">arrow_back</span>
         </ActionButton>
         <ActionButton
           isDisabled={currentPosition >= nodeChildrenCount - steps - 1}
           onClick={() => handleScrollChange(steps)}
+          theme={theme}
         >
           <span className="material-symbols-rounded">arrow_forward</span>
         </ActionButton>
@@ -55,5 +67,7 @@ Carousel.propTypes = {
   itemWidth: PropTypes.number.isRequired,
   steps: PropTypes.number.isRequired,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  disabledSidesBlur: PropTypes.bool,
+  theme: PropTypes.oneOf(['dark', 'light']),
 };
 export default Carousel;
