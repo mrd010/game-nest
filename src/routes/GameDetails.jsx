@@ -7,6 +7,7 @@ import { getCleanUrl, steamLargerImage } from '../services/utilities';
 import GameScore from '../components/GameScore';
 import PubDevRow from '../components/PubDevRow';
 import MiniCategoriesList from '../components/MiniCategoriesList';
+import { extractGameSysReq } from '../services/extractors';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
@@ -15,8 +16,17 @@ const GameDetails = () => {
   // url for whole page background
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
   useEffect(() => {
-    document.querySelector('#root').style.backgroundImage = bgUrl;
+    document.getElementById('main').style.backgroundImage = bgUrl;
   }, [bgUrl]);
+
+  // list of platforms game runs on
+  const supportedPlatforms = Object.entries(gameData.platforms)
+    .filter((platform) => platform[1])
+    .map((platform) => platform[0]);
+  supportedPlatforms.sort();
+
+  // all system requirements
+  const systemRequirements = extractGameSysReq(gameData);
 
   return (
     <MainContentContainer className="bg-opacity-5 text-gray-50">
@@ -151,8 +161,37 @@ const GameDetails = () => {
           </div>
         </section>
       )}
+      {/* system requirements */}
       <section>
-        <div></div>
+        <HomeSectionTitle>PC Requirements</HomeSectionTitle>
+        <div className="grid grid-cols-3 grid-rows-2 gap-2 py-2">
+          {Object.entries(systemRequirements).map((sysRequirement) => {
+            const isLinuxOrMac = ['linux', 'mac'].includes(systemRequirements[0]);
+            return (
+              // container for all sys req
+              <div
+                key={sysRequirement[0]}
+                className={`px-6 py-4 bg-gradient-to-tl from-gray-900/10 to-slate-950/20 rounded-2xl ${isLinuxOrMac ? 'row-span-1' : 'row-span-2'}`}
+              >
+                {/* title */}
+                <h4
+                  className={`font-extrabold font-sans tracking-wider text-slate-50 capitalize ${isLinuxOrMac ? 'text-lg my-2' : 'text-xl my-3'}`}
+                >
+                  {sysRequirement[0]}
+                </h4>
+                {/* sys req list */}
+                <ul className="flex flex-col flex-nowrap divide-y-2 divide-gray-200/10">
+                  {sysRequirement[1].map((row, index) => (
+                    <div className="flex flex-col py-1" key={index}>
+                      <PubDevRow.Title>{row[0]}</PubDevRow.Title>
+                      <PubDevRow.Value className="text-gray-50/70">{row[1]}</PubDevRow.Value>
+                    </div>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       </section>
     </MainContentContainer>
   );
