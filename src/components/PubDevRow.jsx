@@ -35,7 +35,7 @@ Title.propTypes = {
   children: PropTypes.node.isRequired,
 };
 Value.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   className: PropTypes.string,
 };
 Values.propTypes = {
