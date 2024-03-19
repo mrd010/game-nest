@@ -29,7 +29,7 @@ const GameDetails = () => {
             alt={gameData.name}
             width={616}
             height={353}
-            className="rounded-md shadow"
+            className="rounded-md"
           ></LazyLoadImage>
         </div>
         {/* game header info right */}
@@ -42,26 +42,28 @@ const GameDetails = () => {
             <div className="flex flex-nowrap flex-col">
               <h3 className="text-xl font-bold">Release Date</h3>
               <span className="text-3xl text-gray-50/60 font-light">
-                {gameData.release_date.date}
+                {gameData.release_date ? gameData.release_date.date : 'TBA'}
               </span>
             </div>
             {/* supported platforms */}
-            <div className="flex flex-col rounded-full">
-              <h3 className="text-xl font-bold px-3">Platforms</h3>
-              <ul className="flex flex-nowrap flex-row divide-x-2 divide-gray-200/30">
-                {
-                  // display all platforms and colorize those available
-                  Object.entries(gameData.platforms).map((platform) => (
-                    <li
-                      key={platform[0]}
-                      className={`px-3 text-3xl font-light ${platform[1] ? 'text-gray-50' : 'text-gray-50/25'}`}
-                    >
-                      {platform[0]}
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
+            {gameData.platforms && (
+              <div className="flex flex-col rounded-full">
+                <h3 className="text-xl font-bold px-3">Platforms</h3>
+                <ul className="flex flex-nowrap flex-row divide-x-2 divide-gray-200/30">
+                  {
+                    // display all platforms and colorize those available
+                    Object.entries(gameData.platforms).map((platform) => (
+                      <li
+                        key={platform[0]}
+                        className={`px-3 text-3xl font-light ${platform[1] ? 'text-gray-50' : 'text-gray-50/25'}`}
+                      >
+                        {platform[0]}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            )}
           </div>
           {/* scores */}
           <div className="grid grid-cols-[auto_1fr] gap-x-4  grid-rows-[auto_minmax(0,1fr)] items-center">
@@ -86,50 +88,69 @@ const GameDetails = () => {
               </>
             )}
             {/* recommendations */}
-            <p className="text-lg text-gray-50/60 self-start">
-              Recommended by{' '}
-              <span className="text-gray-50 font-bold text-xl">
-                {gameData.recommendations.total}
-              </span>{' '}
-              people
-            </p>
+            {gameData.recommendations && (
+              <p className="text-lg text-gray-50/60 self-start">
+                Recommended by{' '}
+                <span className="text-gray-50 font-bold text-xl">
+                  {gameData.recommendations.total}
+                </span>{' '}
+                people
+              </p>
+            )}
           </div>
         </div>
       </header>
       {/* game details */}
-      <section>
-        <HomeSectionTitle>Details</HomeSectionTitle>
-        <div className="grid grid-cols-2 grid-rows-2 py-4 gap-x-4 divide-x-2 divide-gray-200/15">
-          {/* game description */}
-          <div className="row-span-full">
-            <p className="text-lg font-light">{gameData.short_description}</p>
-          </div>
-          {/* game developers and publishers */}
-          <div className="grid grid-cols-2 pl-4">
-            <PubDevRow>
-              <PubDevRow.Title>Developer{gameData.developers.length > 1 && 's'}</PubDevRow.Title>
-              <PubDevRow.Values
-                values={gameData.developers}
-                className="text-gray-50/60"
-              ></PubDevRow.Values>
-            </PubDevRow>
-            <PubDevRow>
-              <PubDevRow.Title>Publisher{gameData.publishers.length > 1 && 's'}</PubDevRow.Title>
-              <PubDevRow.Values
-                values={gameData.publishers}
-                className="text-gray-50/60"
-              ></PubDevRow.Values>
-            </PubDevRow>
-          </div>
-          {/* game genre links to their pages */}
-          <div className="pl-4 flex flex-col flex-nowrap gap-1">
-            <PubDevRow.Title>Genres</PubDevRow.Title>
-            <div className="flex flex-row gap-1">
-              <MiniCategoriesList categoryList={gameData.genres}></MiniCategoriesList>
+      {(gameData.short_description ||
+        gameData.developers ||
+        gameData.publishers ||
+        gameData.genres) && (
+        <section>
+          <HomeSectionTitle>Details</HomeSectionTitle>
+          <div className="grid grid-cols-2 grid-rows-2 py-4 gap-x-4 divide-x-2 divide-gray-200/15">
+            {/* game description */}
+            {gameData.short_description && (
+              <div className="row-span-full pb-2">
+                <p className="text-lg font-light">{gameData.short_description}</p>
+              </div>
+            )}
+            {/* game developers and publishers */}
+            <div className="grid grid-cols-2 pl-4 pb-2">
+              {gameData?.developers.length && (
+                <PubDevRow>
+                  <PubDevRow.Title>
+                    Developer{gameData.developers.length > 1 && 's'}
+                  </PubDevRow.Title>
+                  <PubDevRow.Values
+                    values={gameData.developers}
+                    className="text-gray-50/60"
+                  ></PubDevRow.Values>
+                </PubDevRow>
+              )}
+              {gameData?.publishers.length && (
+                <PubDevRow>
+                  <PubDevRow.Title>
+                    Publisher{gameData.publishers.length > 1 && 's'}
+                  </PubDevRow.Title>
+                  <PubDevRow.Values
+                    values={gameData.publishers}
+                    className="text-gray-50/60"
+                  ></PubDevRow.Values>
+                </PubDevRow>
+              )}
             </div>
+            {/* game genre links to their pages */}
+            {gameData?.genres.length && (
+              <div className="pl-4 flex flex-col flex-nowrap gap-1 pb-2">
+                <PubDevRow.Title>Genres</PubDevRow.Title>
+                <div className="flex flex-row gap-1">
+                  <MiniCategoriesList categoryList={gameData.genres}></MiniCategoriesList>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
       <section>
         <div></div>
       </section>
