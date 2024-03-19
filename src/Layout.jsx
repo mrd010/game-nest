@@ -5,7 +5,7 @@ const Layout = () => {
   const categories = useLoaderData();
 
   return (
-    <div className="font-Lato">
+    <div className="font-Lato min-h-screen bg-no-repeat bg-cover bg-center bg-fixed" id="main">
       <Header categories={categories}></Header>
       {/* main content */}
       <main className="w-[1280px] mx-auto p-3">
