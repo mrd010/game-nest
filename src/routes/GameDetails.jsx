@@ -15,7 +15,8 @@ import GameDLCCard from '../components/GameDLCCard';
 const GameDetails = () => {
   const gameData = useLoaderData();
   console.log(gameData);
-  const [dlcsInfo, setDlcsInfo] = useState([...gameData.dlc].fill(null));
+  const initialDlcData = gameData.dlc ?? null;
+  const [dlcsInfo, setDlcsInfo] = useState(initialDlcData);
 
   // url for whole page background
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
@@ -33,20 +34,21 @@ const GameDetails = () => {
   const systemRequirements = extractGameSysReq(gameData);
 
   // get dlc infos
-  const stringifiedDLCsIds = JSON.stringify(gameData.dlc);
+  const stringifiedDLCsIds = gameData?.dlc ? JSON.stringify(gameData.dlc) : null;
   useEffect(() => {
     let ignore = false;
     const getDlcsInfo = async () => {
-      const dlcsData = await getGamesMiniData(stringifiedDLCsIds);
-      if (dlcsData && !ignore) {
-        setDlcsInfo(dlcsData);
+      if (stringifiedDLCsIds) {
+        const dlcsData = await getGamesMiniData(stringifiedDLCsIds);
+        if (dlcsData && !ignore) {
+          setDlcsInfo(dlcsData);
+        }
       }
     };
 
     getDlcsInfo();
     return () => (ignore = true);
   }, [stringifiedDLCsIds]);
-  console.log(dlcsInfo);
 
   return (
     <MainContentContainer className="bg-opacity-5 text-gray-50">
@@ -214,26 +216,29 @@ const GameDetails = () => {
         </div>
       </section>
       {/* game dlcs */}
-      <section>
-        {/* dlc list */}
-        <Carousel title={'DLCs'} itemWidth={385} steps={2} disabledSidesBlur theme="dark">
-          {dlcsInfo.map((dlc, index) =>
-            dlc?.status === 1 ? (
-              // card for each dlc - not a link
-              <GameDLCCard
-                key={dlc.appid}
-                appid={dlc.appid}
-                name={dlc.name}
-                width={385}
-              ></GameDLCCard>
-            ) : (
-              <div key={index} className="w-[385px] h-[252px] p-2">
-                <div className="content-loader"></div>
-              </div>
-            )
-          )}
-        </Carousel>
-      </section>
+      {gameData?.dlc && (
+        <section>
+          {/* dlc list */}
+          <Carousel title={'DLCs'} itemWidth={385} steps={2} disabledSidesBlur theme="dark">
+            {dlcsInfo.map((dlc, index) =>
+              dlc?.status === 1 ? (
+                // card for each dlc - not a link
+                <GameDLCCard
+                  key={dlc.appid}
+                  appid={dlc.appid}
+                  name={dlc.name}
+                  width={385}
+                ></GameDLCCard>
+              ) : (
+                <div key={index} className="w-[385px] h-[252px] p-2">
+                  <div className="content-loader"></div>
+                </div>
+              )
+            )}
+          </Carousel>
+        </section>
+        //
+      )}
     </MainContentContainer>
   );
 };
