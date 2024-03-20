@@ -53,7 +53,7 @@ const GameDetails = () => {
   }, [stringifiedDLCsIds]);
 
   return (
-    <MainContentContainer className="bg-opacity-5 text-gray-50">
+    <MainContentContainer className="bg-opacity-10 text-gray-50">
       {/* header of page */}
       <header className="grid grid-cols-2 gap-6">
         {/* game header image left */}
