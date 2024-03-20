@@ -11,7 +11,6 @@ import { extractGameSysReq } from '../services/extractors';
 import Carousel from '../components/Carousel';
 import { getGamesMiniData } from '../services/dataFetchers';
 import GameDLCCard from '../components/GameDLCCard';
-import imagePlaceholder from '../assets/img/placeH.png';
 import SimpleCarousel from '../components/SimpleCarousel';
 import VideoListItem from '../components/VideoListItem';
 import VideoPlayerOverlay from '../components/VideoPlayerOverlay';
@@ -66,10 +65,6 @@ const GameDetails = () => {
   const currentVideo =
     modalContent?.type === 'video'
       ? gameData?.movies?.find((movie) => movie.id === modalContent.id)
-      : null;
-  const currentImage =
-    modalContent?.type === 'image'
-      ? gameData?.screenshots?.find((image) => image.id === modalContent.id)
       : null;
 
   return (
@@ -262,22 +257,21 @@ const GameDetails = () => {
       )}
       {/* screenshots slider */}
       {gameData?.screenshots && (
-        <section className="h-[250px]">
+        <section>
           <HomeSectionTitle>Screenshots</HomeSectionTitle>
-          <SimpleCarousel>
+          <SimpleCarousel className="h-[190px]">
             {gameData.screenshots.map((image) => (
               <button
                 key={image.id}
                 onClick={() => handleModalOverlayOpen('image', image.id)}
                 className="mx-2 ring-yellow-400 hover:ring-2 transition-shadow rounded"
               >
-                <LazyLoadImage
+                <img
                   src={getCleanUrl(image.path_thumbnail)}
-                  placeholder={<img src={imagePlaceholder}></img>}
                   width={600}
                   height={338}
-                  className="w-72 rounded"
-                ></LazyLoadImage>
+                  className="h-[150px] w-auto rounded"
+                ></img>
               </button>
             ))}
           </SimpleCarousel>
@@ -285,9 +279,9 @@ const GameDetails = () => {
       )}
       {/* trailers and videos section */}
       {gameData?.movies.length && (
-        <section className="h-[300px]">
+        <section>
           <HomeSectionTitle>Videos</HomeSectionTitle>
-          <SimpleCarousel className="gap-4">
+          <SimpleCarousel className="gap-4 h-[250px]">
             {gameData.movies.map((video) => (
               <VideoListItem
                 key={video.id}
