@@ -4,9 +4,11 @@ import ModalOverlayContainer from './ModalOverlayContainer';
 const VideoPlayerOverlay = ({ isOpen, hqUrl, lqUrl, onClose }) => {
   return (
     <ModalOverlayContainer isOpen={isOpen} onClose={onClose}>
-      <div className={`aspect-video w-[1000px] drop-shadow-lg shadow-md`}>
-        <VideoPlayer hqUrl={hqUrl} lqUrl={lqUrl} previewImage={false}></VideoPlayer>
-      </div>
+      {(lqUrl || hqUrl) && (
+        <div className={`aspect-video w-[1000px] drop-shadow-lg shadow-md`}>
+          <VideoPlayer hqUrl={hqUrl} lqUrl={lqUrl} previewImage={false}></VideoPlayer>
+        </div>
+      )}
     </ModalOverlayContainer>
   );
 };
