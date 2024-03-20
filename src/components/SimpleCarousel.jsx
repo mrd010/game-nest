@@ -9,7 +9,7 @@ const SimpleCarousel = ({ children }) => {
   return (
     <div
       ref={carousel}
-      className={`grid carousel select-none py-2 items-start grid-flow-col auto-cols-max overflow-x-auto`}
+      className={`grid carousel select-none py-4 items-start grid-flow-col auto-cols-max overflow-x-auto`}
       {...events}
     >
       {children}
