@@ -63,6 +63,22 @@ const GameDetails = () => {
     setModalContent(null);
   };
 
+  // change screenshot image with next and prev buttons in overlay
+  const handleNextScreenshot = () => {
+    if (modalContent.type === 'image') {
+      // next image is rotatable. next id after last id is 0
+      const nextId = modalContent.id < gameData.screenshots.length - 1 ? modalContent.id + 1 : 0;
+      setModalContent({ type: 'image', id: nextId });
+    }
+  };
+  const handlePrevScreenshot = () => {
+    if (modalContent.type === 'image') {
+      // prev image is rotatable. prev id before first id is last id
+      const prevId = modalContent.id > 0 ? modalContent.id - 1 : gameData.screenshots.length - 1;
+      setModalContent({ type: 'image', id: prevId });
+    }
+  };
+
   // current video selected for play in overlay player if selected item is from videos
   const currentVideo =
     modalContent?.type === 'video'
@@ -304,16 +320,20 @@ const GameDetails = () => {
           </SimpleCarousel>
         </section>
       )}
+      {/* video player overlay appears when selecting a video */}
       <VideoPlayerOverlay
         isOpen={modalContent?.type === 'video'}
         onClose={handleClosingModal}
         hqUrl={currentVideo?.webm['max']}
         lqUrl={currentVideo?.webm['480']}
       ></VideoPlayerOverlay>
+      {/* screenshots carousel appears when selecting an image */}
       <ScreenshotsOverlay
         isOpen={modalContent?.type === 'image'}
         onClose={handleClosingModal}
         activeImageUrl={currentImage?.path_full}
+        onPrev={handlePrevScreenshot}
+        onNext={handleNextScreenshot}
       ></ScreenshotsOverlay>
     </MainContentContainer>
   );
