@@ -29,6 +29,11 @@ const GameDetails = () => {
     document.getElementById('main').style.backgroundImage = bgUrl;
     return () => (document.getElementById('main').style.backgroundImage = 'none');
   }, [bgUrl]);
+  // background color change for withdraw when no bg image available
+  useEffect(() => {
+    document.getElementById('main').classList.add('dark-bg');
+    return () => document.getElementById('main').classList.remove('dark-bg');
+  }, []);
 
   // list of platforms game runs on
   const supportedPlatforms = Object.entries(gameData.platforms)

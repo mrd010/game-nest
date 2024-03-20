@@ -10,6 +10,9 @@
   body {
     @apply bg-gray-50;
   }
+  body.dark-bg {
+    background-color: #1b2837;
+  }
 
   /* Remove x button from search inputs ##################################################### */
   /* clears the ‘X’ from Internet Explorer */
