@@ -27,6 +27,7 @@ const GameDetails = () => {
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
   useEffect(() => {
     document.getElementById('main').style.backgroundImage = bgUrl;
+    return () => (document.getElementById('main').style.backgroundImage = 'none');
   }, [bgUrl]);
 
   // list of platforms game runs on
@@ -229,7 +230,7 @@ const GameDetails = () => {
         <HomeSectionTitle>PC Requirements</HomeSectionTitle>
         <div className="grid grid-cols-3 grid-rows-2 gap-8 py-4">
           {Object.entries(systemRequirements).map((sysRequirement) => {
-            const isLinuxOrMac = ['linux', 'mac'].includes(systemRequirements[0]);
+            const isLinuxOrMac = ['linux', 'mac'].includes(sysRequirement[0]);
             return (
               // container for all sys req
               <div
