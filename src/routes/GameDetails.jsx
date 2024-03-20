@@ -157,7 +157,7 @@ const GameDetails = () => {
                 </div>
                 {/* meta link */}
                 <a
-                  href={gameData.metacritic.url}
+                  href={getCleanUrl(gameData.metacritic.url)}
                   target="_blank"
                   className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 hover:text-yellow-400/85 active:text-yellow-400/85"
                 >
