@@ -85,7 +85,6 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
       >
         <ReactPlayer
           ref={player}
-          // className="react-player"
           url={highQuality ? getCleanUrl(hqUrl) : getCleanUrl(lqUrl)}
           light={previewImage ? previewImage : false}
           muted={isMuted}
