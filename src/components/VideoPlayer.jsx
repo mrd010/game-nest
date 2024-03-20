@@ -14,7 +14,7 @@ import volumeIcon from '../assets/icons/player-icons/volume_up.svg';
 import fsIcon from '../assets/icons/player-icons/fullscreen.svg';
 import fsCloseIcon from '../assets/icons/player-icons/close_fullscreen.svg';
 import screenfull from 'screenfull';
-import { secondsToMinutesPlus } from '../services/utilities';
+import { getCleanUrl, secondsToMinutesPlus } from '../services/utilities';
 
 const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
   // video player with custom controls
@@ -86,7 +86,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
         <ReactPlayer
           ref={player}
           // className="react-player"
-          url={highQuality ? hqUrl : lqUrl}
+          url={highQuality ? getCleanUrl(hqUrl) : getCleanUrl(lqUrl)}
           light={previewImage ? previewImage : false}
           muted={isMuted}
           volume={volume}
