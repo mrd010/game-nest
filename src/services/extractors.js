@@ -24,7 +24,6 @@ export const extractGameSysReq = (gameData) => {
     if (gameData.pc_requirements && gameData.pc_requirements.minimum) {
       const sysReqArray = htmlToSysReqArray(gameData.pc_requirements.minimum);
       if (sysReqArray.length && sysReqArray[0].length && sysReqArray[0][0].length) {
-        console.log(sysReqArray);
         systemRequirements.minimum = sysReqArray;
       }
     }
@@ -37,7 +36,6 @@ export const extractGameSysReq = (gameData) => {
     if (gameData.mac_requirements && gameData.mac_requirements.minimum) {
       const sysReqArray = htmlToSysReqArray(gameData.mac_requirements.minimum);
       if (sysReqArray.length && sysReqArray[0].length && sysReqArray[0][0].length) {
-        console.log(sysReqArray);
         systemRequirements.mac = sysReqArray;
       }
     }

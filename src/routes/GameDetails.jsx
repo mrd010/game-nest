@@ -18,7 +18,6 @@ import ScreenshotsOverlay from '../components/ScreenshotsOverlay';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
-  console.log(gameData);
   const initialDlcData = gameData.dlc ?? null;
   const [dlcsInfo, setDlcsInfo] = useState(initialDlcData);
   const [modalContent, setModalContent] = useState(null);

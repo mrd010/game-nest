@@ -10,7 +10,6 @@ const VideoListItem = ({
   onSelect,
   className = '',
 }) => {
-  console.log(name);
   return (
     <button className={`group ${className}`} onClick={() => onSelect(id, name)}>
       <div className="relative aspect-video shadow-sm">
