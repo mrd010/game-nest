@@ -14,6 +14,7 @@ import GameDLCCard from '../components/GameDLCCard';
 import SimpleCarousel from '../components/SimpleCarousel';
 import VideoListItem from '../components/VideoListItem';
 import VideoPlayerOverlay from '../components/VideoPlayerOverlay';
+import ScreenshotsOverlay from '../components/ScreenshotsOverlay';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
@@ -62,9 +63,16 @@ const GameDetails = () => {
     setModalContent(null);
   };
 
+  // current video selected for play in overlay player if selected item is from videos
   const currentVideo =
     modalContent?.type === 'video'
       ? gameData?.movies?.find((movie) => movie.id === modalContent.id)
+      : null;
+
+  // current image if selected item is from screenshots
+  const currentImage =
+    modalContent?.type === 'image'
+      ? gameData?.screenshots?.find((image) => image.id === modalContent.id)
       : null;
 
   return (
@@ -302,6 +310,11 @@ const GameDetails = () => {
         hqUrl={currentVideo?.webm['max']}
         lqUrl={currentVideo?.webm['480']}
       ></VideoPlayerOverlay>
+      <ScreenshotsOverlay
+        isOpen={modalContent?.type === 'image'}
+        onClose={handleClosingModal}
+        activeImageUrl={currentImage?.path_full}
+      ></ScreenshotsOverlay>
     </MainContentContainer>
   );
 };
