@@ -16,7 +16,6 @@ const Trailers = () => {
   const videoUrls = currentVideo && currentVideo.webm;
   const lowQualityVideo = videoUrls && videoUrls['480'];
   const highQualityVideo = videoUrls && videoUrls['max'];
-  console.log(trailers);
 
   // on select video set video as active video
   const handleVideoOpen = (id, name) => {
