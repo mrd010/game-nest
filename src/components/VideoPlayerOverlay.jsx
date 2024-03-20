@@ -1,4 +1,4 @@
-import PropTypes, { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 import VideoPlayer from './VideoPlayer';
 import ModalOverlayContainer from './ModalOverlayContainer';
 const VideoPlayerOverlay = ({ isOpen, hqUrl, lqUrl, onClose }) => {
@@ -11,7 +11,7 @@ const VideoPlayerOverlay = ({ isOpen, hqUrl, lqUrl, onClose }) => {
   );
 };
 VideoPlayerOverlay.propTypes = {
-  isOpen: bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   hqUrl: PropTypes.string,
   lqUrl: PropTypes.string,
   onClose: PropTypes.func.isRequired,
