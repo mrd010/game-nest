@@ -315,7 +315,7 @@ const GameDetails = () => {
                 iconCentered
                 id={video.id}
                 onSelect={() => handleModalOverlayOpen('video', video.id)}
-                className="grid grid-rows-[auto_auto] text-gray-50 gap-2"
+                className="grid grid-rows-[auto_auto] text-gray-50 gap-2 w-[300px]"
               ></VideoListItem>
             ))}
           </SimpleCarousel>
