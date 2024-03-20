@@ -28,6 +28,6 @@ const ModalOverlayContainer = ({ isOpen, onClose, children }) => {
 ModalOverlayContainer.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 export default ModalOverlayContainer;
