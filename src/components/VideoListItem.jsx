@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import playIcon from '../assets/icons/player-icons/play_circle_FILL.svg';
 
 const VideoListItem = ({
@@ -15,11 +14,11 @@ const VideoListItem = ({
   return (
     <button className={`group ${className}`} onClick={() => onSelect(id, name)}>
       <div className="relative aspect-video shadow-sm">
-        <LazyLoadImage
+        <img
           src={thumbnail}
           alt={name}
           className="rounded-md group-hover:opacity-90 h-full w-full contrast-[110%]"
-        ></LazyLoadImage>
+        ></img>
         {!iconCentered && (
           <div
             className={`text-gray-50 absolute bottom-2 left-4 scale-[180%] opacity-75 group-hover:opacity-100`}
