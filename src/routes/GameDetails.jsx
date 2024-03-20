@@ -14,6 +14,7 @@ import GameDLCCard from '../components/GameDLCCard';
 import imagePlaceholder from '../assets/img/placeH.png';
 import SimpleCarousel from '../components/SimpleCarousel';
 import VideoListItem from '../components/VideoListItem';
+import VideoPlayerOverlay from '../components/VideoPlayerOverlay';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
@@ -58,6 +59,18 @@ const GameDetails = () => {
   const handleModalOverlayOpen = (type, id) => {
     setModalContent({ type, id });
   };
+  const handleClosingModal = () => {
+    setModalContent(null);
+  };
+
+  const currentVideo =
+    modalContent?.type === 'video'
+      ? gameData?.movies?.find((movie) => movie.id === modalContent.id)
+      : null;
+  const currentImage =
+    modalContent?.type === 'image'
+      ? gameData?.screenshots?.find((image) => image.id === modalContent.id)
+      : null;
 
   return (
     <MainContentContainer className="bg-opacity-10 text-gray-50">
@@ -282,7 +295,6 @@ const GameDetails = () => {
                 thumbnail={getCleanUrl(video.thumbnail)}
                 iconCentered
                 id={video.id}
-                // gameName={'ass'}
                 onSelect={() => handleModalOverlayOpen('video', video.id)}
                 className="grid grid-rows-[auto_auto] text-gray-50 gap-2"
               ></VideoListItem>
@@ -290,6 +302,12 @@ const GameDetails = () => {
           </SimpleCarousel>
         </section>
       )}
+      <VideoPlayerOverlay
+        isOpen={modalContent?.type === 'video'}
+        onClose={handleClosingModal}
+        hqUrl={currentVideo?.webm['max']}
+        lqUrl={currentVideo?.webm['480']}
+      ></VideoPlayerOverlay>
     </MainContentContainer>
   );
 };
