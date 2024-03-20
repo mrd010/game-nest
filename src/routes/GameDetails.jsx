@@ -13,12 +13,14 @@ import { getGamesMiniData } from '../services/dataFetchers';
 import GameDLCCard from '../components/GameDLCCard';
 import imagePlaceholder from '../assets/img/placeH.png';
 import SimpleCarousel from '../components/SimpleCarousel';
+import VideoListItem from '../components/VideoListItem';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
   console.log(gameData);
   const initialDlcData = gameData.dlc ?? null;
   const [dlcsInfo, setDlcsInfo] = useState(initialDlcData);
+  const [modalContent, setModalContent] = useState(null);
 
   // url for whole page background
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
@@ -51,6 +53,11 @@ const GameDetails = () => {
     getDlcsInfo();
     return () => (ignore = true);
   }, [stringifiedDLCsIds]);
+
+  // select video or image for opening
+  const handleModalOverlayOpen = (type, id) => {
+    setModalContent({ type, id });
+  };
 
   return (
     <MainContentContainer className="bg-opacity-10 text-gray-50">
@@ -241,25 +248,48 @@ const GameDetails = () => {
         </section>
       )}
       {/* screenshots slider */}
-      <section className="h-[200px]">
-        <HomeSectionTitle>Screenshots</HomeSectionTitle>
-        <SimpleCarousel>
-          {gameData.screenshots.map((image) => (
-            <button
-              key={image.id}
-              className="mx-2 ring-yellow-400 hover:ring-2 transition-shadow rounded"
-            >
-              <LazyLoadImage
-                src={getCleanUrl(image.path_thumbnail)}
-                placeholder={<img src={imagePlaceholder}></img>}
-                width={600}
-                height={338}
-                className="w-72 rounded"
-              ></LazyLoadImage>
-            </button>
-          ))}
-        </SimpleCarousel>
-      </section>
+      {gameData?.screenshots && (
+        <section className="h-[250px]">
+          <HomeSectionTitle>Screenshots</HomeSectionTitle>
+          <SimpleCarousel>
+            {gameData.screenshots.map((image) => (
+              <button
+                key={image.id}
+                onClick={() => handleModalOverlayOpen('image', image.id)}
+                className="mx-2 ring-yellow-400 hover:ring-2 transition-shadow rounded"
+              >
+                <LazyLoadImage
+                  src={getCleanUrl(image.path_thumbnail)}
+                  placeholder={<img src={imagePlaceholder}></img>}
+                  width={600}
+                  height={338}
+                  className="w-72 rounded"
+                ></LazyLoadImage>
+              </button>
+            ))}
+          </SimpleCarousel>
+        </section>
+      )}
+      {/* trailers and videos section */}
+      {gameData?.movies.length && (
+        <section className="h-[300px]">
+          <HomeSectionTitle>Videos</HomeSectionTitle>
+          <SimpleCarousel className="gap-4">
+            {gameData.movies.map((video) => (
+              <VideoListItem
+                key={video.id}
+                name={video.name}
+                thumbnail={getCleanUrl(video.thumbnail)}
+                iconCentered
+                id={video.id}
+                // gameName={'ass'}
+                onSelect={() => handleModalOverlayOpen('video', video.id)}
+                className="grid grid-rows-[auto_auto] text-gray-50 gap-2"
+              ></VideoListItem>
+            ))}
+          </SimpleCarousel>
+        </section>
+      )}
     </MainContentContainer>
   );
 };
