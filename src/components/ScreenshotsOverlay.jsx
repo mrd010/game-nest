@@ -12,6 +12,8 @@ const ScreenshotsOverlay = ({ isOpen, activeImageUrl, onClose, onNext, onPrev })
             src={getCleanUrl(activeImageUrl)}
             alt="Current Showing Screenshot"
             key={activeImageUrl}
+            width={1920}
+            height={1080}
             className="rounded"
           ></LazyLoadImage>
           {/* controls */}
