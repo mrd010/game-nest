@@ -232,7 +232,7 @@ const GameDetails = () => {
       )}
       {/* system requirements */}
       <section>
-        <HomeSectionTitle>PC Requirements</HomeSectionTitle>
+        <HomeSectionTitle>System Requirements</HomeSectionTitle>
         <div className="grid grid-cols-3 grid-rows-[auto_auto] grid-flow-col-dense gap-8 py-4">
           {Object.entries(systemRequirements).map((sysRequirement) => {
             const isLinuxOrMac = ['linux', 'mac'].includes(sysRequirement[0]);
