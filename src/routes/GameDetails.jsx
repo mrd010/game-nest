@@ -233,7 +233,7 @@ const GameDetails = () => {
       {/* system requirements */}
       <section>
         <HomeSectionTitle>PC Requirements</HomeSectionTitle>
-        <div className="grid grid-cols-3 grid-rows-2 grid-flow-col-dense gap-8 py-4">
+        <div className="grid grid-cols-3 grid-rows-[auto_auto] grid-flow-col-dense gap-8 py-4">
           {Object.entries(systemRequirements).map((sysRequirement) => {
             const isLinuxOrMac = ['linux', 'mac'].includes(sysRequirement[0]);
             return (
@@ -251,9 +251,16 @@ const GameDetails = () => {
                 {/* sys req list */}
                 <ul className="flex flex-col flex-nowrap divide-y-2 divide-gray-200/10">
                   {sysRequirement[1].map((row, index) => (
-                    <div className="flex flex-col py-1" key={index}>
+                    <div
+                      className={`flex flex-col py-1 ${isLinuxOrMac ? 'text-sm' : 'text-base'}`}
+                      key={index}
+                    >
                       <PubDevRow.Title>{row[0]}</PubDevRow.Title>
-                      <PubDevRow.Value className="text-gray-50/70">{row[1]}</PubDevRow.Value>
+                      <PubDevRow.Value
+                        className={`text-gray-50/70 ${isLinuxOrMac ? 'text-sm' : 'text-base'}`}
+                      >
+                        {row[1]}
+                      </PubDevRow.Value>
                     </div>
                   ))}
                 </ul>

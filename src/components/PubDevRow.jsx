@@ -7,8 +7,8 @@ const Title = ({ children }) => {
   return <span className="font-bold">{children}</span>;
 };
 
-const Value = ({ children, className = 'text-gray-600/95' }) => {
-  return <span className={`text-sm ${className}`}>{children}</span>;
+const Value = ({ children, className = 'text-gray-600/95 text-sm' }) => {
+  return <span className={`${className}`}>{children}</span>;
 };
 
 const Values = ({ values, className }) => {
