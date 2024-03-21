@@ -297,7 +297,7 @@ const GameDetails = () => {
         </section>
       )}
       {/* screenshots slider */}
-      {gameData?.screenshots && (
+      {gameData?.screenshots?.length && (
         <section>
           <HomeSectionTitle>Screenshots</HomeSectionTitle>
           <SimpleCarousel className="h-[190px]">
@@ -319,7 +319,7 @@ const GameDetails = () => {
         </section>
       )}
       {/* trailers and videos section */}
-      {gameData?.movies.length && (
+      {gameData?.movies?.length && (
         <section>
           <HomeSectionTitle>Videos</HomeSectionTitle>
           <SimpleCarousel className="gap-4 h-[250px]">
