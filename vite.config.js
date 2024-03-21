@@ -13,6 +13,10 @@ export default defineConfig({
         target: 'https://api.steampowered.com',
         changeOrigin: true,
       },
+      '/actions': {
+        target: 'https://steamcommunity.com',
+        changeOrigin: true,
+      },
     },
   },
   plugins: [react()],
