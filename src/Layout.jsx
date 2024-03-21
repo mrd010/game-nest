@@ -1,11 +1,18 @@
 import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import Header from './components/Header';
+import { useEffect } from 'react';
 
 const Layout = () => {
   const categories = useLoaderData();
 
   // for navigation loader
   const { state } = useNavigation();
+
+  useEffect(() => {
+    if (state === 'idle') {
+      window.scrollTo(0, 0);
+    }
+  }, [state]);
 
   return (
     <div className="font-Lato min-h-screen bg-no-repeat bg-cover bg-center bg-fixed" id="main">
