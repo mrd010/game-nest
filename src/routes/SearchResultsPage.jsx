@@ -2,6 +2,9 @@ import { useLoaderData } from 'react-router-dom';
 import MainContentContainer from '../components/MainContentContainer';
 import MainContentHeader from '../components/MainContentHeader';
 import GamesAlbum from '../components/GamesAlbum';
+
+const ITEMS_PER_PAGE = 5;
+
 const SearchResultsPage = () => {
   // get searched query and results
   const { searchResults, query } = useLoaderData();
@@ -19,7 +22,7 @@ const SearchResultsPage = () => {
             : `Cant't find any games matching expression "${query}".`
         }
       ></MainContentHeader>
-      <GamesAlbum gameIds={gameIds} itemsPerPage={10}></GamesAlbum>
+      <GamesAlbum gameIds={gameIds} itemsPerPage={ITEMS_PER_PAGE}></GamesAlbum>
     </MainContentContainer>
   );
 };
