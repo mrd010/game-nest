@@ -6,5 +6,5 @@ export const searchLoader = async ({ request }) => {
   const query = url.searchParams.get('q');
   //   search for query and return data
   const searchResults = await getSearchResults(query, 0);
-  return searchResults;
+  return { searchResults, query };
 };
