@@ -41,7 +41,7 @@ const HeaderSearch = () => {
         {/* search input */}
         <input
           type="search"
-          name="search"
+          name="q"
           placeholder="Search for games"
           className="w-full rounded-3xl p-2 pl-4 border-none outline-none text-lg bg-gray-50"
           onChange={handleChangeInput}
