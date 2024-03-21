@@ -8,6 +8,7 @@ const newReleasesApi = '/api/getappsincategory/?category=cat_newreleases';
 const genreGamesApi = '/api/getappsingenre';
 const gameMiniDataAPi = '/api/libraryappdetails';
 const gameDetailsApi = '/api/appdetails';
+const searchApi = '/actions/SearchApps/';
 
 // checks if response is ok and throws error on 400> status
 export const checkResponse = (response) => {
@@ -126,4 +127,17 @@ export const getGameDetails = async (gameId) => {
   // if response got and response is for this game proceed and return game data
   const gameData = response && response[gameId];
   return gameData?.success && gameData?.data;
+};
+
+// get game search results
+export const getSearchResults = async (query, minQueryLengthThreshold) => {
+  if (!query || query.length < minQueryLengthThreshold) {
+    return null;
+  }
+
+  const data = await getData(`${searchApi}${query}`);
+  if (data && data.length > 0) {
+    return data;
+  }
+  return null;
 };
