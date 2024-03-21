@@ -28,7 +28,7 @@ const HeaderSearch = () => {
   // clear search and search results when change pages
   const { state } = useNavigation();
   useEffect(() => {
-    if (state === 'idle') {
+    if (state === 'loading') {
       setQuery('');
       setSearchResults(null);
     }
