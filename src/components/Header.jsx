@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const Header = ({ categories }) => {
   // top header of app
   return (
-    <header className="bg-gray-950 text-gray-50 min-w-min sticky top-0 left-0 z-[100]">
+    <header className="bg-gray-950 text-gray-50 min-w-min z-[100]">
       <div className="grid grid-cols-[auto_auto_1fr_auto] items-center content-center mx-auto w-[1280px] justify-between gap-8">
         {/* header title - app title */}
         <div className="mr-10 p-4">

@@ -5,7 +5,7 @@ const ModalOverlayContainer = ({ isOpen, onClose, children }) => {
   return (
     <div
       ref={outSideContainer}
-      className={`fixed left-0 grid place-items-center top-0 bg-gray-900/90 z-50 w-full origin-left transition-transform duration-300 h-screen ${isOpen ? 'scale-x-100' : 'scale-x-0'}`}
+      className={`fixed z-[150] left-0 grid place-items-center top-0 bg-gray-900/90 w-full origin-left transition-transform duration-300 h-screen ${isOpen ? 'scale-x-100' : 'scale-x-0'}`}
       style={{
         margin: 0,
       }}
