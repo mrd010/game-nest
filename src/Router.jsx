@@ -19,6 +19,8 @@ import Trailers from './routes/Trailers';
 import { trailersLoader } from './loaders/trailersLoader';
 import GameDetails from './routes/GameDetails';
 import { gamePageLoader } from './loaders/gamePageLoader';
+import SearchResultsPage from './routes/SearchResultsPage';
+import { searchLoader } from './loaders/searchLoader';
 
 const Router = () => {
   const router = createBrowserRouter(
@@ -41,6 +43,11 @@ const Router = () => {
         </Route>
         <Route path="videos" element={<Trailers />} loader={trailersLoader}></Route>
         <Route path="games/:gameId" element={<GameDetails />} loader={gamePageLoader}></Route>
+        <Route
+          path="/search"
+          element={<SearchResultsPage></SearchResultsPage>}
+          loader={searchLoader}
+        ></Route>
       </Route>
     )
   );
