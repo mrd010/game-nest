@@ -12,15 +12,15 @@ const Header = ({ categories }) => {
         {/* header title - app title */}
         <div className="mr-10 p-4">
           <h1>
-            <Link className="text-4xl font-extrabold">
+            <Link className="text-4xl font-extrabold" to="/home">
               Game<span className="text-yellow-400">Nest</span>
             </Link>
           </h1>
         </div>
         {/* app nav menu */}
         <nav className="grid grid-cols-3 h-full">
-          <HeaderNavLink text="Home" link="home"></HeaderNavLink>
-          <HeaderNavLink text="Games" link="browse">
+          <HeaderNavLink text="Home" link="/home"></HeaderNavLink>
+          <HeaderNavLink text="Games" link="/browse">
             {
               // sub menu - appears on hover
               categories.map((cat) => (
@@ -34,7 +34,7 @@ const Header = ({ categories }) => {
               ))
             }
           </HeaderNavLink>
-          <HeaderNavLink text="Videos" link="videos"></HeaderNavLink>
+          <HeaderNavLink text="Videos" link="/videos"></HeaderNavLink>
         </nav>
         {/* search bar */}
         <div>
