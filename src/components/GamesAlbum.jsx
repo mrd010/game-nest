@@ -31,13 +31,15 @@ const GamesAlbum = ({ gameIds, itemsPerPage = 10 }) => {
         })
       }
       {/* bottom page numbers */}
-      <div className="self-center border-y-2 py-4">
-        <PageNavNumbers
-          totalPageNumbers={numberOfPages}
-          currentPageNumber={pageNumber}
-          onSelect={handleChangePage}
-        ></PageNavNumbers>
-      </div>
+      {gameIds.length > itemsPerPage && (
+        <div className="self-center border-y-2 py-4">
+          <PageNavNumbers
+            totalPageNumbers={numberOfPages}
+            currentPageNumber={pageNumber}
+            onSelect={handleChangePage}
+          ></PageNavNumbers>
+        </div>
+      )}
     </div>
   );
 };
