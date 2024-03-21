@@ -9,8 +9,9 @@ const HeaderSearch = () => {
   // search nar in header of app. searches whole steam database for games and navigates to that game page in app
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState(null);
-  const debouncedQuery = useDebounce(query, 1000);
 
+  // get data when user stops typing for a period of time and query is at least 3 letters long
+  const debouncedQuery = useDebounce(query, 500);
   useEffect(() => {
     const getData = async () => {
       const data = await getSearchResults(debouncedQuery, 3);
@@ -20,8 +21,6 @@ const HeaderSearch = () => {
     getData();
   }, [debouncedQuery]);
 
-  console.log(searchResults);
-
   // control search input
   const handleChangeInput = (e) => {
     setQuery(e.target.value);
@@ -29,7 +28,9 @@ const HeaderSearch = () => {
 
   return (
     <div className="relative">
+      {/* search form */}
       <Form action="" className="relative z-20 text-gray-950">
+        {/* search input */}
         <input
           type="search"
           name="search"
@@ -38,6 +39,7 @@ const HeaderSearch = () => {
           onChange={handleChangeInput}
           value={query}
         />
+        {/* search button */}
         <button
           type="submit"
           className="absolute right-0 top-0 opacity-75 p-2 text-2xl scale-125 hover:opacity-100 transition-opacity"
