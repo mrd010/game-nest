@@ -1,7 +1,6 @@
 import { useDebounce } from '@uidotdev/usehooks';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Form } from 'react-router-dom';
+import { Form, useNavigation } from 'react-router-dom';
 import SearchResult from './SearchResult';
 import { getSearchResults } from '../services/dataFetchers';
 
@@ -25,6 +24,15 @@ const HeaderSearch = () => {
   const handleChangeInput = (e) => {
     setQuery(e.target.value);
   };
+
+  // clear search and search results when change pages
+  const { state } = useNavigation();
+  useEffect(() => {
+    if (state === 'loading') {
+      setQuery('');
+      setSearchResults(null);
+    }
+  }, [state]);
 
   return (
     <div className="relative group">
@@ -58,5 +66,5 @@ const HeaderSearch = () => {
     </div>
   );
 };
-HeaderSearch.propTypes = {};
+
 export default HeaderSearch;
