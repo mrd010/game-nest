@@ -15,6 +15,7 @@ import SimpleCarousel from '../components/SimpleCarousel';
 import VideoListItem from '../components/VideoListItem';
 import VideoPlayerOverlay from '../components/VideoPlayerOverlay';
 import ScreenshotsOverlay from '../components/ScreenshotsOverlay';
+import FreeGameLabel from '../components/FreeGameLabel';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
@@ -99,7 +100,7 @@ const GameDetails = () => {
   return (
     <MainContentContainer className="bg-opacity-10 text-gray-50">
       {/* header of page */}
-      <header className="grid grid-cols-2 gap-6">
+      <header className="grid grid-cols-2 gap-6 relative">
         {/* game header image left */}
         <div>
           <LazyLoadImage
@@ -112,7 +113,11 @@ const GameDetails = () => {
         </div>
         {/* game header info right */}
         <div className="grid grid-rows-[minmax(0,1fr)_auto_auto] p-4 gap-6">
-          {gameData.is_free && <span>Free</span>}
+          {gameData.is_free && (
+            <div className="absolute -top-2 left-2 scale-125">
+              <FreeGameLabel></FreeGameLabel>
+            </div>
+          )}
           {/* game name */}
           <h1 className="text-5xl font-extrabold line-clamp-2 drop-shadow">{gameData.name}</h1>
           <div className="grid grid-cols-2">
