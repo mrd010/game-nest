@@ -37,7 +37,7 @@ const HeaderSearch = () => {
   return (
     <div className="relative group">
       {/* search form */}
-      <Form action="" className="relative z-20 text-gray-950">
+      <Form action="/search" className="relative z-20 text-gray-950">
         {/* search input */}
         <input
           type="search"
@@ -45,6 +45,7 @@ const HeaderSearch = () => {
           placeholder="Search for games"
           className="w-full rounded-3xl p-2 pl-4 border-none outline-none text-lg bg-gray-50"
           onChange={handleChangeInput}
+          autoComplete="off"
           value={query}
         />
         {/* search button */}
