@@ -27,7 +27,7 @@ const HeaderSearch = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative group">
       {/* search form */}
       <Form action="" className="relative z-20 text-gray-950">
         {/* search input */}
@@ -49,7 +49,7 @@ const HeaderSearch = () => {
       </Form>
       {/* search results */}
       {searchResults && (
-        <ul className="grid grid-flow-row absolute top-[50%] w-full z-10 bg-gray-50 text-gray-900 rounded-b-3xl shadow-lg pt-8 pb-4">
+        <ul className="hidden grid-flow-row overflow-hidden absolute top-[50%] w-full z-10 bg-gray-50 text-gray-900 rounded-b-3xl shadow-lg pt-6 group-focus-within:grid">
           {searchResults.map((result) => (
             <SearchResult key={result.appid} {...result}></SearchResult>
           ))}
