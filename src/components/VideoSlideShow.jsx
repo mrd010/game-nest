@@ -15,9 +15,9 @@ const VideoSlideShow = ({ videoList }) => {
   const currentVideo = videoList.find((video) => video.target.id === selectedId);
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10">
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10 xl:grid-rows-[auto_minmax(0,1fr)] xl:grid-cols-1 mb">
       {/* playing video */}
-      <div className="grid grid-rows-[minmax(0,1fr)_auto]">
+      <div className="grid grid-rows-[minmax(0,1fr)_auto] xl:gap-4 xl:flex xl:flex-col-reverse">
         {/* player */}
         <VideoPlayer
           lqUrl={getCleanUrl(currentVideo.webm['480'])}
@@ -27,16 +27,16 @@ const VideoSlideShow = ({ videoList }) => {
         ></VideoPlayer>
 
         {/* video details */}
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] h-24 border-[1px] rounded-md border-gray-900">
-          <div className="flex flex-col flex-nowrap gap-1 m-4">
-            <h3 className="font-bold text-3xl">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] h-24 xl:h-auto border-[1px] xl:border-none to-yellow-300 from-amber-500 xl:bg-gradient-to-br rounded-md border-gray-900">
+          <div className="flex flex-col flex-nowrap gap-1 m-4 ">
+            <h3 className="font-bold text-3xl xl:text-4xl">
               <Link to={`/games/${selectedId}`} className="hover:text-yellow-600">
                 {currentVideo.target.name}
               </Link>
             </h3>
             {currentVideo.name.length >= 10 &&
               currentVideo.target.name.toLowerCase() !== currentVideo.name.toLowerCase() &&
-              !currentVideo.name.includes('_') && <p>{currentVideo.name}</p>}
+              !currentVideo.name.includes('_') && <p className="xl:text-lg">{currentVideo.name}</p>}
           </div>
           <div className="self-center px-5">
             <AvailableOSs
@@ -49,8 +49,8 @@ const VideoSlideShow = ({ videoList }) => {
         </div>
       </div>
       {/* video list */}
-      <div className="grid gap-4">
-        <div className="grid grid-rows-4 gap-4">
+      <div className="grid gap-4 xl:flex xl:flex-col">
+        <div className="grid grid-rows-4 gap-4 xl:grid-cols-4 xl:grid-rows-1">
           {videoList.map((video) => (
             <VideoListItem
               key={video.target.id}
@@ -58,7 +58,7 @@ const VideoSlideShow = ({ videoList }) => {
               name={video.name}
               thumbnail={getCleanUrl(video.thumbnail)}
               onSelect={() => setSelectedId(video.target.id)}
-              className="grid grid-cols-[200px_200px] gap-4"
+              className="grid grid-cols-[200px_200px] gap-4 xl:grid-cols-1 xl:grid-rows-[auto_1fr] xl:gap-2 xl:items-start"
             ></VideoListItem>
           ))}
         </div>

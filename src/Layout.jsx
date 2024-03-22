@@ -22,7 +22,9 @@ const Layout = () => {
       <Header categories={categories}></Header>
       {/* main content */}
       <div className="relative h-full">
-        <main className={`w-[1280px] mx-auto p-3 ${state === 'idle' ? 'block' : 'hidden'}`}>
+        <main
+          className={`w-[1280px] mx-auto p-3 xl:w-full ${state === 'idle' ? 'block' : 'hidden'}`}
+        >
           <Outlet context={categories}></Outlet>
         </main>
         {state === 'loading' && (

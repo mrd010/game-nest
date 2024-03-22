@@ -12,6 +12,7 @@ const VideoListItem = ({
 }) => {
   return (
     <button className={`group ${className}`} onClick={() => onSelect(id, name)}>
+      {/* thumbnail */}
       <div className="relative aspect-video shadow-sm">
         <img
           src={thumbnail}
@@ -20,7 +21,7 @@ const VideoListItem = ({
         ></img>
         {!iconCentered && (
           <div
-            className={`text-gray-50 absolute bottom-2 left-4 scale-[180%] opacity-75 group-hover:opacity-100`}
+            className={`text-gray-50 absolute bottom-2 left-4 scale-[180%] xl:scale-[200%]  opacity-75 group-hover:opacity-100`}
           >
             <span className="material-symbols-rounded">play_circle</span>
           </div>
@@ -31,10 +32,17 @@ const VideoListItem = ({
           </div>
         )}
       </div>
-      <div className="group-hover:text-yellow-600 flex flex-col gap-3 py-1">
-        {gameName && <h4 className="font-bold text-lg leading-5">{gameName}</h4>}
+      {/* details */}
+      <div className="group-hover:text-yellow-600 flex flex-col gap-3 py-1 xl:gap-2 xl:items-start">
+        {gameName && (
+          <h4 className="font-bold text-lg leading-5 xl:leading-none xl:line-clamp-1 xl:text-left">
+            {gameName}
+          </h4>
+        )}
         {name.length >= 10 && (
-          <p className="break-words text-sm leading-5 line-clamp-3 opacity-75">{name}</p>
+          <p className="break-words text-sm leading-5 line-clamp-3 xl:leading-none opacity-75 xl:line-clamp-2">
+            {name}
+          </p>
         )}
       </div>
     </button>

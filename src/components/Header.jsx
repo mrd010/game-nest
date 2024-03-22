@@ -7,7 +7,7 @@ const Header = ({ categories }) => {
   // top header of app
   return (
     <header className="bg-gray-950 text-gray-50 min-w-min z-[100]">
-      <div className="grid grid-cols-[auto_auto_1fr] items-center content-center mx-auto w-[1280px] justify-between gap-8">
+      <div className="grid grid-cols-[auto_auto_1fr] items-center content-center mx-auto w-[1280px] justify-between gap-8 xl:w-full">
         {/* header title - app title */}
         <div className="mr-10 p-4">
           <h1>

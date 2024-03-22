@@ -56,7 +56,7 @@ const Home = () => {
       </section>
       {/* videos if available*/}
       {refinedTrailersData && (
-        <section className="flex flex-col gap-5 h-[750px]">
+        <section className="flex flex-col gap-5 h-[750px] xl:h-auto">
           <HomeSectionTitle>Latest Videos</HomeSectionTitle>
           <VideoSlideShow videoList={refinedTrailersData.slice(0, 4)}></VideoSlideShow>
         </section>
