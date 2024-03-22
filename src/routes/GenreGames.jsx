@@ -33,7 +33,7 @@ const GenreGames = () => {
             categoryData.items &&
             categoryData.items.length > 0 && (
               <GamesInGenreSection
-                key={categoryData.name}
+                key={name + categoryData.name}
                 name={categoryData.name}
                 items={extractJustGames(categoryData.items)}
               ></GamesInGenreSection>
