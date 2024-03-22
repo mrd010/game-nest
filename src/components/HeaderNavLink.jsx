@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 
-const HeaderNavLink = ({ text, link, children }) => {
+const HeaderNavLink = ({ text, link, children, isHandheldDevice }) => {
   const [opened, setOpened] = useState(false);
 
   // a timer for delaying menu open
@@ -25,20 +25,28 @@ const HeaderNavLink = ({ text, link, children }) => {
 
   // links in header of page which navigates to different main pages of app
   return (
-    <div className="relative grid items-center pr-8" onMouseLeave={handleCloseMenu}>
+    <div className="relative grid items-center pr-8 lg:p-0" onMouseLeave={handleCloseMenu}>
       {/* main link */}
       <Link
         to={link}
-        className={`font-semibold text-lg py-2 px-4 text-center rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
-        onMouseEnter={handleShowMenu}
-        onClick={handleCloseMenu}
+        className={`font-semibold text-lg lg:text-xl py-2 px-4 text-center lg:text-left rounded-md lg:rounded-none transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
+        onMouseEnter={() => {
+          if (!isHandheldDevice) {
+            handleShowMenu();
+          }
+        }}
+        onClick={() => {
+          if (!isHandheldDevice) {
+            handleCloseMenu();
+          }
+        }}
       >
         {text}
       </Link>
       {/* sub menu - items come from parent*/}
-      {children && opened && (
+      {children && (opened || isHandheldDevice) && (
         <div
-          className={`absolute z-20 w-max text-gray-800 bg-gray-100 shadow-2xl rounded-b border-x-[3px] top-full -left-5 grid gap-x-10 p-6 pb-10 grid-flow-col auto-cols-[200px]`}
+          className={`absolute lg:static z-20 w-max lg:w-full text-gray-800 lg:text-gray-50 bg-gray-100 lg:bg-gray-800 shadow-2xl lg:shadow-none rounded-b lg rounded-none border-x-[3px] lg:border-none top-full -left-5 grid gap-x-10 p-6 pb-10 grid-flow-col auto-cols-[200px] lg:flex lg:flex-col lg:py-2 px-6`}
           style={{ gridTemplateRows: `repeat(${Math.ceil(children.length / 2)},minmax(0,1fr))` }}
         >
           {children}
@@ -52,6 +60,7 @@ HeaderNavLink.propTypes = {
   text: PropTypes.string.isRequired,
   link: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  isHandheldDevice: PropTypes.bool,
 };
 
 export default HeaderNavLink;
