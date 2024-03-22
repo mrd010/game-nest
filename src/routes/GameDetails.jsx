@@ -310,7 +310,7 @@ const GameDetails = () => {
                   src={getCleanUrl(image.path_thumbnail)}
                   width={600}
                   height={338}
-                  className="h-[150px] w-auto rounded"
+                  className="h-[150px] w-full rounded"
                 ></img>
               </button>
             ))}
