@@ -26,14 +26,13 @@ const GameDetails = () => {
   // url for whole page background
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
   useEffect(() => {
-    document.getElementById('main').style.backgroundImage = bgUrl;
-    return () => (document.getElementById('main').style.backgroundImage = 'none');
-  }, [bgUrl]);
-  // background color change for withdraw when no bg image available
-  useEffect(() => {
     document.getElementById('main').classList.add('dark-bg');
-    return () => document.getElementById('main').classList.remove('dark-bg');
-  }, []);
+    document.getElementById('main').style.backgroundImage = bgUrl;
+    return () => {
+      document.getElementById('main').classList.remove('dark-bg');
+      document.getElementById('main').style.backgroundImage = 'none';
+    };
+  }, [bgUrl]);
 
   // list of platforms game runs on
   const supportedPlatforms = Object.entries(gameData.platforms)
