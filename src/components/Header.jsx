@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import HeaderNavLink from './HeaderNavLink';
-import HeaderProfile from './HeaderProfile';
 import HeaderSearch from './HeaderSearch';
 import PropTypes from 'prop-types';
 
@@ -8,7 +7,7 @@ const Header = ({ categories }) => {
   // top header of app
   return (
     <header className="bg-gray-950 text-gray-50 min-w-min z-[100]">
-      <div className="grid grid-cols-[auto_auto_1fr_auto] items-center content-center mx-auto w-[1280px] justify-between gap-8">
+      <div className="grid grid-cols-[auto_auto_1fr] items-center content-center mx-auto w-[1280px] justify-between gap-8">
         {/* header title - app title */}
         <div className="mr-10 p-4">
           <h1>
@@ -37,12 +36,8 @@ const Header = ({ categories }) => {
           <HeaderNavLink text="Videos" link="/videos"></HeaderNavLink>
         </nav>
         {/* search bar */}
-        <div>
+        <div className="px-2">
           <HeaderSearch></HeaderSearch>
-        </div>
-        {/* profile section - its login button or profile icon */}
-        <div>
-          <HeaderProfile isLoggedIn={false}></HeaderProfile>
         </div>
       </div>
     </header>
