@@ -5,9 +5,14 @@ import PageNavNumbers from './PageNavNumbers';
 import TabListPreviewPanel from '../components/TabListGamePreview';
 import TabMenu from './TabMenu';
 import { useTabs } from '../hooks/useTabs';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 const TabbedCategories = ({ categoriesData }) => {
   // tabbed list with tabs for each key in categoriesData
+
+  // check if device is handheld
+  const { isHandheldDevice } = useOutletContext();
+  const navigate = useNavigate();
 
   const { selectedTabIndex, changeTab } = useTabs(() => setPageNumber(0));
   // pagination for each category with number of items greater than 10
@@ -25,6 +30,12 @@ const TabbedCategories = ({ categoriesData }) => {
   };
 
   const handleChangeActiveGameInCats = (steamId) => {
+    // if device is handheld don't show preview panel
+    // instead navigate to game page
+    if (isHandheldDevice) {
+      navigate(`/games/${steamId}`);
+      return;
+    }
     setSelectedGameInCats(steamId);
   };
 
@@ -65,9 +76,13 @@ const TabbedCategories = ({ categoriesData }) => {
             )
           }
         </div>
-        <div className={`transition-all duration-500 ${selectedGameInCats ? 'w-[500px]' : 'w-0'}`}>
-          <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>
-        </div>
+        {!isHandheldDevice && (
+          <div
+            className={`transition-all duration-500 ${selectedGameInCats ? 'w-[500px]' : 'w-0'}`}
+          >
+            <TabListPreviewPanel id={selectedGameInCats}></TabListPreviewPanel>
+          </div>
+        )}
       </div>
     </div>
   );
