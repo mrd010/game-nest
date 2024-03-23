@@ -35,12 +35,12 @@ const VideoListItem = ({
       {/* details */}
       <div className="group-hover:text-yellow-600 flex flex-col gap-3 py-1 xl:gap-2 xl:items-start">
         {gameName && (
-          <h4 className="font-bold text-lg leading-5 xl:leading-none xl:line-clamp-1 xl:text-left">
+          <h4 className="font-bold text-lg leading-5 xl:leading-none xl:line-clamp-1 text-left">
             {gameName}
           </h4>
         )}
         {name.length >= 10 && (
-          <p className="break-words text-sm leading-5 line-clamp-3 xl:leading-none opacity-75 xl:line-clamp-2">
+          <p className="break-words text-left text-sm leading-5 line-clamp-3 xl:leading-none opacity-75 xl:line-clamp-2">
             {name}
           </p>
         )}
