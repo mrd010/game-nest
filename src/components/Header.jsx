@@ -25,8 +25,8 @@ const Header = ({ categories, isHandheldDevice }) => {
 
   // top header of app
   return (
-    <header className="bg-gray-950 text-gray-50 min-w-min z-[100] lg:px-4">
-      <div className="grid grid-cols-[auto_auto_1fr] items-center content-center mx-auto w-[1280px] justify-between gap-8 xl:w-full">
+    <header className="bg-gray-950 text-gray-50 min-w-min z-[100] xl:px-6 lg:px-2">
+      <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] items-center content-center mx-auto w-[1280px] justify-between gap-8 xl:w-full">
         {/* hamburger button for handheld devices */}
         {isHandheldDevice && (
           <button onClick={handleOpenMenu} className="scale-150 px-4 grid place-items-center">
