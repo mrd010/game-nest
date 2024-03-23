@@ -21,7 +21,7 @@ const TabListGamePreview = ({ id }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // list of all game genres loaded
-  const genreList = useOutletContext();
+  const { categories } = useOutletContext();
 
   // if data fetched and data is for this id and it fetched with succuss set game data
   const { status, gameData } = extractGameData(data);
@@ -150,7 +150,7 @@ const TabListGamePreview = ({ id }) => {
               gameData.genres && (
                 <MiniCategoriesList
                   categoryList={gameData.genres.filter((genre) =>
-                    genreList.includes(genre.description)
+                    categories.includes(genre.description)
                   )}
                 ></MiniCategoriesList>
               )
