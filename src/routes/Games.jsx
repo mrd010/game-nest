@@ -5,7 +5,7 @@ import MainContentContainer from '../components/MainContentContainer';
 
 const Games = () => {
   // get categories from app parent
-  const categories = useOutletContext();
+  const { categories } = useOutletContext();
   const [currentSubCats, setCurrentSubCats] = useState(null);
 
   return (
