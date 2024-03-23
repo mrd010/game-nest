@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 import MainContentContainer from '../components/MainContentContainer';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import HomeSectionTitle from '../components/HomeSectionTitle';
@@ -16,12 +16,15 @@ import VideoListItem from '../components/VideoListItem';
 import VideoPlayerOverlay from '../components/VideoPlayerOverlay';
 import ScreenshotsOverlay from '../components/ScreenshotsOverlay';
 import FreeGameLabel from '../components/FreeGameLabel';
+import AvailableOSs from '../components/AvailableOSs';
 
 const GameDetails = () => {
   const gameData = useLoaderData();
   const initialDlcData = gameData.dlc ?? null;
   const [dlcsInfo, setDlcsInfo] = useState(initialDlcData);
   const [modalContent, setModalContent] = useState(null);
+
+  const { isHandheldDevice } = useOutletContext();
 
   // url for whole page background
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
@@ -97,9 +100,9 @@ const GameDetails = () => {
       : null;
 
   return (
-    <MainContentContainer className="bg-opacity-10 text-gray-50">
+    <MainContentContainer className="bg-opacity-10 text-gray-50 xl:w-full">
       {/* header of page */}
-      <header className="grid grid-cols-2 gap-6 relative">
+      <header className="grid grid-cols-2 gap-6 xl:gap-2 lg:items-start relative">
         {/* game header image left */}
         <div>
           <LazyLoadImage
@@ -107,70 +110,85 @@ const GameDetails = () => {
             alt={gameData.name}
             width={616}
             height={353}
-            className="rounded-md"
+            className="rounded-md xl:w-full"
           ></LazyLoadImage>
         </div>
         {/* game header info right */}
-        <div className="grid grid-rows-[minmax(0,1fr)_auto_auto] p-4 gap-6">
+        <div className="grid grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_auto] p-4 gap-6 xl:gap-4">
           {gameData.is_free && (
             <div className="absolute -top-2 left-2 scale-125">
               <FreeGameLabel></FreeGameLabel>
             </div>
           )}
           {/* game name */}
-          <h1 className="text-5xl font-extrabold line-clamp-2 drop-shadow">{gameData.name}</h1>
-          <div className="grid grid-cols-2">
+          <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 drop-shadow lg:col-span-2">
+            {gameData.name}
+          </h1>
+          <div className="grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
             {/* release date */}
-            <div className="flex flex-nowrap flex-col">
-              <h3 className="text-xl font-bold">Release Date</h3>
-              <span className="text-3xl text-gray-50/60 font-light">
+            <div className="flex flex-nowrap flex-col lg:flex-row lg:gap-2">
+              <h3 className="text-xl xl:text-lg font-bold">Release Date</h3>
+              <span className="text-3xl xl:text-xl text-gray-50/60 font-light">
                 {gameData.release_date ? gameData.release_date.date : 'TBA'}
               </span>
             </div>
             {/* supported platforms */}
             {gameData.platforms && (
-              <div className="flex flex-col rounded-full">
-                <h3 className="text-xl font-bold px-3">Platforms</h3>
-                <ul className="flex flex-nowrap flex-row divide-x-2 divide-gray-200/30">
-                  {
-                    // display all platforms and colorize those available
-                    Object.entries(gameData.platforms).map((platform) => (
-                      <li
-                        key={platform[0]}
-                        className={`px-3 text-3xl font-light ${platform[1] ? 'text-gray-50' : 'text-gray-50/25'}`}
-                      >
-                        {platform[0]}
-                      </li>
-                    ))
-                  }
-                </ul>
+              <div className="flex flex-col rounded-full lg:flex-row lg:items-center lg:gap-2">
+                <h3 className="text-xl xl:text-lg font-bold px-3 lg:px-0">Platforms</h3>
+                {!isHandheldDevice ? (
+                  <ul className="flex flex-nowrap flex-row divide-x-2 divide-gray-200/30">
+                    {
+                      // display all platforms and colorize those available
+                      Object.entries(gameData.platforms).map((platform) => (
+                        <li
+                          key={platform[0]}
+                          className={`px-3 text-3xl xl:text-xl font-light ${platform[1] ? 'text-gray-50' : 'text-gray-50/25'}`}
+                        >
+                          {platform[0]}
+                        </li>
+                      ))
+                    }
+                  </ul>
+                ) : (
+                  <div className="bg-gray-50 rounded-full">
+                    <AvailableOSs
+                      linux={gameData.platforms?.linux}
+                      win={gameData.platforms?.windows}
+                      mac={gameData.platforms?.mac}
+                      iconSize={18}
+                    ></AvailableOSs>
+                  </div>
+                )}
               </div>
             )}
           </div>
           {/* scores */}
-          <div className="grid grid-cols-[auto_1fr] gap-x-4  grid-rows-[auto_minmax(0,1fr)] items-center">
+          <div className="grid grid-cols-[auto_1fr] gap-x-4  grid-rows-[auto_minmax(0,1fr)] items-center lg:items-end lg:self-end">
             {/* meta score number */}
             {gameData.metacritic && (
               <>
-                <div className="row-span-2">
+                <div className="row-span-2 lg:shadow-md">
                   <GameScore.GameScoreRateMeta
                     score={gameData.metacritic.score}
-                    className="text-5xl size-20 font-bold"
+                    className="text-5xl size-20 lg:size-16 lg:text-3xl font-bold"
                   ></GameScore.GameScoreRateMeta>
                 </div>
                 {/* meta link */}
-                <a
-                  href={getCleanUrl(gameData.metacritic.url)}
-                  target="_blank"
-                  className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 hover:text-yellow-400/85 active:text-yellow-400/85"
-                >
-                  <span className="text-2xl">Metacritic</span>
-                  <span className="material-symbols-rounded scale-75">open_in_new</span>
-                </a>
+                {!isHandheldDevice && (
+                  <a
+                    href={getCleanUrl(gameData.metacritic.url)}
+                    target="_blank"
+                    className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 hover:text-yellow-400/85 active:text-yellow-400/85"
+                  >
+                    <span className="text-2xl">Metacritic</span>
+                    <span className="material-symbols-rounded scale-75">open_in_new</span>
+                  </a>
+                )}
               </>
             )}
             {/* recommendations */}
-            {gameData.recommendations && (
+            {gameData.recommendations && !isHandheldDevice && (
               <p className="text-lg text-gray-50/60 self-start">
                 Recommended by{' '}
                 <span className="text-gray-50 font-bold text-xl">
@@ -197,7 +215,7 @@ const GameDetails = () => {
               </div>
             )}
             {/* game developers and publishers */}
-            <div className="grid grid-cols-2 pl-4 pb-2">
+            <div className="grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-3 pl-4 pb-2">
               {gameData?.developers.length && (
                 <PubDevRow>
                   <PubDevRow.Title>
@@ -236,14 +254,14 @@ const GameDetails = () => {
       {/* system requirements */}
       <section>
         <HomeSectionTitle>System Requirements</HomeSectionTitle>
-        <div className="grid grid-cols-3 grid-rows-[auto_auto] grid-flow-col-dense gap-8 py-4">
+        <div className="grid grid-cols-3 lg:grid-cols-2 grid-rows-[auto_auto] lg:grid-rows-1 grid-flow-col-dense gap-8 py-4 lg:gap-4">
           {Object.entries(systemRequirements).map((sysRequirement) => {
             const isLinuxOrMac = ['linux', 'mac'].includes(sysRequirement[0]);
             return (
               // container for all sys req
               <div
                 key={sysRequirement[0]}
-                className={`px-6 py-4 bg-gradient-to-tl from-gray-900/10 to-slate-950/20 rounded-2xl ${isLinuxOrMac ? 'row-span-1' : 'row-span-2'}`}
+                className={`px-6 py-4 bg-gradient-to-tl from-gray-900/10 to-slate-950/20 rounded-2xl ${isLinuxOrMac ? 'row-span-1 lg:hidden' : 'row-span-2'}`}
               >
                 {/* title */}
                 <h4
@@ -297,9 +315,9 @@ const GameDetails = () => {
       )}
       {/* screenshots slider */}
       {gameData?.screenshots?.length && (
-        <section>
+        <section className="xl:w-full">
           <HomeSectionTitle>Screenshots</HomeSectionTitle>
-          <SimpleCarousel className="h-[190px]">
+          <SimpleCarousel className="h-[190px] w-full">
             {gameData.screenshots.map((image) => (
               <button
                 key={image.id}
