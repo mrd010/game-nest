@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { getCleanUrl } from '../services/utilities';
 import VideoListItem from './VideoListItem';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import ButtonLink from './ButtonLink';
 import AvailableOSs from './AvailableOSs';
 import VideoPlayer from './VideoPlayer';
@@ -13,6 +13,8 @@ const VideoSlideShow = ({ videoList }) => {
   const [selectedId, setSelectedId] = useState(firstVideo);
 
   const currentVideo = videoList.find((video) => video.target.id === selectedId);
+
+  const { isHandheldDevice } = useOutletContext();
 
   return (
     <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10 xl:grid-rows-[auto_minmax(0,1fr)] xl:grid-cols-1 mb">
@@ -29,7 +31,7 @@ const VideoSlideShow = ({ videoList }) => {
         {/* video details */}
         <div className="grid grid-cols-[minmax(0,1fr)_auto] h-24 xl:h-auto border-[1px] xl:border-none to-yellow-300 from-amber-500 xl:bg-gradient-to-br rounded-md border-gray-900">
           <div className="flex flex-col flex-nowrap gap-1 m-4 ">
-            <h3 className="font-bold text-3xl xl:text-4xl">
+            <h3 className="font-bold text-3xl xl:text-4xl lg:text-2xl lg:underline">
               <Link to={`/games/${selectedId}`} className="hover:text-yellow-600">
                 {currentVideo.target.name}
               </Link>
@@ -43,7 +45,7 @@ const VideoSlideShow = ({ videoList }) => {
               mac={currentVideo.target.mac_available}
               linux={currentVideo.target.linux_available}
               win={currentVideo.target.windows_available}
-              iconSize={32}
+              iconSize={isHandheldDevice ? 24 : 32}
             ></AvailableOSs>
           </div>
         </div>
