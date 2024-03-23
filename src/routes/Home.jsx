@@ -10,7 +10,6 @@ import {
 import NewsSection from '../components/NewsSection';
 import VideoSlideShow from '../components/VideoSlideShow';
 import HomeSectionTitle from '../components/HomeSectionTitle';
-import SimpleCarousel from '../components/SimpleCarousel';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
@@ -34,32 +33,18 @@ const Home = () => {
   );
 
   return (
-    <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:px-4">
+    <div className="flex flex-col flex-nowrap gap-10 lg:w-screen">
       {/* recommended games */}
       {recommendedGames.length && (
-        <section className="my-5 lg:my-0">
-          {isHandheldDevice ? (
-            <>
-              <HomeSectionTitle>Recommended Games</HomeSectionTitle>
-              <SimpleCarousel className="lg:items-stretch">
-                {recommendedGames.map((game) => (
-                  // create carousel with recommended games (games released recently and have high meta score)
-                  <div key={game.steamAppID} className="w-[275px] px-2">
-                    <RecommendedCard {...game}></RecommendedCard>
-                  </div>
-                ))}
-              </SimpleCarousel>
-            </>
-          ) : (
-            <Carousel title="Recommended Games" itemWidth={300} steps={3}>
-              {recommendedGames.map((game) => (
-                // create carousel with recommended games (games released recently and have high meta score)
-                <div key={game.steamAppID} className="w-[300px] px-2">
-                  <RecommendedCard {...game}></RecommendedCard>
-                </div>
-              ))}
-            </Carousel>
-          )}
+        <section className="my-5">
+          <Carousel title="Recommended Games" itemWidth={300} steps={3}>
+            {recommendedGames.map((game) => (
+              // create carousel with recommended games (games released recently and have high meta score)
+              <div key={game.steamAppID} className="w-[300px] px-2">
+                <RecommendedCard {...game}></RecommendedCard>
+              </div>
+            ))}
+          </Carousel>
         </section>
       )}
       {/* game news */}
