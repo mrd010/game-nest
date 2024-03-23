@@ -2,13 +2,11 @@ import { Link, useNavigation } from 'react-router-dom';
 import HeaderNavLink from './HeaderNavLink';
 import HeaderSearch from './HeaderSearch';
 import PropTypes from 'prop-types';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import { useEffect, useState } from 'react';
 
-const Header = ({ categories }) => {
+const Header = ({ categories, isHandheldDevice }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   // a query to check if device is not desktop
-  const isHandheldDevice = useMediaQuery('only screen and (max-width:1023px)');
 
   const handleOpenMenu = () => {
     setMenuIsOpen(true);
@@ -93,6 +91,7 @@ const Header = ({ categories }) => {
 
 Header.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isHandheldDevice: PropTypes.bool.isRequired,
 };
 
 export default Header;
