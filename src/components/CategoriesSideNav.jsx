@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
-import { NavLink, useOutletContext } from 'react-router-dom';
-import { toKebabCase } from '../services/utilities';
-const CategoriesSideNav = ({ categoryList, subCategories }) => {
-  const isHandheldDevice = useOutletContext();
+import { NavLink } from 'react-router-dom';
+const CategoriesSideNav = ({ categoryList }) => {
   return (
     <nav
       className={`w-[300px] xl:w-max lg:w-full lg:sticky lg:py-4 lg:border-b-2 lg:bg-gray-50 lg:top-0 lg:z-[60] `}
@@ -20,28 +18,15 @@ const CategoriesSideNav = ({ categoryList, subCategories }) => {
         </li>
         {/* categories nav link */}
         {categoryList.map((category) => (
-          <li key={category} className="">
+          <li key={category}>
             <NavLink
               to={`/browse/${category}`}
               className={({ isActive, isPending, isTransitioning }) =>
-                `text-lg lg:text-base lg:rounded-full lg:border-[2px] w-full px-6 inline-block py-2 lg:py-1 transition-[padding] lg:transition-none text-gray-800/75 hover:bg-gradient-to-r from-transparent to-transparent via-10% lg:text-nowrap ${isActive ? 'via-yellow-200/90 lg:via-yellow-300/85 bg-gradient-to-r font-bold peer py-4 lg:py-2 is-active lg:bg-yellow-400 lg:border-amber-400/80' : isPending || isTransitioning ? 'via-gray-400/30 bg-gradient-to-r font-bold' : 'via-gray-500/10'}`
+                `text-lg lg:text-base lg:rounded-full lg:border-[2px] w-full px-6 inline-block py-2 lg:py-1 transition-[padding] lg:transition-none text-gray-800/75 hover:bg-gradient-to-r from-transparent to-transparent via-10% lg:text-nowrap ${isActive ? 'via-yellow-200/90 lg:via-yellow-300/85 bg-gradient-to-r font-bold peer py-4 lg:py-1 is-active lg:bg-yellow-400 lg:border-amber-400/80' : isPending || isTransitioning ? 'via-gray-400/30 bg-gradient-to-r font-bold' : 'via-gray-500/10'}`
               }
             >
               {category}
             </NavLink>
-            {!isHandheldDevice && subCategories && (
-              <nav className="flex-col hidden flex-nowrap peer-[.is-active]:flex pl-6">
-                {subCategories.map((subCat) => (
-                  <a
-                    className="py-2 px-4 text-sm text-gray-800/80 rounded-sm font-bold opacity-50 hover:opacity-100 hover:border-l-4 border-yellow-300/80"
-                    key={subCat}
-                    href={`#${toKebabCase(subCat)}`}
-                  >
-                    {subCat}
-                  </a>
-                ))}
-              </nav>
-            )}
           </li>
         ))}
       </ul>
@@ -50,6 +35,5 @@ const CategoriesSideNav = ({ categoryList, subCategories }) => {
 };
 CategoriesSideNav.propTypes = {
   categoryList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  subCategories: PropTypes.arrayOf(PropTypes.string),
 };
 export default CategoriesSideNav;
