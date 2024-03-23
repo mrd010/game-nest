@@ -9,7 +9,7 @@ const Games = () => {
   const [currentSubCats, setCurrentSubCats] = useState(null);
 
   return (
-    <div className="grid grid-cols-[auto_1fr] gap-5">
+    <div className="grid grid-cols-[auto_1fr] gap-5 lg:grid-cols-1 lg:grid-flow-row">
       {/* side nav categories */}
       <CategoriesSideNav
         categoryList={categories}
