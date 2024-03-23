@@ -20,14 +20,14 @@ const Layout = () => {
 
   return (
     <div
-      className="font-Lato min-h-screen bg-no-repeat bg-cover bg-center bg-fixed grid grid-rows-[auto_1fr]"
+      className="font-Lato min-h-screen bg-no-repeat bg-cover bg-center bg-fixed grid grid-rows-[auto_1fr] xl:overflow-x-hidden"
       id="main"
     >
       <Header categories={categories} isHandheldDevice={isHandheldDevice}></Header>
       {/* main content */}
-      <div className="relative h-full">
+      <div className="relative h-full xl:overflow-x-hidden">
         <main
-          className={`w-[1280px] mx-auto p-3 xl:w-full ${state === 'idle' ? 'block' : 'hidden'}`}
+          className={`w-[1280px] mx-auto p-3 lg:px-0 xl:w-full ${state === 'idle' ? 'block' : 'hidden'}`}
         >
           <Outlet context={{ categories, isHandheldDevice }}></Outlet>
         </main>
