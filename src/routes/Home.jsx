@@ -10,6 +10,8 @@ import {
 import NewsSection from '../components/NewsSection';
 import VideoSlideShow from '../components/VideoSlideShow';
 import HomeSectionTitle from '../components/HomeSectionTitle';
+import { useMediaQuery } from '@uidotdev/usehooks';
+import SimpleCarousel from '../components/SimpleCarousel';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
@@ -31,21 +33,35 @@ const Home = () => {
     refinedCategoriesData.top_sellers
   );
 
+  // query for check if device is handhel
+  const isHandheldDevice = useMediaQuery('only screen and (max-width:1023px)');
+
   return (
-    <div className="flex flex-col flex-nowrap gap-10">
+    <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:px-4">
       {/* recommended games */}
-      <section className="my-5">
-        {recommendedGames.length && (
-          <Carousel title="Recommended Games" itemWidth={300} steps={3}>
-            {recommendedGames.map((game) => (
-              // create carousel with recommended games (games released recently and have high meta score)
-              <div key={game.steamAppID} className="w-[300px] px-2">
-                <RecommendedCard {...game}></RecommendedCard>
-              </div>
-            ))}
-          </Carousel>
-        )}
-      </section>
+      {recommendedGames.length && (
+        <section className="my-5 lg:my-0">
+          {isHandheldDevice ? (
+            <SimpleCarousel className="lg:items-stretch">
+              {recommendedGames.map((game) => (
+                // create carousel with recommended games (games released recently and have high meta score)
+                <div key={game.steamAppID} className="w-[275px] px-2">
+                  <RecommendedCard {...game}></RecommendedCard>
+                </div>
+              ))}
+            </SimpleCarousel>
+          ) : (
+            <Carousel title="Recommended Games" itemWidth={300} steps={3}>
+              {recommendedGames.map((game) => (
+                // create carousel with recommended games (games released recently and have high meta score)
+                <div key={game.steamAppID} className="w-[300px] px-2">
+                  <RecommendedCard {...game}></RecommendedCard>
+                </div>
+              ))}
+            </Carousel>
+          )}
+        </section>
+      )}
       {/* game news */}
       <section className="h-[280px]">
         <NewsSection importantGameIds={importantGamesIds}></NewsSection>
