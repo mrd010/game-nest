@@ -57,10 +57,12 @@ export const shuffled = (array) => {
   return shuffledArray;
 };
 
+// remove parameters from urls of api
 export const getCleanUrl = (url) => {
   return url.split('?')[0];
 };
 
+// convert seconds to 00:00 format
 export const secondsToMinutesPlus = (seconds) => {
   const minutes = secondsToMinutes(Math.floor(seconds));
   const remainedSeconds = Math.floor(seconds) % 60;
