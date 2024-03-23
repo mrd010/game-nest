@@ -42,14 +42,17 @@ const Home = () => {
       {recommendedGames.length && (
         <section className="my-5 lg:my-0">
           {isHandheldDevice ? (
-            <SimpleCarousel className="lg:items-stretch">
-              {recommendedGames.map((game) => (
-                // create carousel with recommended games (games released recently and have high meta score)
-                <div key={game.steamAppID} className="w-[275px] px-2">
-                  <RecommendedCard {...game}></RecommendedCard>
-                </div>
-              ))}
-            </SimpleCarousel>
+            <>
+              <HomeSectionTitle>Recommended Games</HomeSectionTitle>
+              <SimpleCarousel className="lg:items-stretch">
+                {recommendedGames.map((game) => (
+                  // create carousel with recommended games (games released recently and have high meta score)
+                  <div key={game.steamAppID} className="w-[275px] px-2">
+                    <RecommendedCard {...game}></RecommendedCard>
+                  </div>
+                ))}
+              </SimpleCarousel>
+            </>
           ) : (
             <Carousel title="Recommended Games" itemWidth={300} steps={3}>
               {recommendedGames.map((game) => (
