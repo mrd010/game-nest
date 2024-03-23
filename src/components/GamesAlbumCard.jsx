@@ -11,7 +11,7 @@ const GamesAlbumCard = ({ gameData }) => {
   return (
     <Link
       to={`/games/${gameData.appid}`}
-      className="group grid grid-cols-[auto_minmax(0,2fr)] gap-2 h-min items-center transition-opacity drop-shadow-md hover:drop-shadow-xl rounded-lg bg-slate-50 overflow-hidden min-h-[215px]"
+      className="group grid grid-cols-[auto_minmax(0,2fr)] xl:grid-cols-2 gap-2 h-min items-center transition-opacity drop-shadow-md hover:drop-shadow-xl rounded-lg bg-slate-50 overflow-hidden min-h-[215px]"
     >
       {
         // a fancy style container . no use
@@ -19,11 +19,11 @@ const GamesAlbumCard = ({ gameData }) => {
           <div className="absolute left-0 -top-12 w-full h-[420px] bg-gradient-to-t from-amber-500 to-yellow-300 -z-50 transition-transform duration-300 rotate-[62deg] -translate-x-[400px] group-hover:-translate-x-10"></div>
         )
       }
-      <div className="">
+      <div className="xl:h-full">
         <LazyLoadImage
           src={steamHeaderImage(gameData.appid)}
           placeholder={<div className="content-loader h-full w-full"></div>}
-          className={`shadow-md contrast-[110%] rounded-l-lg transition-transform duration-300 ${imageLoaded ? 'group-hover:scale-90 group-hover:rounded-lg' : ''}`}
+          className={`shadow-md contrast-[110%] xl:h-full xl:object-cover rounded-l-lg transition-transform duration-300 ${imageLoaded ? 'group-hover:scale-90 group-hover:rounded-lg' : ''}`}
           onLoad={() => setImageLoaded(true)}
         ></LazyLoadImage>
       </div>

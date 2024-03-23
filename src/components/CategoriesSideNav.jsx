@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { toKebabCase } from '../services/utilities';
 const CategoriesSideNav = ({ categoryList, subCategories }) => {
   return (
-    <nav className={`w-[300px]`}>
+    <nav className={`w-[300px] xl:w-max`}>
       <ul className="divide-y-2  sticky top-4">
         {/* main nav link (default page) */}
         <li className={`text-xl px-6 hover:text-yellow-600  `}>
