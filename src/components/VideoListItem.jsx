@@ -35,7 +35,7 @@ const VideoListItem = ({
       {/* details */}
       <div className="group-hover:text-yellow-600 flex flex-col gap-3 py-1 xl:gap-1 xl:items-start">
         {gameName && (
-          <h4 className="font-bold text-lg leading-5 xl:leading-normal xl:line-clamp-1 text-left">
+          <h4 className="font-bold text-lg lg:text-base leading-5 xl:leading-normal xl:line-clamp-1 text-left">
             {gameName.replaceAll('_', ' ')}
           </h4>
         )}

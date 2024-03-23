@@ -38,7 +38,7 @@ const Trailers = () => {
         desc={'Watch the most recent videos of games for pc'}
       ></MainContentHeader>
       {/* videos mini */}
-      <section className="grid grid-cols-4 gap-x-10 gap-y-16">
+      <section className="grid grid-cols-4 lg:grid-cols-3 gap-x-10 gap-y-16 xl:gap-y-10 lg:gap-y-8">
         {trailers.map((trailerData) => (
           <VideoListItem
             key={`${trailerData.target.id}${trailerData.name}`}
