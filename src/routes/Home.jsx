@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 import Carousel from '../components/Carousel';
 import RecommendedCard from '../components/RecommendedCard';
 import TabbedCategories from '../components/TabbedCategories';
@@ -10,11 +10,11 @@ import {
 import NewsSection from '../components/NewsSection';
 import VideoSlideShow from '../components/VideoSlideShow';
 import HomeSectionTitle from '../components/HomeSectionTitle';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import SimpleCarousel from '../components/SimpleCarousel';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
+  const { isHandheldDevice } = useOutletContext();
 
   // remove duplicate games from data
   const refinedCategoriesData = {
@@ -32,9 +32,6 @@ const Home = () => {
     recommendedGames,
     refinedCategoriesData.top_sellers
   );
-
-  // query for check if device is handhel
-  const isHandheldDevice = useMediaQuery('only screen and (max-width:1023px)');
 
   return (
     <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:px-4">
