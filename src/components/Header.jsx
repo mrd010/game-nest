@@ -43,7 +43,7 @@ const Header = ({ categories, isHandheldDevice }) => {
         </div>
         {/* app nav menu */}
         <nav
-          className={`grid grid-cols-3 h-full lg:fixed lg:z-[100] lg:top-0 lg:left-0 lg:h-screen w-full lg:bg-gray-900 lg:flex lg:flex-col lg:flex-nowrap items-center justify-center lg:transition-all lg:duration-500 ${!menuIsOpen ? 'lg:-translate-y-full' : 'lg:translate-y-0'}`}
+          className={`grid grid-cols-3 h-full lg:fixed lg:z-[100] lg:top-0 lg:left-0 w-full lg:bg-gray-900 lg:flex lg:flex-col lg:flex-nowrap items-center justify-center lg:transition-all lg:duration-500 ${!menuIsOpen ? 'lg:-translate-y-full' : 'lg:translate-y-0'}`}
         >
           {/* x button */}
           {isHandheldDevice && (
