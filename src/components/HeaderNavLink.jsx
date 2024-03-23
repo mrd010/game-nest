@@ -46,7 +46,7 @@ const HeaderNavLink = ({ text, link, children, isHandheldDevice }) => {
       {/* sub menu - items come from parent*/}
       {children && opened && !isHandheldDevice && (
         <div
-          className={`absolute lg:static z-20 w-max lg:w-full text-gray-800 lg:text-gray-50 bg-gray-100 lg:bg-gray-800 shadow-2xl lg:shadow-none rounded-b lg rounded-none border-x-[3px] lg:border-none top-full -left-5 grid gap-x-10 p-6 pb-10 grid-flow-col auto-cols-[200px] lg:flex lg:flex-col lg:py-2 px-6`}
+          className={`absolute lg:static w-max lg:w-full text-gray-800 lg:text-gray-50 bg-gray-100 lg:bg-gray-800 shadow-2xl lg:shadow-none rounded-b lg rounded-none border-x-[3px] lg:border-none top-full translate-y-4 -left-5 grid gap-x-10 p-6 pb-10 grid-flow-col auto-cols-[200px] lg:flex lg:flex-col lg:py-2 px-6`}
           style={{ gridTemplateRows: `repeat(${Math.ceil(children.length / 2)},minmax(0,1fr))` }}
         >
           {children}
