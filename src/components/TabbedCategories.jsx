@@ -48,7 +48,9 @@ const TabbedCategories = ({ categoriesData }) => {
       ></TabMenu>
       <div className="flex flex-nowrap gap-12 w-full h-[780px]">
         <div className="relative grow">
-          <div className={`flex flex-col group flex-nowrap divide-y-2 border-gray-950/50`}>
+          <div
+            className={`flex flex-col group flex-nowrap divide-y-[1px] divide-gray-300/50 border-gray-950/50`}
+          >
             {
               // divide items in pages and show active page items
               categoriesData[categoryIds[selectedTabIndex]]
