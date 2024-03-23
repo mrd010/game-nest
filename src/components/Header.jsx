@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 import HeaderNavLink from './HeaderNavLink';
 import HeaderSearch from './HeaderSearch';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from '@uidotdev/usehooks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Header = ({ categories }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -17,9 +17,17 @@ const Header = ({ categories }) => {
     setMenuIsOpen(false);
   };
 
+  // close menu on page navigation
+  const { state } = useNavigation();
+  useEffect(() => {
+    if (state === 'idle') {
+      handleCloseMenu();
+    }
+  }, [state]);
+
   // top header of app
   return (
-    <header className="bg-gray-950 text-gray-50 min-w-min z-[100]">
+    <header className="bg-gray-950 text-gray-50 min-w-min z-[100] lg:px-4">
       <div className="grid grid-cols-[auto_auto_1fr] items-center content-center mx-auto w-[1280px] justify-between gap-8 xl:w-full">
         {/* hamburger button for handheld devices */}
         {isHandheldDevice && (
@@ -37,12 +45,12 @@ const Header = ({ categories }) => {
         </div>
         {/* app nav menu */}
         <nav
-          className={`grid grid-cols-3 h-full lg:fixed lg:top-0 lg:left-0 lg:h-screen w-80 lg:bg-gray-900 lg:flex lg:flex-col lg:transition-all ${!menuIsOpen ? ' lg:-translate-x-96 lg:opacity-0' : 'lg:translate-x-0 lg:opacity-100'}`}
+          className={`grid grid-cols-3 h-full lg:fixed lg:z-[100] lg:top-0 lg:left-0 lg:h-screen w-full lg:bg-gray-900 lg:flex lg:flex-col lg:flex-nowrap items-center justify-center lg:transition-all lg:duration-500 ${!menuIsOpen ? 'lg:-translate-y-full' : 'lg:translate-y-0'}`}
         >
           {/* x button */}
           {isHandheldDevice && (
             <button
-              className="self-end m-4 scale-150 grid place-items-center"
+              className="grid place-items-center scale-[200%] absolute top-10 right-10"
               onClick={handleCloseMenu}
             >
               <span className="material-symbols-rounded">close</span>
@@ -75,7 +83,7 @@ const Header = ({ categories }) => {
         </nav>
 
         {/* search bar */}
-        <div className="px-2">
+        <div>
           <HeaderSearch></HeaderSearch>
         </div>
       </div>
