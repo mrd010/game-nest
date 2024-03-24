@@ -102,7 +102,7 @@ const GameDetails = () => {
   return (
     <MainContentContainer className="bg-opacity-10 text-gray-50 xl:w-full">
       {/* header of page */}
-      <header className="grid grid-cols-2 gap-6 xl:gap-2 lg:items-start relative">
+      <header className="grid grid-cols-2 gap-6 xl:gap-2 lg:flex lg:flex-col relative">
         {/* game header image left */}
         <div>
           <LazyLoadImage
@@ -116,26 +116,26 @@ const GameDetails = () => {
         {/* game header info right */}
         <div className="grid grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_auto] p-4 gap-6 xl:gap-4">
           {gameData.is_free && (
-            <div className="absolute -top-2 left-2 scale-125">
+            <div className="absolute -top-2 left-2 lg:top-0 opacity-85 lg:left-4 scale-125 lg:scale-150">
               <FreeGameLabel></FreeGameLabel>
             </div>
           )}
           {/* game name */}
-          <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 drop-shadow lg:col-span-2">
+          <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 lg:line-clamp-1 drop-shadow lg:col-span-2">
             {gameData.name}
           </h1>
-          <div className="grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
+          <div className="grid grid-cols-2 lg:items-center lg:gap-1">
             {/* release date */}
             <div className="flex flex-nowrap flex-col lg:flex-row lg:gap-2">
-              <h3 className="text-xl xl:text-lg font-bold">Release Date</h3>
+              <h3 className="text-xl xl:text-lg lg:text-xl font-bold">Release Date</h3>
               <span className="text-3xl xl:text-xl text-gray-50/60 font-light">
                 {gameData.release_date ? gameData.release_date.date : 'TBA'}
               </span>
             </div>
             {/* supported platforms */}
             {gameData.platforms && (
-              <div className="flex flex-col rounded-full lg:flex-row lg:items-center lg:gap-2">
-                <h3 className="text-xl xl:text-lg font-bold px-3 lg:px-0">Platforms</h3>
+              <div className="flex flex-col rounded-full lg:items-start lg:gap-2">
+                <h3 className="text-xl xl:text-lg lg:hidden font-bold px-3 ">Platforms</h3>
                 {!isHandheldDevice ? (
                   <ul className="flex flex-nowrap flex-row divide-x-2 divide-gray-200/30">
                     {
@@ -156,7 +156,7 @@ const GameDetails = () => {
                       linux={gameData.platforms?.linux}
                       win={gameData.platforms?.windows}
                       mac={gameData.platforms?.mac}
-                      iconSize={18}
+                      iconSize={25}
                     ></AvailableOSs>
                   </div>
                 )}
@@ -164,32 +164,30 @@ const GameDetails = () => {
             )}
           </div>
           {/* scores */}
-          <div className="grid grid-cols-[auto_1fr] gap-x-4  grid-rows-[auto_minmax(0,1fr)] items-center lg:items-end lg:self-end">
+          <div className="grid grid-cols-[auto_1fr] lg:grid-cols-1 gap-x-4 lg:gap-x-0 grid-rows-[auto_minmax(0,1fr)] items-center">
             {/* meta score number */}
             {gameData.metacritic && (
               <>
-                <div className="row-span-2 lg:shadow-md">
+                <div className="row-span-2">
                   <GameScore.GameScoreRateMeta
                     score={gameData.metacritic.score}
-                    className="text-5xl size-20 lg:size-16 lg:text-3xl font-bold"
+                    className="text-5xl lg:text-6xl size-20 lg:size-24 font-bold"
                   ></GameScore.GameScoreRateMeta>
                 </div>
                 {/* meta link */}
-                {!isHandheldDevice && (
-                  <a
-                    href={getCleanUrl(gameData.metacritic.url)}
-                    target="_blank"
-                    className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 hover:text-yellow-400/85 active:text-yellow-400/85"
-                  >
-                    <span className="text-2xl">Metacritic</span>
-                    <span className="material-symbols-rounded scale-75">open_in_new</span>
-                  </a>
-                )}
+                <a
+                  href={getCleanUrl(gameData.metacritic.url)}
+                  target="_blank"
+                  className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 lg:gap-0 hover:text-yellow-400/85 active:text-yellow-400/85"
+                >
+                  <span className="text-2xl lg:text-xl lg:tracking-tighter">Metacritic</span>
+                  <span className="material-symbols-rounded scale-75 lg:scale-50">open_in_new</span>
+                </a>
               </>
             )}
             {/* recommendations */}
-            {gameData.recommendations && !isHandheldDevice && (
-              <p className="text-lg text-gray-50/60 self-start">
+            {gameData.recommendations && (
+              <p className="text-lg text-gray-50/60 self-start lg:absolute lg:left-4 lg:bottom-4">
                 Recommended by{' '}
                 <span className="text-gray-50 font-bold text-xl">
                   {gameData.recommendations.total}
@@ -261,7 +259,7 @@ const GameDetails = () => {
               // container for all sys req
               <div
                 key={sysRequirement[0]}
-                className={`px-6 py-4 bg-gradient-to-tl from-gray-900/10 to-slate-950/20 rounded-2xl ${isLinuxOrMac ? 'row-span-1 lg:hidden' : 'row-span-2'}`}
+                className={`px-6 py-4 bg-gradient-to-tl from-gray-900/20 to-slate-950/30 rounded-2xl ${isLinuxOrMac ? 'row-span-1 lg:hidden' : 'row-span-2'}`}
               >
                 {/* title */}
                 <h4
