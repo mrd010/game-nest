@@ -2,6 +2,7 @@ import { useLoaderData } from 'react-router-dom';
 import HomeSectionTitle from '../components/HomeSectionTitle';
 import GamesAlbum from '../components/GamesAlbum';
 import { extractJustGames } from '../services/extractors';
+import MainContentHeader from '../components/MainContentHeader';
 
 const numberOfGamesPerPage = 5;
 
@@ -25,10 +26,10 @@ const NewReleasedGames = () => {
   return (
     <>
       <header>
-        <h1 className="text-5xl my-2 font-extrabold">What Games to Play Right Now</h1>
-        <p className="text-lg">
-          Find newly Released and Top Seller games for PC and filter by genre.
-        </p>
+        <MainContentHeader
+          title={'What Games to Play Right Now'}
+          desc={'Find newly Released and Top Seller games for PC and filter by genre.'}
+        ></MainContentHeader>
       </header>
       {/* for each category if data is valid create section for it */}
       {allGames && (
