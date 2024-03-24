@@ -15,7 +15,6 @@ import SimpleCarousel from '../components/SimpleCarousel';
 import VideoListItem from '../components/VideoListItem';
 import VideoPlayerOverlay from '../components/VideoPlayerOverlay';
 import ScreenshotsOverlay from '../components/ScreenshotsOverlay';
-import FreeGameLabel from '../components/FreeGameLabel';
 import AvailableOSs from '../components/AvailableOSs';
 
 const GameDetails = () => {
