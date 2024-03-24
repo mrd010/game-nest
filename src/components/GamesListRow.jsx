@@ -8,7 +8,7 @@ const GamesListRow = (props) => {
   return (
     <button
       onClick={() => props.onSelect(props.id)}
-      className={`grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 drop-shadow-sm border-gray-950/50 hover:bg-amber-50 overflow-hidden ${props.isSelected ? 'bg-gradient-to-tr from-yellow-400 to-yellow-200' : ''}`}
+      className={`grid grid-cols-[auto_minmax(0,1fr)_auto] sm:grid-cols-[auto_minmax(0,1fr)] sm:grid-rows-[auto_auto] items-center gap-x-4 drop-shadow-sm border-gray-950/50 hover:bg-amber-50 overflow-hidden ${props.isSelected ? 'bg-gradient-to-tr from-yellow-400 to-yellow-200' : ''}`}
     >
       <LazyLoadImage
         src={steamThumbnail(props.id)}
@@ -16,8 +16,9 @@ const GamesListRow = (props) => {
         placeholderSrc={thumbPlaceholder}
         width={184}
         height={69}
+        wrapperProps={{ className: 'sm:block sm:row-span-2' }}
       ></LazyLoadImage>
-      <span className={`p-1 line-clamp-1 text-left ${props.isSelected ? 'font-bold' : ''}`}>
+      <span className={`p-1 line-clamp-1 text-left  ${props.isSelected ? 'font-bold' : ''}`}>
         {props.name}
       </span>
       <AvailableOSs
