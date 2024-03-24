@@ -13,7 +13,7 @@ import HomeSectionTitle from '../components/HomeSectionTitle';
 
 const Home = () => {
   const { recommendedGames, featuredCategories, trailers } = useLoaderData();
-  const { isHandheldDevice } = useOutletContext();
+  const { isMobile } = useOutletContext();
 
   // remove duplicate games from data
   const refinedCategoriesData = {
@@ -36,11 +36,11 @@ const Home = () => {
     <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:p-4">
       {/* recommended games */}
       {recommendedGames.length && (
-        <section className="my-5">
-          <Carousel title="Recommended Games" itemWidth={300} steps={3}>
+        <section className="my-5 sm:my-4">
+          <Carousel title="Recommended Games" itemWidth={!isMobile ? 300 : 200} steps={3}>
             {recommendedGames.map((game) => (
               // create carousel with recommended games (games released recently and have high meta score)
-              <div key={game.steamAppID} className="w-[300px] px-2">
+              <div key={game.steamAppID} className="w-[300px] md:w-[200px] px-2">
                 <RecommendedCard {...game}></RecommendedCard>
               </div>
             ))}
