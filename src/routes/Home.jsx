@@ -33,7 +33,7 @@ const Home = () => {
   );
 
   return (
-    <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:p-2">
+    <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:p-4">
       {/* recommended games */}
       {recommendedGames.length && (
         <section className="my-5">
