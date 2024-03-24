@@ -114,17 +114,12 @@ const GameDetails = () => {
           ></LazyLoadImage>
         </div>
         {/* game header info right */}
-        <div className="grid grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_auto] p-4 gap-6 xl:gap-4">
-          {gameData.is_free && (
-            <div className="absolute -top-2 left-2 lg:top-0 opacity-85 lg:left-4 scale-125 lg:scale-150">
-              <FreeGameLabel></FreeGameLabel>
-            </div>
-          )}
+        <div className="grid lg:relative grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_auto] p-4 gap-6 xl:gap-4">
           {/* game name */}
           <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 lg:line-clamp-1 drop-shadow lg:col-span-2">
             {gameData.name}
           </h1>
-          <div className="grid grid-cols-2 lg:items-center lg:gap-1">
+          <div className="grid grid-cols-2 lg:gap-1">
             {/* release date */}
             <div className="flex flex-nowrap flex-col lg:flex-row lg:gap-2">
               <h3 className="text-xl xl:text-lg lg:text-xl font-bold">Release Date</h3>
@@ -151,12 +146,12 @@ const GameDetails = () => {
                     }
                   </ul>
                 ) : (
-                  <div className="bg-gray-50 rounded-full">
+                  <div className="bg-gray-50 px-1 rounded absolute -top-16 left-3">
                     <AvailableOSs
                       linux={gameData.platforms?.linux}
                       win={gameData.platforms?.windows}
                       mac={gameData.platforms?.mac}
-                      iconSize={25}
+                      iconSize={22}
                     ></AvailableOSs>
                   </div>
                 )}
@@ -187,7 +182,7 @@ const GameDetails = () => {
             )}
             {/* recommendations */}
             {gameData.recommendations && (
-              <p className="text-lg text-gray-50/60 self-start lg:absolute lg:left-4 lg:bottom-4">
+              <p className="text-lg text-gray-50/60 self-start lg:absolute lg:left-4 lg:bottom-5">
                 Recommended by{' '}
                 <span className="text-gray-50 font-bold text-xl">
                   {gameData.recommendations.total}
@@ -205,7 +200,7 @@ const GameDetails = () => {
         gameData.genres) && (
         <section>
           <HomeSectionTitle>Details</HomeSectionTitle>
-          <div className="grid grid-cols-2 grid-rows-2 py-4 gap-x-4 divide-x-2 divide-gray-200/15">
+          <div className="grid grid-cols-2 grid-rows-2 py-4 gap-x-4 divide-x-2 lg:divide-x-0 lg:divide-y-[1px] divide-gray-200/10 lg:flex lg:flex-col">
             {/* game description */}
             {gameData.short_description && (
               <div className="row-span-full pb-2">
@@ -213,7 +208,7 @@ const GameDetails = () => {
               </div>
             )}
             {/* game developers and publishers */}
-            <div className="grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 gap-3 pl-4 pb-2">
+            <div className="grid grid-cols-2 gap-3 pl-4 lg:p-0 lg:py-3 pb-2">
               {gameData?.developers.length && (
                 <PubDevRow>
                   <PubDevRow.Title>
@@ -239,7 +234,7 @@ const GameDetails = () => {
             </div>
             {/* game genre links to their pages */}
             {gameData?.genres.length && (
-              <div className="pl-4 flex flex-col flex-nowrap gap-1 pb-2">
+              <div className="pl-4 flex flex-col flex-nowrap gap-1 pb-2 lg:p-0 lg:py-3">
                 <PubDevRow.Title>Genres</PubDevRow.Title>
                 <div className="flex flex-row gap-1">
                   <MiniCategoriesList categoryList={gameData.genres}></MiniCategoriesList>
@@ -271,12 +266,12 @@ const GameDetails = () => {
                 <ul className="flex flex-col flex-nowrap divide-y-2 divide-gray-200/10">
                   {sysRequirement[1].map((row, index) => (
                     <div
-                      className={`flex flex-col py-1 ${isLinuxOrMac ? 'text-sm' : 'text-base'}`}
+                      className={`flex flex-col py-1 lg:grid ${row.length > 1 ? ' lg:grid-cols-[100px_auto]' : ''} ${isLinuxOrMac ? 'text-sm' : 'text-base'}`}
                       key={index}
                     >
                       <PubDevRow.Title>{row[0]}</PubDevRow.Title>
                       <PubDevRow.Value
-                        className={`text-gray-50/70 ${isLinuxOrMac ? 'text-sm' : 'text-base'}`}
+                        className={`text-gray-50/70 ${isLinuxOrMac ? 'text-sm' : 'text-base lg:text-sm'}`}
                       >
                         {row[1]}
                       </PubDevRow.Value>
@@ -337,7 +332,7 @@ const GameDetails = () => {
       {gameData?.movies?.length && (
         <section>
           <HomeSectionTitle>Videos</HomeSectionTitle>
-          <SimpleCarousel className="gap-4 h-[250px]">
+          <SimpleCarousel className="gap-4 h-[280px]">
             {gameData.movies.map((video) => (
               <VideoListItem
                 key={video.id}
