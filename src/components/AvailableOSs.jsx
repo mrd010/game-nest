@@ -6,7 +6,7 @@ import OSIcon from './OSIcon';
 
 const AvailableOSs = ({ win, mac, linux, iconSize = 18 }) => {
   return (
-    <div className="grid grid-flow-col gap-1 justify-start p-3">
+    <div className="grid grid-flow-col gap-1 justify-start p-3 sm:p-1">
       <OSIcon src={AppleIcon} isAvailable={mac} size={iconSize}></OSIcon>
       <OSIcon src={LinuxIcon} isAvailable={linux} size={iconSize}></OSIcon>
       <OSIcon src={WindowsIcon} isAvailable={win} size={iconSize}></OSIcon>
