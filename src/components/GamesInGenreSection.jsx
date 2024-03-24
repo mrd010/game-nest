@@ -6,6 +6,7 @@ import { getGamesMiniData } from '../services/dataFetchers';
 import { useInView } from 'react-intersection-observer';
 import ContentLoader from './ContentLoader';
 import { toKebabCase } from '../services/utilities';
+import { useOutletContext } from 'react-router-dom';
 const GamesInGenreSection = ({ name, items }) => {
   // init data with and array of empty data
   const initialData = [...items].fill({});
@@ -14,6 +15,8 @@ const GamesInGenreSection = ({ name, items }) => {
   const { ref, inView } = useInView({ triggerOnce: true });
   // use stringified version for preventing re-renders
   const stringifiedIds = JSON.stringify(items);
+
+  const { isHandheldDevice } = useOutletContext();
 
   useEffect(() => {
     let ignore = false;
@@ -34,10 +37,10 @@ const GamesInGenreSection = ({ name, items }) => {
 
   return (
     <div ref={ref} id={toKebabCase(name)}>
-      <Carousel title={name} itemWidth={410} steps={1}>
+      <Carousel title={name} itemWidth={!isHandheldDevice ? 400 : 300} steps={1}>
         {gamesData.map((data, index) =>
           data && data.status === 1 ? (
-            <div key={data.appid} className="px-2 w-[410px] bg-transparent">
+            <div key={data.appid} className="px-2 w-[400px] lg:w-[300px] bg-transparent">
               <GamesCategoryCarouselCard gameData={data}></GamesCategoryCarouselCard>
             </div>
           ) : (
