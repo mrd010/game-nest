@@ -8,7 +8,7 @@ const News = ({ appId, title, url }) => {
     <a
       href={url}
       target="_blank"
-      className="group h-full relative grid grid-rows-[107.5px_1fr] gap-2"
+      className="group h-full relative grid grid-rows-[107.5px_minmax(0,1fr)] sm:grid-rows-[86px_minmax(0,1fr)] gap-2"
     >
       <div className="">
         {appId ? (
@@ -19,7 +19,7 @@ const News = ({ appId, title, url }) => {
       </div>
       <div className="grid gap-1">
         {title && url ? (
-          <h3 className="font-bold line-clamp-3 hover:text-yellow-600 drop-shadow-sm shadow-gray-900">
+          <h3 className="font-bold md:text-sm line-clamp-3 hover:text-yellow-600 drop-shadow-sm shadow-gray-900">
             {title}
           </h3>
         ) : (
