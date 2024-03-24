@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-const TabMenu = ({ tabsList, tabWidth = 128, selectedTabIndex, onTabChange }) => {
+const TabMenu = ({ tabsList, tabWidth, selectedTabIndex, onTabChange }) => {
   return (
     <div className={`flex flex-row flex-nowrap relative`}>
       {/* indicator */}
@@ -15,7 +15,7 @@ const TabMenu = ({ tabsList, tabWidth = 128, selectedTabIndex, onTabChange }) =>
         <button
           key={index}
           onClick={() => onTabChange(index)}
-          className={`px-1 py-3 transition-opacity ${selectedTabIndex === index ? 'opacity-100 font-bold' : 'opacity-40'}`}
+          className={`px-1 py-3  md:text-sm transition-opacity ${selectedTabIndex === index ? 'opacity-100 font-bold' : 'opacity-40'}`}
           style={{ width: `${tabWidth}px` }}
         >
           {tab}

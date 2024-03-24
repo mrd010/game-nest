@@ -11,7 +11,7 @@ const TabbedCategories = ({ categoriesData }) => {
   // tabbed list with tabs for each key in categoriesData
 
   // check if device is handheld
-  const { isHandheldDevice } = useOutletContext();
+  const { isHandheldDevice, isMobile } = useOutletContext();
   const navigate = useNavigate();
 
   const { selectedTabIndex, changeTab } = useTabs(() => setPageNumber(0));
@@ -39,12 +39,16 @@ const TabbedCategories = ({ categoriesData }) => {
     setSelectedGameInCats(steamId);
   };
 
+  // get width of screen
+  const screenW = screen.width;
+
   return (
     <div className="grid grid-flow-row gap-2">
       <TabMenu
         selectedTabIndex={selectedTabIndex}
         tabsList={['New Releases', 'Top Sellers', 'Coming Soon']}
         onTabChange={changeTab}
+        tabWidth={isMobile ? screenW / 3 - 10 : 128}
       ></TabMenu>
       <div className="flex flex-nowrap gap-12 w-full h-[780px]">
         <div className="relative grow">
