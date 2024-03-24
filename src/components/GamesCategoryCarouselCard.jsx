@@ -2,17 +2,25 @@ import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { steamHeaderImage } from '../services/utilities';
 import PubDevRow from './PubDevRow';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import placeholder from '../assets/img/placeH.png';
+import { useInView } from 'react-intersection-observer';
 
 const GamesCategoryCarouselCard = ({ gameData }) => {
   // used for animations. animations only work when image loads
+  const { isHandheldDevice } = useOutletContext();
+  const { ref, inView } = useInView({ threshold: 1 });
 
   return (
-    <div className="group grid grid-rows-[auto_minmax(0,1fr)] size-full pt-2 pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative">
+    <div
+      ref={ref}
+      className="group grid grid-rows-[auto_minmax(0,1fr)] size-full pt-2 pb-4 shadow-md rounded-md overflow-hidden bg-gray-50 transition-transform relative"
+    >
       {
         // a fancy style container . no use
-        <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 opacity-95 scale-y-[20%] origin-top group-hover:scale-y-100"></div>
+        <div
+          className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 md:duration-500 md:delay-100 opacity-95 scale-y-[20%] origin-top ${!isHandheldDevice ? 'group-hover:scale-y-100' : `${inView ? 'scale-y-[100%]' : ''}`}`}
+        ></div>
       }
       {/* card picture */}
       <Link to={`/games/${gameData.appid}`} className={`scale-90`}>
@@ -27,11 +35,11 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
       {/* card details */}
       <div className="grid grid-rows-[auto_auto_auto_minmax(0,1fr)] items-start h-full divide-y-2 z-10">
         {/* game name and release date */}
-        <div className="pt-6 pb-2 mx-4 flex flex-col flex-nowrap h-36">
+        <div className="pt-6 lg:py-2 pb-2 mx-4 flex flex-col flex-nowrap h-36 lg:h-28">
           {/* name */}
           <Link to={`/games/${gameData.appid}`} className="mb-auto">
             <h4
-              className={`text-2xl uppercase font-bold line-clamp-2 group-hover:underline transition-colors hover:text-gray-50`}
+              className={`text-2xl lg:text-xl uppercase font-bold line-clamp-2 group-hover:underline lg:underline transition-colors md:delay-150 duration-300 hover:text-gray-50 ${inView && isHandheldDevice ? 'text-gray-50' : ''}`}
             >
               {gameData.name}
             </h4>
