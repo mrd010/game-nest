@@ -25,19 +25,22 @@ const Header = ({ categories, isHandheldDevice }) => {
 
   // top header of app
   return (
-    <header className="bg-gray-950 text-gray-50 min-w-min z-[100] xl:px-6 lg:px-2">
-      <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] items-center content-center mx-auto w-[1280px] justify-between gap-8 lg:gap-6 md:gap-4 sm:gap-2 xl:w-full">
+    <header className="bg-gray-950 text-gray-50 min-w-min z-[100] xl:px-6 lg:px-2 sm:px-0">
+      <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] sm:grid-cols-[auto_minmax(0,1fr)] items-center content-center mx-auto w-[1280px] justify-between gap-8 lg:gap-6 md:gap-4 sm:gap-0 sm:gap-x-4 xl:w-full">
         {/* hamburger button for handheld devices */}
         {isHandheldDevice && (
-          <button onClick={handleOpenMenu} className="scale-150 px-4 grid place-items-center">
+          <button
+            onClick={handleOpenMenu}
+            className="scale-150 px-4 grid place-items-center sm:px-6"
+          >
             <span className="material-symbols-rounded">menu</span>
           </button>
         )}
         {/* header title - app title */}
-        <div className="mr-10 p-4 md:mr-0">
-          <h1>
-            <Link className="text-4xl font-extrabold" to="/home">
-              Game<span className="text-yellow-400">Nest</span>
+        <div className="mr-10 p-4 md:mr-0 sm:col-span-2 sm:row-start-2 sm:p-1 sm:bg-gray-50">
+          <h1 className="sm:text-center  sm:pt-6">
+            <Link className="text-4xl sm:text-5xl font-extrabold sm:text-gray-900" to="/home">
+              Game<span className="text-yellow-400 sm:text-amber-400">Nest</span>
             </Link>
           </h1>
         </div>
@@ -48,7 +51,7 @@ const Header = ({ categories, isHandheldDevice }) => {
           {/* x button */}
           {isHandheldDevice && (
             <button
-              className="grid place-items-center scale-[200%] absolute top-10 right-10"
+              className="grid place-items-center scale-[200%] absolute top-10 right-10 sm:top-6 sm:right-6 sm:scale-150"
               onClick={handleCloseMenu}
             >
               <span className="material-symbols-rounded">close</span>
@@ -81,7 +84,7 @@ const Header = ({ categories, isHandheldDevice }) => {
         </nav>
 
         {/* search bar */}
-        <div>
+        <div className="sm:p-2 ">
           <HeaderSearch></HeaderSearch>
         </div>
       </div>
