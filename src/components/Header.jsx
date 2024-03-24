@@ -34,7 +34,7 @@ const Header = ({ categories, isHandheldDevice }) => {
           </button>
         )}
         {/* header title - app title */}
-        <div className="mr-10 p-4">
+        <div className="mr-10 p-4 md:mr-0">
           <h1>
             <Link className="text-4xl font-extrabold" to="/home">
               Game<span className="text-yellow-400">Nest</span>
