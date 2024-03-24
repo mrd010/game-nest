@@ -52,7 +52,7 @@ const VideoSlideShow = ({ videoList }) => {
       </div>
       {/* video list */}
       <div className="grid gap-4 xl:flex xl:flex-col">
-        <div className="grid grid-rows-4 gap-4 xl:grid-cols-4 xl:grid-rows-1">
+        <div className="grid grid-rows-4 gap-4 xl:grid-cols-4 xl:grid-rows-1 md:grid-rows-2 md:grid-cols-2 md:gap-x-8">
           {videoList.map((video) => (
             <VideoListItem
               key={video.target.id}
