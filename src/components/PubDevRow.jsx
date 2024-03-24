@@ -4,7 +4,7 @@ const PubDevRow = ({ children }) => {
 };
 
 const Title = ({ children }) => {
-  return <span className="font-bold">{children}</span>;
+  return <span className="font-bold lg:text-sm">{children}</span>;
 };
 
 const Value = ({ children, className = 'text-gray-600/95 text-sm' }) => {
