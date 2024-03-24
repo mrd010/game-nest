@@ -40,13 +40,13 @@ const NewsSection = ({ importantGameIds }) => {
           {newsData
             ? newsData.map((news) =>
                 news.title.length > 20 ? (
-                  <div key={news.appid} className="w-[250px] px-2">
+                  <div key={news.appid} className="w-[250px] sm:w-[200px] px-2">
                     <News appId={news.appid} title={news.title} url={news.url}></News>
                   </div>
                 ) : null
               )
             : [...Array(6)].map((v, index) => (
-                <div key={index} className="w-[250px] px-2">
+                <div key={index} className="w-[250px] sm:w-[200px] px-2">
                   <News></News>
                 </div>
               ))}
