@@ -26,7 +26,7 @@ const Header = ({ categories, isHandheldDevice }) => {
   // top header of app
   return (
     <header className="bg-gray-950 text-gray-50 min-w-min z-[100] xl:px-6 lg:px-2">
-      <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] items-center content-center mx-auto w-[1280px] justify-between gap-8 xl:w-full">
+      <div className="grid grid-cols-[auto_auto_minmax(0,1fr)] items-center content-center mx-auto w-[1280px] justify-between gap-8 lg:gap-6 md:gap-4 sm:gap-2 xl:w-full">
         {/* hamburger button for handheld devices */}
         {isHandheldDevice && (
           <button onClick={handleOpenMenu} className="scale-150 px-4 grid place-items-center">
@@ -43,7 +43,7 @@ const Header = ({ categories, isHandheldDevice }) => {
         </div>
         {/* app nav menu */}
         <nav
-          className={`grid grid-cols-3 h-full lg:fixed lg:z-[100] lg:top-0 lg:left-0 w-full lg:bg-gray-900 lg:flex lg:flex-col lg:flex-nowrap items-center justify-center lg:transition-all lg:duration-500 ${!menuIsOpen ? 'lg:-translate-y-full' : 'lg:translate-y-0'}`}
+          className={`grid grid-cols-3 h-full lg:fixed lg:z-[100] lg:top-0 lg:left-0 w-full lg:bg-gray-900 lg:flex lg:flex-col lg:flex-nowrap items-center justify-center lg:transition-transform lg:duration-500 ${!menuIsOpen ? 'lg:-translate-y-full' : 'lg:translate-y-0'}`}
         >
           {/* x button */}
           {isHandheldDevice && (
