@@ -5,7 +5,7 @@ const VideoPlayerOverlay = ({ isOpen, hqUrl, lqUrl, onClose }) => {
   return (
     <ModalOverlayContainer isOpen={isOpen} onClose={onClose}>
       {(lqUrl || hqUrl) && (
-        <div className={`aspect-video w-[1000px] drop-shadow-lg shadow-md`}>
+        <div className={`aspect-video w-[1000px] lg:w-4/5 drop-shadow-lg shadow-md`}>
           <VideoPlayer hqUrl={hqUrl} lqUrl={lqUrl} previewImage={false}></VideoPlayer>
         </div>
       )}
