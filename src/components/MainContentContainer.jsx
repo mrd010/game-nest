@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 const MainContentContainer = ({ className = '', children }) => {
   return (
     <div
-      className={`px-10 xl:px-4 relative py-20 my-2 rounded-md bg-zinc-100 space-y-16 ${className}`}
+      className={`px-10 xl:px-4 relative py-20 lg:py-8 lg:bg-transparent my-2 rounded-md bg-zinc-100 space-y-16 lg:space-y-10 ${className}`}
     >
       {children}
     </div>
