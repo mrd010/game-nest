@@ -40,7 +40,7 @@ const VideoSlideShow = ({ videoList }) => {
               currentVideo.target.name.toLowerCase() !== currentVideo.name.toLowerCase() &&
               !currentVideo.name.includes('_') && <p className="xl:text-lg">{currentVideo.name}</p>}
           </div>
-          <div className="self-center px-5">
+          <div className="self-center px-5 lg:hidden">
             <AvailableOSs
               mac={currentVideo.target.mac_available}
               linux={currentVideo.target.linux_available}
@@ -52,7 +52,7 @@ const VideoSlideShow = ({ videoList }) => {
       </div>
       {/* video list */}
       <div className="grid gap-4 xl:flex xl:flex-col">
-        <div className="grid grid-rows-4 gap-4 xl:grid-cols-4 xl:grid-rows-1 md:grid-rows-2 md:grid-cols-2 md:gap-x-8">
+        <div className="grid grid-rows-4 gap-4 xl:grid-cols-4 xl:grid-rows-1 md:grid-rows-2 md:grid-cols-2 md:gap-x-8 sm:gap-x-4">
           {videoList.map((video) => (
             <VideoListItem
               key={video.target.id}
