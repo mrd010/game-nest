@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 const CategoriesSideNav = ({ categoryList }) => {
   return (
     <nav
-      className={`w-[300px] xl:w-max lg:w-full lg:sticky lg:py-4 lg:border-b-2 lg:bg-gray-50 lg:top-0 lg:z-[60] `}
+      className={`w-[300px] xl:w-max lg:w-full lg:sticky lg:py-2 lg:border-b-2 lg:bg-gray-50 lg:top-0 lg:z-[60] `}
     >
       <ul className="divide-y-2 lg:divide-none sticky top-4 lg:flex lg:flex-row lg:no-scrollbar lg:overflow-x-auto lg:gap-2">
         {/* main nav link (default page) */}
