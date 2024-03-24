@@ -29,7 +29,7 @@ const HeaderNavLink = ({ text, link, children, isHandheldDevice }) => {
       {/* main link */}
       <Link
         to={link}
-        className={`font-semibold text-lg lg:text-4xl py-2 lg:py-6 px-4 lg:px-20 text-center rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
+        className={`font-semibold text-lg lg:text-3xl py-2 lg:py-2 lg:my-2 px-4 text-center rounded-md transition-colors hover:bg-gray-50 hover:text-gray-950 ${opened ? 'bg-gray-50 text-gray-950' : 'bg-transparent text-gray-50'}`}
         onMouseEnter={() => {
           if (!isHandheldDevice) {
             handleShowMenu();
