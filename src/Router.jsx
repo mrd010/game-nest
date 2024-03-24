@@ -21,6 +21,7 @@ import GameDetails from './routes/GameDetails';
 import { gamePageLoader } from './loaders/gamePageLoader';
 import SearchResultsPage from './routes/SearchResultsPage';
 import { searchLoader } from './loaders/searchLoader';
+import PageLoadSpinner from './components/PageLoadSpinner';
 
 const Router = () => {
   const router = createBrowserRouter(
@@ -51,6 +52,11 @@ const Router = () => {
       </Route>
     )
   );
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <RouterProvider
+      router={router}
+      fallbackElement={<PageLoadSpinner></PageLoadSpinner>}
+    ></RouterProvider>
+  );
 };
 export default Router;
