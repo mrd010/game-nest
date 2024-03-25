@@ -37,10 +37,10 @@ const Home = () => {
       {/* recommended games */}
       {recommendedGames.length && (
         <section className="my-5 sm:my-4">
-          <Carousel title="Recommended Games" itemWidth={!isMobile ? 300 : 200} steps={3}>
+          <Carousel title="Recommended Games" itemWidth={!isMobile ? 300 : 250} steps={3}>
             {recommendedGames.map((game) => (
               // create carousel with recommended games (games released recently and have high meta score)
-              <div key={game.steamAppID} className="w-[300px] md:w-[200px] px-2">
+              <div key={game.steamAppID} className="w-[300px] md:w-[250px] px-2">
                 <RecommendedCard {...game}></RecommendedCard>
               </div>
             ))}
