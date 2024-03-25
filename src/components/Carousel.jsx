@@ -25,15 +25,18 @@ const Carousel = ({
   // real children count of carousel
   const nodeChildrenCount = children.filter((child) => child !== null).length;
 
+  // scroll to new item
   const handleScrollChange = (direction) => {
     if (direction === 0) {
       return;
     }
-    // when pressed arrow buttons change position between 0 and max items - steps -1
-    // note: steps is number of items scrolling with each scroll
+
     if (isMobile) {
+      // for mobile devices step by one in each swipe
       setCurrentPosition((p) => Math.min(Math.max(0, p + direction), nodeChildrenCount - 1));
     } else {
+      // when pressed arrow buttons change position between 0 and max items - steps -1
+      // note: steps is number of items scrolling with each scroll
       setCurrentPosition((p) =>
         Math.min(Math.max(0, p + direction), nodeChildrenCount - steps - 1)
       );
@@ -48,7 +51,7 @@ const Carousel = ({
   // gestures for mobile devices
   useDrag(
     ({ swipe: [sx] }) => {
-      console.log(sx);
+      // get swipe direction
       handleScrollChange(-sx);
     },
     {
