@@ -1,4 +1,4 @@
 /* /index.html 200
-/api/* https://store.steampowered.com
-/ISteamNews/* https://api.steampowered.com
-/actions/* https://steamcommunity.com
+/api/* https://store.steampowered.com 200
+/ISteamNews/* https://api.steampowered.com 200
+/actions/* https://steamcommunity.com 200
