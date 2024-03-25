@@ -92,7 +92,7 @@ const Carousel = ({
           >
             {children}
           </div>
-          {isMobile && (
+          {isMobile && nodeChildrenCount > 1 && (
             <div className="flex flex-row flex-nowrap gap-2 justify-center">
               {[...Array(nodeChildrenCount)].map((v, index) => (
                 <div
