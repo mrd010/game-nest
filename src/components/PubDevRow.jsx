@@ -13,7 +13,7 @@ const Value = ({ children, className = 'text-gray-600/95 text-sm' }) => {
 
 const Values = ({ values, className }) => {
   return (
-    <div className="flex flex-row gap-1">
+    <div className="flex flex-row md:flex-col gap-1 md:gap-0">
       {values.map((value, index) => (
         <Value key={index} className={className}>
           {value}

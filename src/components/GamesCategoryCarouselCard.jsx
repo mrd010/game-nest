@@ -19,7 +19,7 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
       {
         // a fancy style container . no use
         <div
-          className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 md:duration-500 md:delay-100 opacity-95 origin-top ${!isHandheldDevice ? 'scale-y-[20%] group-hover:scale-y-100' : inView ? 'scale-y-100' : 'scale-y-[20%]'}`}
+          className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-400 transition-transform duration-300 md:duration-500 md:delay-100 opacity-95 origin-top ${!isHandheldDevice ? 'scale-y-[20%] group-hover:scale-y-100' : inView ? 'scale-y-100' : 'scale-y-[20%]'}`}
         ></div>
       }
       {/* card picture */}
@@ -33,13 +33,13 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
         ></LazyLoadImage>
       </Link>
       {/* card details */}
-      <div className="grid grid-rows-[auto_auto_auto_minmax(0,1fr)] items-start h-full divide-y-2 z-10">
+      <div className="grid grid-rows-[auto_auto_auto_minmax(0,1fr)] items-start h-full divide-y-2 lg:divide-none z-10">
         {/* game name and release date */}
-        <div className="pt-6 lg:py-2 pb-2 mx-4 flex flex-col flex-nowrap h-36 lg:h-28">
+        <div className="pt-6 lg:py-1 pb-2 mx-4 flex flex-col flex-nowrap h-36 lg:h-28 sm:h-24 xs:h-20">
           {/* name */}
           <Link to={`/games/${gameData.appid}`} className="mb-auto">
             <h4
-              className={`text-2xl lg:text-xl uppercase font-bold line-clamp-2 group-hover:underline lg:underline transition-colors md:delay-150 duration-300 hover:text-gray-50 ${inView && isHandheldDevice ? 'text-gray-50' : ''}`}
+              className={`text-2xl lg:text-xl sm:text-lg xs:text-base uppercase font-bold line-clamp-2 transition-all md:delay-150 duration-300 hover:text-gray-50 ${inView ? 'translate-y-2' : ''} `}
             >
               {gameData.name}
             </h4>
@@ -64,7 +64,7 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
             </PubDevRow.Title>
             {gameData.rgPublishers && (
               <PubDevRow.Values
-                values={gameData.rgPublishers.map((pub) => pub.name)}
+                values={gameData.rgPublishers.slice(0, 3).map((pub) => pub.name)}
               ></PubDevRow.Values>
             )}
           </PubDevRow>
@@ -77,14 +77,18 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
             </PubDevRow.Title>
             {gameData.rgDevelopers && (
               <PubDevRow.Values
-                values={gameData.rgDevelopers.map((pub) => pub.name)}
+                values={gameData.rgDevelopers.slice(0, 3).map((pub) => pub.name)}
               ></PubDevRow.Values>
             )}
           </PubDevRow>
         </div>
-        <div className="p-4 h-full">
-          <p className="line-clamp-4 text-sm text-gray-700/85">{gameData.strSnippet}</p>
-        </div>
+        {gameData.strSnippet && (
+          <div className="mx-4 py-4 h-full grow">
+            <p className="line-clamp-4 text-sm text-gray-700/85 xs:text-xs">
+              {gameData.strSnippet}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
