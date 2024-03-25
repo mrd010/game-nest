@@ -23,7 +23,7 @@ const GameDetails = () => {
   const [dlcsInfo, setDlcsInfo] = useState(initialDlcData);
   const [modalContent, setModalContent] = useState(null);
 
-  const { isHandheldDevice } = useOutletContext();
+  const { isHandheldDevice, isMobile, isSmallMobile } = useOutletContext();
 
   // url for whole page background
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
@@ -113,12 +113,12 @@ const GameDetails = () => {
           ></LazyLoadImage>
         </div>
         {/* game header info right */}
-        <div className="grid lg:relative grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_auto] p-4 gap-6 xl:gap-4">
+        <div className="grid lg:relative grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_auto] xs:grid-cols-1 xs:auto-rows-auto xs:grid-flow-row p-4 gap-6 xl:gap-4">
           {/* game name */}
-          <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 lg:line-clamp-1 drop-shadow lg:col-span-2">
+          <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 lg:line-clamp-1 drop-shadow lg:col-span-2 xs:col-span-1">
             {gameData.name}
           </h1>
-          <div className="grid grid-cols-2 lg:gap-1">
+          <div className="grid grid-cols-2 xs:grid-cols-1 lg:gap-1">
             {/* release date */}
             <div className="flex flex-nowrap flex-col lg:flex-row lg:gap-2">
               <h3 className="text-xl xl:text-lg lg:text-xl font-bold">Release Date</h3>
@@ -145,7 +145,7 @@ const GameDetails = () => {
                     }
                   </ul>
                 ) : (
-                  <div className="bg-gray-50 px-1 rounded absolute -top-16 left-3">
+                  <div className="bg-gray-50 px-1 rounded absolute -top-16 sm:-top-12 left-3">
                     <AvailableOSs
                       linux={gameData.platforms?.linux}
                       win={gameData.platforms?.windows}
@@ -158,14 +158,14 @@ const GameDetails = () => {
             )}
           </div>
           {/* scores */}
-          <div className="grid grid-cols-[auto_1fr] lg:grid-cols-1 gap-x-4 lg:gap-x-0 grid-rows-[auto_minmax(0,1fr)] items-center">
+          <div className="grid grid-cols-[auto_1fr] xs:grid-cols-[auto_1fr] lg:grid-cols-1 gap-x-4 lg:gap-x-0 xs:gap-2 grid-rows-[auto_minmax(0,1fr)] items-center">
             {/* meta score number */}
             {gameData.metacritic && (
               <>
                 <div className="row-span-2">
                   <GameScore.GameScoreRateMeta
                     score={gameData.metacritic.score}
-                    className="text-5xl lg:text-6xl size-20 lg:size-24 font-bold"
+                    className="text-5xl lg:text-6xl size-20 xs:size-16 xs:text-4xl lg:size-24 font-bold"
                   ></GameScore.GameScoreRateMeta>
                 </div>
                 {/* meta link */}
@@ -174,14 +174,16 @@ const GameDetails = () => {
                   target="_blank"
                   className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 lg:gap-0 hover:text-yellow-400/85 active:text-yellow-400/85"
                 >
-                  <span className="text-2xl lg:text-xl lg:tracking-tighter">Metacritic</span>
+                  <span className="text-2xl lg:text-xl lg:tracking-tighter xs:tracking-normal">
+                    Metacritic
+                  </span>
                   <span className="material-symbols-rounded scale-75 lg:scale-50">open_in_new</span>
                 </a>
               </>
             )}
             {/* recommendations */}
             {gameData.recommendations && (
-              <p className="text-lg text-gray-50/60 self-start lg:absolute lg:left-4 lg:bottom-5">
+              <p className="text-lg text-gray-50/60 self-start lg:absolute lg:left-4 lg:bottom-5 xs:static">
                 Recommended by{' '}
                 <span className="text-gray-50 font-bold text-xl">
                   {gameData.recommendations.total}
@@ -202,8 +204,8 @@ const GameDetails = () => {
           <div className="grid grid-cols-2 grid-rows-2 py-4 gap-x-4 divide-x-2 lg:divide-x-0 lg:divide-y-[1px] divide-gray-200/10 lg:flex lg:flex-col">
             {/* game description */}
             {gameData.short_description && (
-              <div className="row-span-full pb-2">
-                <p className="text-lg font-light">{gameData.short_description}</p>
+              <div className="row-span-full pb-2 sm:pb-4">
+                <p className="text-lg xs:text-base font-light">{gameData.short_description}</p>
               </div>
             )}
             {/* game developers and publishers */}
@@ -246,7 +248,7 @@ const GameDetails = () => {
       {/* system requirements */}
       <section>
         <HomeSectionTitle>System Requirements</HomeSectionTitle>
-        <div className="grid grid-cols-3 lg:grid-cols-2 grid-rows-[auto_auto] lg:grid-rows-1 grid-flow-col-dense gap-8 py-4 lg:gap-4">
+        <div className="grid grid-cols-3 lg:grid-cols-2 grid-rows-[auto_auto] lg:grid-rows-1 grid-flow-col-dense sm:grid-cols-1 sm:grid-flow-row gap-8 py-4 lg:gap-4">
           {Object.entries(systemRequirements).map((sysRequirement) => {
             const isLinuxOrMac = ['linux', 'mac'].includes(sysRequirement[0]);
             return (
@@ -286,7 +288,13 @@ const GameDetails = () => {
       {gameData?.dlc && (
         <section>
           {/* dlc list */}
-          <Carousel title={'DLCs'} itemWidth={385} steps={2} disabledSidesBlur theme="dark">
+          <Carousel
+            title={'DLCs'}
+            itemWidth={isMobile ? 240 : 385}
+            steps={2}
+            disabledSidesBlur
+            theme="dark"
+          >
             {dlcsInfo.map((dlc, index) =>
               dlc?.status === 1 ? (
                 // card for each dlc - not a link
@@ -294,10 +302,10 @@ const GameDetails = () => {
                   key={dlc.appid}
                   appid={dlc.appid}
                   name={dlc.name}
-                  width={385}
+                  width={isMobile ? 240 : 385}
                 ></GameDLCCard>
               ) : (
-                <div key={index} className="w-[385px] h-[252px] p-2">
+                <div key={index} className="w-[385px] md:w-[240px] h-[252px] p-2">
                   <div className="content-loader"></div>
                 </div>
               )
@@ -309,7 +317,7 @@ const GameDetails = () => {
       {gameData?.screenshots?.length && (
         <section className="xl:w-full">
           <HomeSectionTitle>Screenshots</HomeSectionTitle>
-          <SimpleCarousel className="h-[190px] w-full">
+          <SimpleCarousel className="h-[190px] xs:h-36 w-full">
             {gameData.screenshots.map((image) => (
               <button
                 key={image.id}
@@ -320,7 +328,7 @@ const GameDetails = () => {
                   src={getCleanUrl(image.path_thumbnail)}
                   width={600}
                   height={338}
-                  className="h-[150px] w-full rounded"
+                  className="h-[150px] xs:h-28 w-full rounded"
                 ></img>
               </button>
             ))}
