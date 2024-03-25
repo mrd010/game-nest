@@ -17,7 +17,7 @@ const VideoSlideShow = ({ videoList }) => {
   const { isHandheldDevice } = useOutletContext();
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10 xl:grid-rows-[auto_minmax(0,1fr)] xl:grid-cols-1 mb">
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-10 sm:gap-4 xl:grid-rows-[auto_minmax(0,1fr)] xl:grid-cols-1 mb">
       {/* playing video */}
       <div className="grid grid-rows-[minmax(0,1fr)_auto] xl:gap-4 xl:flex xl:flex-col-reverse">
         {/* player */}
