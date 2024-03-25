@@ -17,7 +17,7 @@ const Layout = () => {
   }, [state]);
 
   // query for check if device is handheld
-  const { isHandheldDevice, isMobile } = useDevices();
+  const { isHandheldDevice, isMobile, isSmallMobile } = useDevices();
 
   return (
     <div
@@ -30,7 +30,7 @@ const Layout = () => {
         <main
           className={`w-[1280px] mx-auto p-3 lg:px-0 xl:w-full ${state === 'idle' ? 'block' : 'hidden'}`}
         >
-          <Outlet context={{ categories, isHandheldDevice, isMobile }}></Outlet>
+          <Outlet context={{ categories, isHandheldDevice, isMobile, isSmallMobile }}></Outlet>
         </main>
         {state === 'loading' && <PageLoadSpinner></PageLoadSpinner>}
       </div>
