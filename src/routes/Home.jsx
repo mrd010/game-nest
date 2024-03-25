@@ -33,10 +33,10 @@ const Home = () => {
   );
 
   return (
-    <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:p-4">
+    <div className="flex flex-col flex-nowrap gap-10 lg:w-screen lg:p-4 lg:gap-4">
       {/* recommended games */}
       {recommendedGames.length && (
-        <section className="my-5 sm:my-4">
+        <section className="my-5 sm:my-2">
           <Carousel title="Recommended Games" itemWidth={!isMobile ? 300 : 250} steps={3}>
             {recommendedGames.map((game) => (
               // create carousel with recommended games (games released recently and have high meta score)
@@ -48,7 +48,7 @@ const Home = () => {
         </section>
       )}
       {/* game news */}
-      <section className="h-[280px]">
+      <section className="h-[280px] sm:h-[240px]">
         <NewsSection importantGameIds={importantGamesIds}></NewsSection>
       </section>
       {/* featured categories */}
@@ -57,7 +57,7 @@ const Home = () => {
       </section>
       {/* videos if available*/}
       {refinedTrailersData && (
-        <section className="flex flex-col gap-5 h-[750px] xl:h-auto">
+        <section className="flex flex-col gap-4 sm:gap-2 h-[750px] xl:h-auto">
           <HomeSectionTitle>Latest Videos</HomeSectionTitle>
           <VideoSlideShow videoList={refinedTrailersData.slice(0, 4)}></VideoSlideShow>
         </section>
