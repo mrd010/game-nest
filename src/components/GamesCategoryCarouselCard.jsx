@@ -19,7 +19,7 @@ const GamesCategoryCarouselCard = ({ gameData }) => {
       {
         // a fancy style container . no use
         <div
-          className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 md:duration-500 md:delay-100 opacity-95 scale-y-[20%] origin-top ${!isHandheldDevice ? 'group-hover:scale-y-100' : `${inView ? 'scale-y-[100%]' : ''}`}`}
+          className={`absolute left-0 top-0 w-full h-full bg-gradient-to-t from-yellow-300 to-amber-500 transition-transform duration-300 md:duration-500 md:delay-100 opacity-95 origin-top ${!isHandheldDevice ? 'scale-y-[20%] group-hover:scale-y-100' : inView ? 'scale-y-100' : 'scale-y-[20%]'}`}
         ></div>
       }
       {/* card picture */}
