@@ -63,7 +63,7 @@ const Carousel = ({
 
   return (
     <div
-      className={`grid grid-cols-[1fr_auto] md:grid-cols-1 relative gap-x-5 gap-y-5 md:gap-x-0 ${!disabledSidesBlur && currentPosition > 0 ? 'before:content-[" "] before:absolute before:bottom-2 before:left-0 before:z-50 before:h-[calc(100%_-_60px)] before:w-10 before:bg-gradient-to-l before:from-transparent before:to-gray-50 before:to-80%' : ''}${!disabledSidesBlur && currentPosition < nodeChildrenCount - steps - 1 ? 'after:content-[" "] after:w-8 after:right-0 after:bottom-2 after:h-[calc(100%_-_60px)] after:bg-gradient-to-r after:to-80% after:from-transparent after:to-gray-50 after:absolute after:z-50' : ''}`}
+      className={`grid grid-cols-[1fr_auto] md:grid-cols-1 relative gap-x-5 gap-y-5 md:gap-x-0 ${!disabledSidesBlur && !isMobile && currentPosition > 0 ? 'before:content-[" "] before:absolute before:bottom-2 before:left-0 before:z-50 before:h-[calc(100%_-_60px)] before:w-10 before:bg-gradient-to-l before:from-transparent before:to-gray-50 before:to-80%' : ''}${!disabledSidesBlur && !isMobile && currentPosition < nodeChildrenCount - steps - 1 ? 'after:content-[" "] after:w-8 after:right-0 after:bottom-2 after:h-[calc(100%_-_60px)] after:bg-gradient-to-r after:to-80% after:from-transparent after:to-gray-50 after:absolute after:z-50' : ''}`}
     >
       <HomeSectionTitle>{title}</HomeSectionTitle>
       {!isMobile && (
@@ -87,19 +87,21 @@ const Carousel = ({
       {children && (
         <>
           <div
-            className="grid grid-flow-col auto-cols-max scroll-smooth col-span-2 overflow-hidden pb-4 md:pb-0 carousel touch-none"
+            className="grid grid-flow-col auto-cols-max scroll-smooth col-span-2 overflow-x-hidden pb-4 md:pb-0 carousel touch-none"
             ref={carousel}
           >
             {children}
           </div>
-          <div className="flex flex-row flex-nowrap gap-2 justify-center">
-            {[...Array(nodeChildrenCount)].map((v, index) => (
-              <div
-                key={index}
-                className={`size-2  rounded-full bg-gray-900 transition-opacity ${currentPosition === index ? 'opacity-100' : ' opacity-25'}`}
-              ></div>
-            ))}
-          </div>
+          {isMobile && (
+            <div className="flex flex-row flex-nowrap gap-2 justify-center">
+              {[...Array(nodeChildrenCount)].map((v, index) => (
+                <div
+                  key={index}
+                  className={`size-2  rounded-full bg-gray-900 transition-opacity ${currentPosition === index ? 'opacity-100' : ' opacity-25'}`}
+                ></div>
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>
