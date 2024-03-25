@@ -23,8 +23,8 @@ export default {
       sm: { max: '639px' },
       // => @media (max-width: 639px) { ... }
 
-      xs: { max: '420px' },
-      // => @media (max-width: 420px) { ... }
+      xs: { max: '490px' },
+      // => @media (max-width: 490px) { ... }
     },
   },
   plugins: [],
