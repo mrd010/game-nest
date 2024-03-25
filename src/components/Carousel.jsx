@@ -59,7 +59,7 @@ const Carousel = ({
       )}
       {children && (
         <div
-          className="grid grid-flow-col auto-cols-max scroll-smooth col-span-2 overflow-hidden lg:overflow-x-auto pb-4 carousel"
+          className="grid grid-flow-col auto-cols-max scroll-smooth col-span-2 overflow-hidden lg:overflow-x-auto pb-4 sm:pb-0 carousel"
           ref={carousel}
         >
           {children}
