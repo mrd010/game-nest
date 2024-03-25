@@ -4,7 +4,7 @@ import MainContentContainer from '../components/MainContentContainer';
 
 const Games = () => {
   // get categories from app parent
-  const { categories, isHandheldDevice } = useOutletContext();
+  const { categories, isHandheldDevice, isMobile, isSmallMobile } = useOutletContext();
 
   return (
     <div className="grid grid-cols-[auto_1fr] gap-5 lg:grid-cols-1 lg:grid-flow-row">
@@ -12,7 +12,7 @@ const Games = () => {
       <CategoriesSideNav categoryList={categories}></CategoriesSideNav>
       {/* main content */}
       <MainContentContainer>
-        <Outlet context={{ isHandheldDevice }}></Outlet>
+        <Outlet context={{ isHandheldDevice, isMobile, isSmallMobile }}></Outlet>
       </MainContentContainer>
     </div>
   );
