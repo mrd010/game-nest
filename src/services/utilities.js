@@ -59,8 +59,8 @@ export const shuffled = (array) => {
 
 // remove parameters from urls of api
 export const getCleanUrl = (url) => {
-  url.replace('http', 'https');
-  return url.split('?')[0];
+  const safeUrl = url.replace('http:', 'https:');
+  return safeUrl.split('?')[0];
 };
 
 // convert seconds to 00:00 format
