@@ -1,10 +1,12 @@
-import { Link, useNavigation } from 'react-router-dom';
+import { Link, useLocation, useNavigation } from 'react-router-dom';
 import HeaderNavLink from './HeaderNavLink';
 import HeaderSearch from './HeaderSearch';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 const Header = ({ categories, isHandheldDevice }) => {
+  const loc = useLocation();
+  const locIsGameDetailsPage = /^\/games\//.test(loc.pathname);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   // a query to check if device is not desktop
 
@@ -37,7 +39,9 @@ const Header = ({ categories, isHandheldDevice }) => {
           </button>
         )}
         {/* header title - app title */}
-        <div className="mr-10 p-4 md:mr-0 sm:col-span-2 sm:row-start-2 sm:p-1 sm:bg-gray-50">
+        <div
+          className={`mr-10 p-4 md:mr-0 sm:col-span-2 sm:row-start-2 sm:p-1 sm:bg-gray-50 ${locIsGameDetailsPage ? 'hidden' : ''}`}
+        >
           <h1 className="sm:text-center  sm:pt-6">
             <Link className="text-4xl sm:text-5xl font-extrabold sm:text-gray-900" to="/home">
               Game<span className="text-yellow-400 sm:text-amber-400">Nest</span>
