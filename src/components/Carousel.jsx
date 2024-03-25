@@ -19,7 +19,7 @@ const Carousel = ({
   const carousel = useRef(null);
 
   // device type
-  const { isHandheldDevice } = useOutletContext();
+  const { isMobile } = useOutletContext();
 
   // real children count of carousel
   const nodeChildrenCount = children.filter((child) => child !== null).length;
@@ -36,10 +36,10 @@ const Carousel = ({
   }, [itemWidth, currentPosition]);
   return (
     <div
-      className={`grid grid-cols-[1fr_auto] lg:grid-cols-1 grid-row-2 relative gap-x-5 gap-y-5 lg:gap-x-0 ${!isHandheldDevice && !disabledSidesBlur && currentPosition > 0 ? 'before:content-[" "] before:absolute before:bottom-2 before:left-0 before:z-50 before:h-[calc(100%_-_60px)] before:w-10 before:bg-gradient-to-l before:from-transparent before:to-gray-50 before:to-80%' : ''}${!isHandheldDevice && !disabledSidesBlur && currentPosition < nodeChildrenCount - steps - 1 ? 'after:content-[" "] after:w-8 after:right-0 after:bottom-2 after:h-[calc(100%_-_60px)] after:bg-gradient-to-r after:to-80% after:from-transparent after:to-gray-50 after:absolute after:z-50' : ''}`}
+      className={`grid grid-cols-[1fr_auto] md:grid-cols-1 grid-row-2 relative gap-x-5 gap-y-5 md:gap-x-0 ${!disabledSidesBlur && currentPosition > 0 ? 'before:content-[" "] before:absolute before:bottom-2 before:left-0 before:z-50 before:h-[calc(100%_-_60px)] before:w-10 before:bg-gradient-to-l before:from-transparent before:to-gray-50 before:to-80%' : ''}${!disabledSidesBlur && currentPosition < nodeChildrenCount - steps - 1 ? 'after:content-[" "] after:w-8 after:right-0 after:bottom-2 after:h-[calc(100%_-_60px)] after:bg-gradient-to-r after:to-80% after:from-transparent after:to-gray-50 after:absolute after:z-50' : ''}`}
     >
       <HomeSectionTitle>{title}</HomeSectionTitle>
-      {!isHandheldDevice && (
+      {!isMobile && (
         <div className="flex flex-row gap-3 justify-self-end self-end">
           <ActionButton
             isDisabled={currentPosition <= 0}
@@ -59,7 +59,7 @@ const Carousel = ({
       )}
       {children && (
         <div
-          className="grid grid-flow-col auto-cols-max scroll-smooth col-span-2 overflow-hidden lg:overflow-x-auto pb-4 sm:pb-0 carousel"
+          className="grid grid-flow-col auto-cols-max scroll-smooth col-span-2 overflow-hidden pb-4 sm:pb-0 carousel"
           ref={carousel}
         >
           {children}
