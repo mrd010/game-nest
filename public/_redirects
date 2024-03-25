@@ -1,0 +1,4 @@
+/api/* https://store.steampowered.com/api/:splat 200
+/ISteamNews/* https://api.steampowered.com/ISteamNews/:splat 200
+/actions/* https://steamcommunity.com/actions/:splat 200
+/* /index.html 200
