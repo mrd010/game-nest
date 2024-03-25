@@ -19,7 +19,6 @@ export const checkResponse = (response) => {
 
 // fetches json data with any api url
 const getData = async (url) => {
-  console.log(url);
   const response = await fetch(url, {
     method: 'GET',
     headers: { 'content-type': 'application/json' },
