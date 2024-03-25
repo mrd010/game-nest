@@ -84,7 +84,7 @@ const Header = ({ categories, isHandheldDevice }) => {
         </nav>
 
         {/* search bar */}
-        <div className="sm:p-2 ">
+        <div className="sm:p-3">
           <HeaderSearch></HeaderSearch>
         </div>
       </div>
