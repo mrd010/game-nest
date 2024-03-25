@@ -59,6 +59,7 @@ export const shuffled = (array) => {
 
 // remove parameters from urls of api
 export const getCleanUrl = (url) => {
+  url.replace('http', 'https');
   return url.split('?')[0];
 };
 
