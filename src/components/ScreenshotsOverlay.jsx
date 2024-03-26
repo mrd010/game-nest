@@ -3,6 +3,8 @@ import ModalOverlayContainer from './ModalOverlayContainer';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { getCleanUrl } from '../services/utilities';
 import CarouselItemsIndicator from './CarouselItemsIndicator';
+import { useDrag } from '@use-gesture/react';
+import { useOutletContext } from 'react-router-dom';
 const ScreenshotsOverlay = ({
   isOpen,
   activeImageUrl,
@@ -12,10 +14,28 @@ const ScreenshotsOverlay = ({
   numberOfImages,
   currentImageIndex,
 }) => {
+  const { isMobile } = useOutletContext();
+  // change image based on direction
+  const handleChangeImage = (direction) => {
+    if (direction === -1) {
+      onPrev();
+    } else if (direction === 1) {
+      onNext();
+    }
+  };
+
+  // enable gesture on mobile devices
+  const bind = useDrag(
+    ({ swipe: [dx] }) => {
+      handleChangeImage(-1 * dx);
+    },
+    { enabled: isMobile }
+  );
+
   return (
     <ModalOverlayContainer isOpen={isOpen} onClose={onClose}>
       {activeImageUrl && (
-        <div className="absolute w-3/4 sm:w-[90%] grid content-center">
+        <div {...bind()} className="absolute w-3/4 sm:w-[90%] grid content-center touch-none">
           {/* main frame */}
           <LazyLoadImage
             src={getCleanUrl(activeImageUrl)}
@@ -40,7 +60,7 @@ const ScreenshotsOverlay = ({
           >
             <span className="material-symbols-rounded translate-x-[3px]">arrow_forward_ios</span>
           </button>
-          {/* images index indicator */}
+          {/* images index indicator for mobile */}
           <div className="invert py-4">
             <CarouselItemsIndicator
               count={numberOfImages}
