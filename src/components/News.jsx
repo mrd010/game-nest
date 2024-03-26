@@ -19,7 +19,7 @@ const News = ({ appId, title, url }) => {
       </div>
       <div className="grid gap-1">
         {title && url ? (
-          <h3 className="font-bold md:text-sm xs:text-xs line-clamp-3 sm:line-clamp-4 hover:text-yellow-600 drop-shadow-sm shadow-gray-900">
+          <h3 className="line-clamp-3 font-bold shadow-gray-900 text-balance sm:text-pretty drop-shadow-sm hover:text-yellow-600 md:text-sm sm:py-2 sm:line-clamp-4 xs:text-xs">
             {title}
           </h3>
         ) : (
