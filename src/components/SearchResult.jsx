@@ -7,7 +7,8 @@ const SearchResult = (props) => {
   return (
     <Link
       to={`/games/${props.appid}`}
-      className="grid grid-flow-col justify-start items-center gap-2 py-2 px-4 hover:bg-yellow-300"
+      onMouseOver={() => props.onHover(props.index)}
+      className={`grid grid-flow-col justify-start items-center gap-2 py-2 px-4 ${props.isSelected ? 'bg-yellow-300' : ''}`}
     >
       <img
         src={getCleanUrl(props.icon)}
@@ -26,5 +27,8 @@ SearchResult.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onHover: PropTypes.func.isRequired,
 };
 export default SearchResult;
