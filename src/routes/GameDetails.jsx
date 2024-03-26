@@ -23,16 +23,21 @@ const GameDetails = () => {
   const [dlcsInfo, setDlcsInfo] = useState(initialDlcData);
   const [modalContent, setModalContent] = useState(null);
 
-  const { isHandheldDevice, isMobile, isSmallMobile } = useOutletContext();
+  const { isHandheldDevice, isMobile } = useOutletContext();
 
   // url for whole page background
   const bgUrl = `url('${getCleanUrl(gameData.background)}')`;
   useEffect(() => {
-    document.getElementById('main').classList.add('dark-bg');
-    document.getElementById('main').style.backgroundImage = bgUrl;
+    const main = document.getElementById('main');
+    if (main) {
+      document.getElementById('main').classList.add('dark-bg');
+      document.getElementById('main').style.backgroundImage = bgUrl;
+    }
     return () => {
-      document.getElementById('main').classList.remove('dark-bg');
-      document.getElementById('main').style.backgroundImage = 'none';
+      if (main) {
+        document.getElementById('main').classList.remove('dark-bg');
+        document.getElementById('main').style.backgroundImage = 'none';
+      }
     };
   }, [bgUrl]);
 
