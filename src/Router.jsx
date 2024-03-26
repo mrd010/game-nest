@@ -22,11 +22,17 @@ import { gamePageLoader } from './loaders/gamePageLoader';
 import SearchResultsPage from './routes/SearchResultsPage';
 import { searchLoader } from './loaders/searchLoader';
 import PageLoadSpinner from './components/PageLoadSpinner';
+import ErrorPage from './routes/ErrorPage';
 
 const Router = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />} loader={appLoader}>
+      <Route
+        path="/"
+        element={<Layout />}
+        loader={appLoader}
+        errorElement={<ErrorPage></ErrorPage>}
+      >
         <Route index element={<Home />} loader={homeLoader}></Route>
         <Route path="home" element={<Home />} loader={homeLoader}></Route>
         <Route path="browse" element={<Games />}>
