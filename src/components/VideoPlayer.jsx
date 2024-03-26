@@ -77,7 +77,7 @@ const VideoPlayer = ({ lqUrl, hqUrl, previewImage }) => {
     >
       <div
         onClick={() => {
-          if (isStarted) {
+          if (isStarted && showControls) {
             handlePlayPause(!isPlaying);
           }
         }}
