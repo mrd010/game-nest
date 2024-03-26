@@ -24,7 +24,11 @@ const Layout = () => {
       className="font-Lato min-h-screen bg-no-repeat bg-cover bg-center bg-fixed grid grid-rows-[auto_1fr] xl:overflow-x-hidden"
       id="main"
     >
-      <Header categories={categories} isHandheldDevice={isHandheldDevice}></Header>
+      <Header
+        categories={categories}
+        isHandheldDevice={isHandheldDevice}
+        isSmallMobile={isSmallMobile}
+      ></Header>
       {/* main content */}
       <div className="relative h-full xl:overflow-x-hidden">
         <main
