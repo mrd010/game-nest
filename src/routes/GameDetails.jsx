@@ -368,6 +368,8 @@ const GameDetails = () => {
         activeImageUrl={currentImage?.path_full}
         onPrev={handlePrevScreenshot}
         onNext={handleNextScreenshot}
+        currentImageIndex={currentImage?.id}
+        numberOfImages={gameData?.screenshots?.length}
       ></ScreenshotsOverlay>
     </MainContentContainer>
   );
