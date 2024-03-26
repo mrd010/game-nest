@@ -58,7 +58,6 @@ const Carousel = ({
     {
       target: carousel,
       enabled: isMobile,
-      axis: 'x',
     }
   );
 
@@ -94,10 +93,12 @@ const Carousel = ({
             {children}
           </div>
           {isMobile && nodeChildrenCount > 1 && nodeChildrenCount <= 12 && (
-            <CarouselItemsIndicator
-              count={nodeChildrenCount}
-              current={currentPosition}
-            ></CarouselItemsIndicator>
+            <div className={theme === 'dark' ? 'invert' : ''}>
+              <CarouselItemsIndicator
+                count={nodeChildrenCount}
+                current={currentPosition}
+              ></CarouselItemsIndicator>
+            </div>
           )}
         </>
       )}
