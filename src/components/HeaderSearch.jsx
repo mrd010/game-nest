@@ -77,6 +77,7 @@ const HeaderSearch = () => {
         {/* search button */}
         <button
           type="submit"
+          disabled={query.length <= 3}
           className="absolute right-0 top-0 opacity-75 p-2 text-2xl scale-125 hover:opacity-100 transition-opacity"
         >
           <span className="material-symbols-rounded">search</span>
