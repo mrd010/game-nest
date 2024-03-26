@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import HomeSectionTitle from './HomeSectionTitle';
 import { useOutletContext } from 'react-router-dom';
 import { useDrag } from '@use-gesture/react';
+import CarouselItemsIndicator from './CarouselItemsIndicator';
 
 const Carousel = ({
   title,
@@ -92,15 +93,11 @@ const Carousel = ({
           >
             {children}
           </div>
-          {isMobile && nodeChildrenCount > 1 && (
-            <div className="flex flex-row flex-nowrap gap-2 justify-center">
-              {[...Array(nodeChildrenCount)].map((v, index) => (
-                <div
-                  key={index}
-                  className={`size-2  rounded-full bg-gray-900 transition-opacity ${currentPosition === index ? 'opacity-100' : ' opacity-25'}`}
-                ></div>
-              ))}
-            </div>
+          {isMobile && nodeChildrenCount > 1 && nodeChildrenCount <= 12 && (
+            <CarouselItemsIndicator
+              count={nodeChildrenCount}
+              current={currentPosition}
+            ></CarouselItemsIndicator>
           )}
         </>
       )}
