@@ -32,7 +32,7 @@ const GamesAlbumCard = ({ gameData }) => {
         <LazyLoadImage
           src={steamHeaderImage(gameData.appid)}
           placeholder={<div className="content-loader h-full w-full"></div>}
-          className={`shadow-md contrast-[110%] xl:h-full xl:object-cover rounded-l-lg transition-transform sm:w-full origin-bottom duration-300 ${imageLoaded && !isHandheldDevice ? 'group-hover:scale-95 group-hover:rounded-lg' : isHandheldDevice && inView ? 'rounded-lg scale-95' : ''}`}
+          className={`shadow-md contrast-[110%] xl:h-full xl:object-cover rounded-l-lg transition-transform sm:w-full sm:origin-bottom duration-300 ${imageLoaded && !isHandheldDevice ? 'group-hover:scale-90 group-hover:rounded-lg' : isHandheldDevice && inView ? 'rounded-lg scale-90 sm:scale-95' : ''}`}
           onLoad={() => setImageLoaded(true)}
         ></LazyLoadImage>
       </div>
