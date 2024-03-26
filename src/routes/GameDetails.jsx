@@ -112,67 +112,67 @@ const GameDetails = () => {
             className="rounded-md xl:w-full"
           ></LazyLoadImage>
         </div>
-        {/* game header info right */}
-        <div className="grid lg:relative grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_auto] xs:grid-cols-1 xs:auto-rows-auto xs:grid-flow-row p-4 gap-6 xl:gap-4">
+        {/* game header info */}
+        <div className="grid lg:relative lg:items-start grid-rows-[minmax(0,1fr)_auto_auto] lg:grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[auto_auto] lg:grid-flow-col sm:auto-rows-auto p-4 gap-6 xl:gap-4 xs:grid-cols-1 xs:grid-rows-none xs:grid-flow-row xs:items-start">
           {/* game name */}
-          <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 lg:line-clamp-1 drop-shadow lg:col-span-2 xs:col-span-1">
+          <h1 className="text-5xl xl:text-4xl font-extrabold line-clamp-2 lg:line-clamp-3 xs:line-clamp-none xs:text-3xl drop-shadow text-balance">
             {gameData.name}
           </h1>
-          <div className="grid grid-cols-2 xs:grid-cols-1 lg:gap-1">
+          <div className="grid grid-cols-2 lg:grid-cols-1 xs:grid-cols-1 lg:gap-1">
             {/* release date */}
             <div className="flex flex-nowrap flex-col lg:flex-row lg:gap-2">
-              <h3 className="text-xl xl:text-lg lg:text-xl font-bold">Release Date</h3>
-              <span className="text-3xl xl:text-xl text-gray-50/60 font-light">
+              <h3 className="text-xl xl:text-lg lg:text-xl xs:text-lg font-bold">Release Date</h3>
+              <span className="text-3xl xl:text-xl xs:text-lg text-gray-50/60 font-light">
                 {gameData.release_date ? gameData.release_date.date : 'TBA'}
               </span>
             </div>
             {/* supported platforms */}
-            {gameData.platforms && (
+            {gameData.platforms && !isHandheldDevice && (
               <div className="flex flex-col rounded-full lg:items-start lg:gap-2">
                 <h3 className="text-xl xl:text-lg lg:hidden font-bold px-3 ">Platforms</h3>
-                {!isHandheldDevice ? (
-                  <ul className="flex flex-nowrap flex-row divide-x-2 divide-gray-200/30">
-                    {
-                      // display all platforms and colorize those available
-                      Object.entries(gameData.platforms).map((platform) => (
-                        <li
-                          key={platform[0]}
-                          className={`px-3 text-3xl xl:text-xl font-light ${platform[1] ? 'text-gray-50' : 'text-gray-50/25'}`}
-                        >
-                          {platform[0]}
-                        </li>
-                      ))
-                    }
-                  </ul>
-                ) : (
-                  <div className="bg-gray-50 px-1 rounded absolute -top-16 sm:-top-12 left-3">
-                    <AvailableOSs
-                      linux={gameData.platforms?.linux}
-                      win={gameData.platforms?.windows}
-                      mac={gameData.platforms?.mac}
-                      iconSize={22}
-                    ></AvailableOSs>
-                  </div>
-                )}
+
+                <ul className="flex flex-nowrap flex-row divide-x-2 divide-gray-200/30">
+                  {
+                    // display all platforms and colorize those available
+                    Object.entries(gameData.platforms).map((platform) => (
+                      <li
+                        key={platform[0]}
+                        className={`px-3 text-3xl xl:text-xl font-light ${platform[1] ? 'text-gray-50' : 'text-gray-50/25'}`}
+                      >
+                        {platform[0]}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            )}
+            {gameData.platforms && isHandheldDevice && (
+              <div className="bg-gray-50 px-1 rounded absolute -top-16 sm:-top-12 left-3">
+                <AvailableOSs
+                  linux={gameData.platforms?.linux}
+                  win={gameData.platforms?.windows}
+                  mac={gameData.platforms?.mac}
+                  iconSize={22}
+                ></AvailableOSs>
               </div>
             )}
           </div>
           {/* scores */}
-          <div className="grid grid-cols-[auto_1fr] xs:grid-cols-[auto_1fr] lg:grid-cols-1 gap-x-4 lg:gap-x-0 xs:gap-2 grid-rows-[auto_minmax(0,1fr)] items-center">
+          <div className="grid grid-cols-[auto_1fr] lg:row-span-2 xs:flex xs:flex-row xs:gap-4 xs:flex-nowrap lg:grid-cols-1 lg:grid-rows-[auto_minmax(0,1fr)] lg:items-start lg:h-full lg:gap-y-2 gap-x-4 lg:gap-x-0 grid-rows-[auto_minmax(0,1fr)] items-center sm:relative sm:block sm:h-auto">
             {/* meta score number */}
             {gameData.metacritic && (
               <>
-                <div className="row-span-2">
+                <div className="row-span-2 lg:grid lg:justify-end">
                   <GameScore.GameScoreRateMeta
                     score={gameData.metacritic.score}
-                    className="text-5xl lg:text-6xl size-20 xs:size-16 xs:text-4xl lg:size-24 font-bold"
+                    className="text-5xl lg:text-6xl md:text-5xl size-20 sm:size-16 sm:text-4xl xs:size-16 xs:text-4xl lg:size-24 md:size-20 font-bold"
                   ></GameScore.GameScoreRateMeta>
                 </div>
                 {/* meta link */}
                 <a
                   href={getCleanUrl(gameData.metacritic.url)}
                   target="_blank"
-                  className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 lg:gap-0 hover:text-yellow-400/85 active:text-yellow-400/85"
+                  className="font-bold my-1 grid grid-flow-col items-start justify-start gap-1 lg:gap-0 hover:text-yellow-400/85 active:text-yellow-400/85 lg:hidden"
                 >
                   <span className="text-2xl lg:text-xl lg:tracking-tighter xs:tracking-normal">
                     Metacritic
@@ -183,9 +183,9 @@ const GameDetails = () => {
             )}
             {/* recommendations */}
             {gameData.recommendations && (
-              <p className="text-lg text-gray-50/60 self-start lg:absolute lg:left-4 lg:bottom-5 xs:static">
+              <p className="text-lg text-gray-50/60 self-start lg:text-balance lg:text-right xs:text-left sm:absolute sm:top-full sm:right-0 sm:text-sm sm:my-2 xs:static xs:text-2xl xs:m-0">
                 Recommended by{' '}
-                <span className="text-gray-50 font-bold text-xl">
+                <span className="text-gray-50 font-bold text-xl sm:text-base  xs:text-2xl">
                   {gameData.recommendations.total}
                 </span>{' '}
                 people
@@ -348,7 +348,7 @@ const GameDetails = () => {
                 iconCentered
                 id={video.id}
                 onSelect={() => handleModalOverlayOpen('video', video.id)}
-                className="grid grid-rows-[auto_auto] text-gray-50 gap-2 w-[300px]"
+                className="grid grid-rows-[auto_auto] text-gray-50 gap-2 w-[300px] xs:w-52"
               ></VideoListItem>
             ))}
           </SimpleCarousel>
