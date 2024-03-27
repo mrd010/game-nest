@@ -4,10 +4,13 @@ import { getGamesMiniData } from '../services/dataFetchers';
 import GamesAlbumCard from './GamesAlbumCard';
 import ContentLoader from './ContentLoader';
 import { useInView } from 'react-intersection-observer';
+import { useOutletContext } from 'react-router-dom';
 const GamesAlbumList = ({ gamesListIds, isActive }) => {
   const [gamesData, setGamesData] = useState(new Array(gamesListIds.length).fill(null));
   const [loaded, setLoaded] = useState(false);
   const { ref, inView } = useInView({ triggerOnce: true });
+
+  const { isMobile } = useOutletContext();
 
   // use stringified version for preventing re-renders
   const stringifiedIds = JSON.stringify(gamesListIds);
@@ -46,11 +49,14 @@ const GamesAlbumList = ({ gamesListIds, isActive }) => {
               <GamesAlbumCard key={data.appid} gameData={data}></GamesAlbumCard>
             ) : (
               // load loader placeholder if no data received yet
-              <div key={index} className="grid grid-cols-2 gap-4 h-[215px]">
+              <div
+                key={index}
+                className="grid grid-cols-2 gap-4 sm:gap-0 h-[215px] sm:h-[400px] sm:grid-rows-2 sm:grid-cols-1"
+              >
                 <div>
                   <ContentLoader size="100%"></ContentLoader>
                 </div>
-                <div className="grid grid-rows-[auto_1fr_auto] gap-2 py-4">
+                <div className="grid grid-rows-[auto_1fr_auto] gap-2 py-4 sm:grid-flow-row sm:grid-rows-none sm:gap-1">
                   <ContentLoader size="30px"></ContentLoader>
                   <ContentLoader size="70px"></ContentLoader>
                   <ContentLoader size="35px"></ContentLoader>

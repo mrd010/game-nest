@@ -45,14 +45,19 @@ const GamesInGenreSection = ({ name, items }) => {
             </div>
           ) : (
             // load loader placeholder if no data received yet
-            <div key={index} className="grid grid-cols-2 gap-4 h-[215px]">
-              <div>
+            <div
+              key={index}
+              className="grid grid-rows-[auto_minmax(0,1fr)] gap-2 lg:gap-0 w-[400px] lg:w-[300px] px-2"
+            >
+              <div className="h-[164px] lg:h-[150px]">
                 <ContentLoader size="100%"></ContentLoader>
               </div>
-              <div className="grid grid-rows-[auto_1fr_auto] gap-2 py-4">
-                <ContentLoader size="30px"></ContentLoader>
-                <ContentLoader size="70px"></ContentLoader>
-                <ContentLoader size="35px"></ContentLoader>
+              <div className="grid gap-4 py-4 lg:gap-1">
+                <ContentLoader size="60px"></ContentLoader>
+                <ContentLoader size="20px"></ContentLoader>
+                <ContentLoader size="40px"></ContentLoader>
+                <ContentLoader size="40px"></ContentLoader>
+                <ContentLoader size="100px"></ContentLoader>
               </div>
             </div>
           )
